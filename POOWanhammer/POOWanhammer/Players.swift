@@ -17,8 +17,7 @@ class Players {
     var looseCounter = 0
     var lifeTeam = 0
     var symbol = "X"
-    
-    // var fightersArray : [Characters]
+    var fightersArray = [Characters]()
     
     // init(name: Tools.giveName)
     init(gamerName: String, teamName: String) {
@@ -27,22 +26,20 @@ class Players {
     }
     
     // create Team
-    static func createTeam() {
+    /*
+        func createTeam() -> Players {
         
-        // create Gamer
+        // create Gamer Name 1
         var pseudoOfGamerOk = ""
         var nameOfTeamOk = ""
         repeat {
-            Tools.giveGamerName1()
             if let pseudoOfGamer = readLine(), pseudoOfGamer != "" {
-                pseudoOfGamerOk = String(pseudoOfGamer)
-            }
+                // pseudoOfGamerOk = String(pseudoOfGamer)
+            } else { print("Vous devez choisir un nom de Gamer") }
         } while pseudoOfGamerOk == ""
-        // MICHEL MICHEL inserer le TeamName func
-        
-        
+        // create Team Name 1
         repeat {
-            Tools.giveTeamName1()
+            Tools.giveTeamName1(pseudoOfGamerOk: pseudoOfGamerOk)
             if let nameOfTeam = readLine(), nameOfTeam != "" {
                 nameOfTeamOk = String(nameOfTeam)
             }
@@ -52,7 +49,7 @@ class Players {
         Tools.welcome1(gamerName: team1.gamerName)
         Tools.pause()
         
-        // same things for the team 2
+        // create Gamer Name 2
         repeat {
             Tools.giveGamerName2()
             if let pseudoOfGamer = readLine(), pseudoOfGamer != "" {
@@ -60,11 +57,15 @@ class Players {
                 if pseudoOfGamerOk == team1.gamerName.lowercased() {
                     print("Ce Pseudo est déjà utilisé, merci d'en choisir un autre")
                 }
-            }
+            } else { print("Vous devez choisir un nom de Gamer") }
         } while pseudoOfGamerOk == "" || pseudoOfGamerOk == team1.gamerName.lowercased()
         
+        
+        pseudoOfGamerOk = "" // reset var to be in same condition
+        nameOfTeamOk = ""
+        // create Team Name 2
         repeat {
-            Tools.giveTeamName2()
+            Tools.giveTeamName2(pseudoOfGamerOk: pseudoOfGamerOk)
             if let nameOfTeam = readLine(), nameOfTeam != "" {
                 nameOfTeamOk = String(nameOfTeam)
             }
@@ -74,11 +75,13 @@ class Players {
         let team2 = Players(gamerName: pseudoOfGamerOk, teamName: nameOfTeamOk)
         Tools.welcome2(gamerName: team2.gamerName)
         Tools.pause()
+        */
+        
+        // choose Characters
         
         
     }
-    // choose Characters
     
     
-}
+    
 

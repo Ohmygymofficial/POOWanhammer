@@ -10,12 +10,12 @@ import Foundation
 
 class Characters {
     
-    //var name: String
-    // var weapon: Weapon
-    // var life: Int
-    // var category : Type
+    var name: String
+    var weapon: Weapon
+    var life: Int
+    var category : Type
     
-    // func attack
+    //func attack
     // func heal
     // func isDead
     
