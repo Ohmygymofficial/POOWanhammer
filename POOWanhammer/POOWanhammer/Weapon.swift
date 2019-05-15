@@ -8,11 +8,13 @@
 
 import Foundation
 
-class Weapon {
+
+// We defined here all the different weapons possibles of fighters
+enum Weapon: String {
     
-    
-    // var name: String
-    // var Strenght : Int
-    // var Heal : Int
-    
+    case sword = "son épée"
+    case axe = "sa hâche"
+    case wand = "sa baguette"
+    case fist = "son poing"
 }
+

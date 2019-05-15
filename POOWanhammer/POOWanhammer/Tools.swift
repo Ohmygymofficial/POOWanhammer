@@ -10,6 +10,8 @@ import Foundation
 
 class Tools { // create to ask some static thing at users
     
+    // to archive all the fighter name and check is Unique
+    static var allFighterName = [String]()
     
     
     /**
@@ -103,6 +105,7 @@ class Tools { // create to ask some static thing at users
         return false
     }
     
+    
     /**
      teamAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
@@ -117,6 +120,30 @@ class Tools { // create to ask some static thing at users
         }
         return false
     }
+    
+    /**
+     fighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     */
+    static func fighterAlreadyExist(what : String) -> Bool {
+        
+        // peut être créer un tableau qui stocke les noms des fighters, toute team confondue, et compare en LOOP dedans ?
+        
+        // add one "" to initialize the array on the first User Input
+        if !geek.firstUI {
+            allFighterName.append("")
+        }
+        
+        for eachFighter in allFighterName {
+        if what.uppercased() == eachFighter.uppercased() {
+            return true
+            }
+        }
+    // if it's OK : We add this one in the Array
+    allFighterName.append(what)
+    return false
+}
+    
+    
     
     
     /**
