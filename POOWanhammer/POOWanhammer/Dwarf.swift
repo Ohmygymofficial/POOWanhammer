@@ -10,8 +10,8 @@ import Foundation
 
 class Dwarf : Fighter {
     
-    override init(name: String, numberFetich: Int) {
-        super.init(name: name, numberFetich: numberFetich)
+    init() {
+        super.init(category: Category.dwarf)
         self.weapon = Weapon.axe.rawValue
         self.special = Special.doubleDamage.rawValue
         self.lifePoint = 80

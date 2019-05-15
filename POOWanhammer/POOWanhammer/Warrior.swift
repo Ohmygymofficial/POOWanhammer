@@ -9,8 +9,8 @@
 import Foundation
 class Warrior : Fighter {
     
-    override init(name: String, numberFetich: Int) {
-        super.init(name: name, numberFetich: numberFetich)
+    init() {
+        super.init(category: Category.warrior)
         self.weapon = weapon
         self.special = special
         self.lifePoint = lifePoint

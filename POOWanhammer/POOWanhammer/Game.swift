@@ -12,9 +12,6 @@ class Game {
     //var players : [Players]
     var playersArray = [Players]()
     
-    // var fighterArray  VOIR AVEC LILIAN
-    var fightersArray = [Fighter]()
-    
     
     // to check if it's the first User Input
     var firstUI = true
@@ -43,12 +40,12 @@ class Game {
         if let choiceMenu1 = readLine() {
             switch choiceMenu1 {
             case "1":
-                geek.initialize() // ask userName and teamName and chooseFighters
+                game.initialize() // ask userName and teamName and chooseFighters
             case "2":
                 print("Lâcheur ! 😜")
                 stayInProgram = false //change BOOL to go outside loop of program
             case "3":
-                geek.demoMode() //automatic choice of the userName, TeamName and Fighters
+                game.demoMode() //automatic choice of the userName, TeamName and Fighters
             default: print("Je n'ai pas compris votre choix.. tapez 1, 2 ou 3")
             }
         }
@@ -62,7 +59,7 @@ class Game {
     func initialize() {
         // Initialisation of each team
         for n in 0...1 {
-            let user = Players(gamerName: Others.giveGamerName(), teamName : Others.giveTeamName())
+            let user = Players()
             playersArray.append(user)
             if firstUI {
                 playersArray[n].symbol = "🔴"
@@ -78,7 +75,6 @@ class Game {
             Others.chooseFighterCategory()
         }
     }
-    
     
     
     /**

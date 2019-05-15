@@ -10,8 +10,8 @@ import Foundation
 
 class Wizard : Fighter {
     
-    override init(name: String, numberFetich: Int) {
-        super.init(name: name, numberFetich: numberFetich)
+    init() {
+        super.init(category: Category.wizard)
         self.weapon = Weapon.wand.rawValue
         self.special = Special.fireball.rawValue
         self.lifePoint = 125

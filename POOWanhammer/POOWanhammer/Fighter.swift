@@ -19,9 +19,9 @@ class Fighter { // by default, we choose Warrior
     var strenght: Int = 10
 
     
-    init(name: String, numberFetich: Int) {
-        self.name = name
-        self.numberFetich = numberFetich
+    init(category: Category) {
+        self.name = nameOfTheFighter(category: category)
+        self.numberFetich = numberFetich()
     }
  
     
@@ -32,6 +32,63 @@ class Fighter { // by default, we choose Warrior
     
     
     
+    
+    /**
+     nameOfTheFighter : Take all the fighter Name
+     */
+    func nameOfTheFighter(category: Category) -> String {
+        
+        print("\r Quel est le doux prenom de ce \(category) ?")
+        
+        var nameOfFighterOk = ""
+        if let nameOfFighter = readLine() {
+            
+            // check if already exist
+            let isOk =  Others.fighterAlreadyExist(what: nameOfFighter)
+            if isOk  { //
+                print("Ce prenom de Fighter existe déjà ... ^^  On en choisit une autre ? ")
+                return nameOfTheFighter(category: category)
+            }
+            
+            // Check if it's empty
+            if nameOfFighter == ""  { //
+                print("Vous devez choisir un nom de Fighter avec des lettres ;)")
+                return nameOfTheFighter(category: category)
+            }
+            
+            // if the code can read this, is that the User Input is ok !
+            nameOfFighterOk = nameOfFighter
+        }
+        return nameOfFighterOk
+    }
+    
+    
+    /**
+     numberFetich : ask FetichNumber of the fighter
+     */
+    func numberFetich() -> Int {
+        let numberTestOk = ""
+        repeat { // repeat while var is empty
+            print("Quel est ton numéro fétiche entre 1 et 5 ")
+            if let numberTest = readLine() {
+                if let numberTestOk = Int(numberTest) { // check if it's Int
+                    if numberTestOk > 0, numberTestOk < 6 {
+                        return numberTestOk
+                    } else { // if it's not 1 2 3 4 5  print this :
+                        print("Le chiffre doit être supérieur à 0, et inférieur à 6")
+                    }
+                } else { // if it's Int, so print :
+                    print("Cela ne peut être qu'un numéro !")
+                }
+                
+            } else {
+                print("Tu dois donner un numéro fétiche à ton Fighter dans la fonction numberTest ;)")
+            }
+        } while numberTestOk == ""
+        return 1
+    }
+    
+
     
     
     
