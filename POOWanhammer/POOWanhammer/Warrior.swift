@@ -9,14 +9,26 @@
 import Foundation
 class Warrior : Fighter {
     
+    
     init() {
-        super.init(category: Category.warrior)
+        super.init(name: Fighter.nameOfTheFighter(category: Category.warrior), numberFetich: Fighter.setNumberFetich())
+        self.weapon = Weapon.sword
+        self.special = Special.doubleAttack
+        self.lifePoint = 100
+        self.strenght = 10
+        self.category = Category.warrior
+    }
+    
+    /*
+    override init(name: String, numberFetich: Int) {
+        super.init(name: name, numberFetich: numberFetich)
         self.weapon = weapon
         self.special = special
         self.lifePoint = lifePoint
         self.strenght = strenght
         self.category = category
     }
+    */
     
     /**
      specialWarrior : Double Attack for Warrior special attack

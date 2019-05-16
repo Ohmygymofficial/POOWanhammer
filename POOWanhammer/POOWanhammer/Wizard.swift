@@ -11,12 +11,12 @@ import Foundation
 class Wizard : Fighter {
     
     init() {
-        super.init(category: Category.wizard)
-        self.weapon = Weapon.wand.rawValue
-        self.special = Special.fireball.rawValue
+        super.init(name: Fighter.nameOfTheFighter(category: Category.wizard), numberFetich: Fighter.setNumberFetich())
+        self.weapon = Weapon.wand
+        self.special = Special.fireball
         self.lifePoint = 125
         self.strenght = 15
-        self.category = Category.wizard.rawValue
+        self.category = Category.wizard
     }
     
     

@@ -12,16 +12,19 @@ class Fighter { // by default, we choose Warrior
     
     var name : String
     var numberFetich : Int
-    var category = Category.warrior.rawValue
-    var weapon: String = Weapon.sword.rawValue
-    var special: String = Special.doubleAttack.rawValue
+    var category = Category.warrior
+    var weapon = Weapon.sword
+    var special = Special.doubleAttack
     var lifePoint: Int = 100
     var strenght: Int = 10
-
     
-    init(category: Category) {
-        self.name = nameOfTheFighter(category: category)
-        self.numberFetich = numberFetich()
+    // to archive all the fighter name and check is Unique
+    static var allFighterName = [String]()
+    
+    
+    init(name: String, numberFetich: Int) {
+        self.name = name
+        self.numberFetich = numberFetich
     }
  
     
@@ -36,7 +39,7 @@ class Fighter { // by default, we choose Warrior
     /**
      nameOfTheFighter : Take all the fighter Name
      */
-    func nameOfTheFighter(category: Category) -> String {
+    static func nameOfTheFighter(category: Category) -> String {
         
         print("\r Quel est le doux prenom de ce \(category) ?")
         
@@ -44,7 +47,7 @@ class Fighter { // by default, we choose Warrior
         if let nameOfFighter = readLine() {
             
             // check if already exist
-            let isOk =  Others.fighterAlreadyExist(what: nameOfFighter)
+            let isOk =  fighterAlreadyExist(what: nameOfFighter)
             if isOk  { //
                 print("Ce prenom de Fighter existe déjà ... ^^  On en choisit une autre ? ")
                 return nameOfTheFighter(category: category)
@@ -66,7 +69,7 @@ class Fighter { // by default, we choose Warrior
     /**
      numberFetich : ask FetichNumber of the fighter
      */
-    func numberFetich() -> Int {
+    static func setNumberFetich() -> Int {
         let numberTestOk = ""
         repeat { // repeat while var is empty
             print("Quel est ton numéro fétiche entre 1 et 5 ")
@@ -90,10 +93,46 @@ class Fighter { // by default, we choose Warrior
     
 
     
+    /**
+     fighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     */
+    static func fighterAlreadyExist(what : String) -> Bool {
+        
+        // peut être créer un tableau qui stocke les noms des fighters, toute team confondue, et compare en LOOP dedans ?
+        
+        // add one "" to initialize the array on the first User Input
+        if game.firstUI {
+            allFighterName.append("")
+        }
+        
+        for eachFighter in allFighterName {
+            if what.uppercased() == eachFighter.uppercased() {
+                return true
+            }
+        }
+        // if it's OK : We add this one in the Array
+        allFighterName.append(what)
+        return false
+    }
+    
+    
+    
+    /**
+     FightersSettings : To print the caracteristic of the Fighters
+     */
+    static func FightersSettings() {
+        print("Voici les caractéristiques des personnages :"
+            + "\n 🗡 Le \(Category.warrior.rawValue): PV : 100, Dégâts : 10, spécial : Double Attaque"
+            + "\n 👨‍🎤 Le \(Category.dwarf.rawValue) : PV : 80, Arme : Hâche, Dégâts : 20, spécial : Double Dégâts"
+            + "\n 👹 Le \(Category.colossus.rawValue) : PV : 200, Dégâts : 5, spécial : Frayeur (Adversaire perd son tour)"
+            + "\n 🧙‍♀️ Le \(Category.wizard.rawValue) : PV : 150, Soins : +15, spécial : FireBall dégâts 30")
+    }
     
     
     
     //func attack
+
+    
     // func heal
     // func isDead
     

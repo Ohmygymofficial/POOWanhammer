@@ -11,12 +11,12 @@ import Foundation
 class Dwarf : Fighter {
     
     init() {
-        super.init(category: Category.dwarf)
-        self.weapon = Weapon.axe.rawValue
-        self.special = Special.doubleDamage.rawValue
+        super.init(name: Fighter.nameOfTheFighter(category: Category.dwarf), numberFetich: Fighter.setNumberFetich())
+        self.weapon = Weapon.axe
+        self.special = Special.doubleDamage
         self.lifePoint = 80
         self.strenght = 20
-        self.category = Category.dwarf.rawValue
+        self.category = Category.dwarf
     }
     
     

@@ -14,12 +14,12 @@ class Colossus : Fighter {
     // To get a string of the value in the enum in main.swift it's : figherObject.category.rawValue
     
     init() {
-        super.init(category: Category.colossus)
-        self.weapon = Weapon.fist.rawValue
-        self.special = Special.fear.rawValue
+        super.init(name: Fighter.nameOfTheFighter(category: Category.colossus), numberFetich: Fighter.setNumberFetich())
+        self.weapon = Weapon.fist
+        self.special = Special.fear
         self.lifePoint = 200
         self.strenght = 5
-        self.category = Category.colossus.rawValue
+        self.category = Category.colossus
     }
     
     /**

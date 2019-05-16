@@ -18,20 +18,19 @@ class Players {
     var lifeTeam = 0
     var symbol = "X"
     
-    // var fighterArray  VOIR AVEC LILIAN
+    // var fighterArray
     var fightersArray = [Fighter]()
     
-    
-    init() {
-        self.gamerName = setPlayerName()
-        self.teamName = setTeamName()
+    init(gamerName: String, teamName: String) {
+        self.gamerName = gamerName
+        self.teamName = teamName
     }
     
     
     /**
      setPlayerName : Take all the UserName
      */
-    func setPlayerName() -> String {
+    static func setPlayerName() -> String {
         
         if game.firstUI {
             print("\r🔴 Joueur 1 : Quel est ton nom de Gamer ?")
@@ -69,7 +68,7 @@ class Players {
     /**
      setTeamName : Take all the Team Name
      */
-    func setTeamName() -> String {
+    static func setTeamName() -> String {
         
         print("\r Ton nom de TEAM ?")
         
@@ -77,7 +76,7 @@ class Players {
         if let teamOfGamer = readLine() {
             
             // check if already exist
-            let isOk = teamAlreadyExist(what: teamOfGamer)
+            let isOk = Players.teamAlreadyExist(what: teamOfGamer)
             if isOk  { //
                 print("Cette TEAM existe déjà ... ^^  On en choisit une autre ? ")
                 return setTeamName()
@@ -95,6 +94,38 @@ class Players {
     }
     
     
+    /**
+     userAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     */
+    static func userAlreadyExist(what : String) -> Bool {
+        
+        
+        if !game.firstUI { //only if it's the second User Input
+            // for the userName (compare to the user 1)
+            if what.uppercased() == game.playersArray[0].gamerName.uppercased() {
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    
+    /**
+     teamAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     */
+    static func teamAlreadyExist(what : String) -> Bool {
+        
+        
+        if !game.firstUI { //only if it's the second User Input
+            // for the teamName (compare to the user 1)
+            if what.uppercased() == game.playersArray[0].teamName.uppercased() {
+                return true
+            }
+        }
+        return false
+    }
+    
     
     /**
      giveFighterName : Take all the UserName
@@ -106,6 +137,7 @@ class Players {
             } else {
                 print("\r\rTu dois choisir \(3 - fightersArray.count) Fighters : ")
             }
+            var fighterInLoad = Fighter(name: "", numberFetich: 1)
             print("\n1. 🗡 Donne moi un \(Category.warrior.rawValue)"
                 + "\n2. 👨‍🎤 Donne moi un \(Category.dwarf.rawValue)"
                 + "\n3. 👹 Donne moi un \(Category.colossus.rawValue)"
@@ -115,7 +147,7 @@ class Players {
             if let choiceMenu1 = readLine() {
                 switch choiceMenu1 {
                 case "1":
-                    let fighterInLoad = Warrior()
+                    fighterInLoad = Warrior()
                     fightersArray.append(fighterInLoad)
                 case "2":
                     let fighterInLoad = Dwarf()
@@ -131,7 +163,7 @@ class Players {
                     let fighterInLoad = Wizard()
                     fightersArray.append(fighterInLoad)
                 case "5":
-                    FightersSettings()
+                    Fighter.FightersSettings()
                     pause()
                     return chooseFighterCategory()
                     
@@ -143,7 +175,7 @@ class Players {
         }
     }
     
-    
+   
     
 }
 
