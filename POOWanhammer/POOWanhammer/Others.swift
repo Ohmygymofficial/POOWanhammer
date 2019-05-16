@@ -21,7 +21,5 @@ class Others { // create to ask some static thing at users
             _ = readLine()
             
         }
-        
-        
 }
 

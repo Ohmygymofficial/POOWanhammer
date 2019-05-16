@@ -81,7 +81,7 @@ class Game {
             }
             // TEST
             Others.pause()
-
+            
         }
     }
     
@@ -92,24 +92,59 @@ class Game {
      */
     
     func chooseAttackerFrom() {
-
+        
         print("Ici j'essaye d'accéder aux objets ainsi créé :")
         print("Pour cela, l'instance user éphémère ayant été supprimé, en ayant au préalable stocké la TEAM dans les playersArray, et les Fighters dans le FighterArray (paramètres de PLAYER), ALORS, je dois utiliser une nouvelle variable/constate pour rappeler le playerArray !! Let's test !!")
         let attackerIs = playersArray[0]
         let defenderIs = playersArray[1]
- 
+        
         Others.pause()
         print("Ici les attaquants :")
+        var n = 0
         for character in attackerIs.fightersArray {
-            print("\(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            print("Index \(n) : \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            n += 1
         }
         
         Others.pause()
         print("Ici les defenseurs :")
+        n = 0
         for character in defenderIs.fightersArray {
-            print("\(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            print("Index \(n) : \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            n += 1
         }
+        
+        Others.pause()
+        print("Ici un defenseur meurt :")
+        for character in defenderIs.fightersArray {
+            if character.name == "Kulk" {
+                character.lifePoint = 0
+            }
+        }
+        
+        Others.pause()
+        print("Ici on le vire du tableau :")
+        n = 0
+        for character in defenderIs.fightersArray {
+            if character.lifePoint == 0 {
+                defenderIs.fightersArray.remove(at: n)
+            }
+            n += 1
+        }
+        
+        Others.pause()
+        print("Ici les nouveaux index :")
+        n = 0
+        for character in defenderIs.fightersArray {
+            print("Index \(n) : \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            n += 1
+        }
+        
+        
     }
+    
+    
+    
     
     // initialisation of RandomChest
     // initialisation of FetichZone
