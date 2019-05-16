@@ -16,8 +16,10 @@ class Game {
     // to check if it's the first User Input
     var firstUI = true
     
-    // check numberOfWizard
-    var numberOfWizard = 0
+    // to switch team one or team two
+    var wichTeam = 0
+    
+    
     
     
     /**
@@ -57,6 +59,7 @@ class Game {
      initialize : Here User, teamName and Fighters will be choose
      */
     func initialize() {
+        
         // Initialisation of each team
         for n in 0...1 {
             let user = Players(gamerName: Players.setPlayerName(), teamName: Players.setTeamName())
@@ -70,6 +73,8 @@ class Game {
                 print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
             }
             
+            
+            
             // Initialisation of each fighters
             print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
             user.chooseFighterCategory()
@@ -81,67 +86,42 @@ class Game {
             }
             // TEST
             Others.pause()
-            
         }
     }
+    
+    
+    
     
     
     
     /**
-     chooseAttackerFrom() : Who give the attack
+     fight() : The fight Begin here
      */
-    
-    func chooseAttackerFrom() {
+    func fight() {
+        //choose the good Team attacker and defender
+        let attackerIs = playersArray[wichTeam]
+        let defenderIs = playersArray[wichTeam + 1]
         
-        print("Ici j'essaye d'accéder aux objets ainsi créé :")
-        print("Pour cela, l'instance user éphémère ayant été supprimé, en ayant au préalable stocké la TEAM dans les playersArray, et les Fighters dans le FighterArray (paramètres de PLAYER), ALORS, je dois utiliser une nouvelle variable/constate pour rappeler le playerArray !! Let's test !!")
-        let attackerIs = playersArray[0]
-        let defenderIs = playersArray[1]
-        
-        Others.pause()
-        print("Ici les attaquants :")
-        var n = 0
+        print("Avec qui souhaites=-tu agir ?")
+        var n = 1
         for character in attackerIs.fightersArray {
-            print("Index \(n) : \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            print("Tape \(n) pour \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
             n += 1
         }
         
-        Others.pause()
-        print("Ici les defenseurs :")
-        n = 0
-        for character in defenderIs.fightersArray {
-            print("Index \(n) : \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
-            n += 1
-        }
+        let attackerChoosen = attackerIs.chooseAttackerFrom(user: attackerIs)
+        print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
         
-        Others.pause()
-        print("Ici un defenseur meurt :")
-        for character in defenderIs.fightersArray {
-            if character.name == "Kulk" {
-                character.lifePoint = 0
-            }
-        }
-        
-        Others.pause()
-        print("Ici on le vire du tableau :")
-        n = 0
-        for character in defenderIs.fightersArray {
-            if character.lifePoint == 0 {
-                defenderIs.fightersArray.remove(at: n)
-            }
-            n += 1
-        }
-        
-        Others.pause()
-        print("Ici les nouveaux index :")
-        n = 0
-        for character in defenderIs.fightersArray {
-            print("Index \(n) : \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
-            n += 1
-        }
+        // game.randomChest()
+        // game.randomFetich()
+        // game.chooseDefender()
+        // game.bonusZone()
         
         
     }
+    
+    
+    
     
     
     
@@ -162,3 +142,4 @@ class Game {
     
     
 }
+

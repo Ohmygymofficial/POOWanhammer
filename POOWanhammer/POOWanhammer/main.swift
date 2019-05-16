@@ -22,7 +22,7 @@ game.principalMenu()
 
 if stayInProgram {
 // When team are create by players, the fight start.
-game.chooseAttackerFrom()
+game.fight()
 }
 
 

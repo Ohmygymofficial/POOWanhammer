@@ -21,6 +21,10 @@ class Players {
     // var fighterArray
     var fightersArray = [Fighter]()
     
+    // check numberOfWizard
+    var numberOfWizard = 0
+    
+    
     init(gamerName: String, teamName: String) {
         self.gamerName = gamerName
         self.teamName = teamName
@@ -41,7 +45,7 @@ class Players {
             
             // check if already exist
             let isOk = userAlreadyExist(what: pseudoOfGamer)
-            if isOk  { //
+            if isOk  {
                 print("Ce pseudo existe déjà ... ^^  On en choisit un autre ? ")
                 return setPlayerName()
             }
@@ -156,10 +160,11 @@ class Players {
                     let fighterInLoad = Colossus()
                     fightersArray.append(fighterInLoad)
                 case "4":
-                    if game.numberOfWizard >= 2 {
+                    if numberOfWizard >= 2 {
                         print("Désolé, vous ne pouvez pas choisir que des magiciens dans votre Team ;)")
                         return chooseFighterCategory()
                     }
+                    numberOfWizard += 1
                     let fighterInLoad = Wizard()
                     fightersArray.append(fighterInLoad)
                 case "5":
@@ -175,7 +180,31 @@ class Players {
         }
     }
     
-   
+    /**
+     chooseAttackerFrom() : Who give the attack
+     */
+    func chooseAttackerFrom(user : Players) -> Fighter {
+        // take a temporary value for the fighter
+        var attackerChoosen = Fighter(name: "", numberFetich: 1)
+        // to make sure that user input is not empty
+        var answer = 0
+        
+        repeat {
+            
+            answer = Others.checkInt()
+            // to be on the good index
+            answer -= 1
+            // Check if choice exist in the Player Array
+            if user.fightersArray.indices.contains(answer) {
+                attackerChoosen = user.fightersArray[answer]
+                // if not
+            } else {
+                print("Saisir un chiffre proposé, merci !")
+            }
+        } while !user.fightersArray.indices.contains(answer) || answer == 0
+        return attackerChoosen
+    }
+    
     
 }
 
