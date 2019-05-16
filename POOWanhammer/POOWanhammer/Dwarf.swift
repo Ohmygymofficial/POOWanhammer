@@ -12,10 +12,10 @@ class Dwarf : Fighter {
     
     init() {
         super.init(name: Fighter.nameOfTheFighter(category: Category.dwarf), numberFetich: Fighter.setNumberFetich())
-        self.weapon = Weapon.axe
+        self.weapon = Weapon(nameOfWeapon: "sa hache", powerOfWeapon: 20, weaponType: Weapon.WeaponType.axe)
         self.special = Special.doubleDamage
         self.lifePoint = 80
-        self.strenght = 20
+        // self.strenght = 20
         self.category = Category.dwarf
     }
     

@@ -15,10 +15,10 @@ class Colossus : Fighter {
     
     init() {
         super.init(name: Fighter.nameOfTheFighter(category: Category.colossus), numberFetich: Fighter.setNumberFetich())
-        self.weapon = Weapon.fist
+        self.weapon = Weapon(nameOfWeapon: "sa main", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
         self.special = Special.fear
         self.lifePoint = 200
-        self.strenght = 5
+        // self.strenght = 5
         self.category = Category.colossus
     }
     

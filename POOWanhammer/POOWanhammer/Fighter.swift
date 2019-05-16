@@ -13,10 +13,10 @@ class Fighter { // by default, we choose Warrior
     var name : String
     var numberFetich : Int
     var category = Category.warrior
-    var weapon = Weapon.sword
+    var weapon = Weapon(nameOfWeapon: "son épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
     var special = Special.doubleAttack
     var lifePoint: Int = 100
-    var strenght: Int = 10
+    // var strenght: Int = 10
     
     // to archive all the fighter name and check is Unique
     static var allFighterName = [String]()
@@ -90,6 +90,8 @@ class Fighter { // by default, we choose Warrior
         } while numberTestOk == ""
         return 1
     }
+    
+    
     
 
     

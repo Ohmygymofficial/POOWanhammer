@@ -9,12 +9,25 @@
 import Foundation
 
 
-// We defined here all the different weapons possibles of fighters
-enum Weapon: String {
+class Weapon {
     
-    case sword = "son épée"
-    case axe = "sa hâche"
-    case wand = "sa baguette"
-    case fist = "son poing"
+    // We defined here all the different weapons possibles of fighters
+    enum WeaponType {
+        
+        case sword, axe, wand, fist
+        //case axe = "sa hâche"
+        //case wand = "sa baguette"
+        // case fist = "son poing"
+    }
+    
+    var nameOfWeapon : String
+    var powerOfWeapon : Int
+    var weaponType : WeaponType
+    
+    init(nameOfWeapon: String, powerOfWeapon :Int, weaponType: WeaponType) {
+        self.nameOfWeapon = nameOfWeapon
+        self.powerOfWeapon = powerOfWeapon
+        self.weaponType = weaponType
+    }
+    
 }
-

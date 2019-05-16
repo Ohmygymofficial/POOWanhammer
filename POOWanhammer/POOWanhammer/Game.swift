@@ -82,7 +82,7 @@ class Game {
             // loop with this instance user and "var character" to show the team"
             print("\n\(user.gamerName), voici ta team \(user.teamName):")
             for character in user.fightersArray {
-                print("\(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             }
             // TEST
             Others.pause()
@@ -105,14 +105,16 @@ class Game {
         print("Avec qui souhaites=-tu agir ?")
         var n = 1
         for character in attackerIs.fightersArray {
-            print("Tape \(n) pour \(character.name) le \(character.category) avec \(character.weapon.rawValue) de puissance \(character.strenght). PV = \(character.lifePoint)")
+            print("Tape \(n) pour \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             n += 1
         }
         
         let attackerChoosen = attackerIs.chooseAttackerFrom(user: attackerIs)
         print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
         
+        
         // game.randomChest()
+        
         // game.randomFetich()
         // game.chooseDefender()
         // game.bonusZone()
@@ -121,7 +123,14 @@ class Game {
     }
     
     
-    
+    /**
+     func randomChest() : Random Chest Appear and can change weapon of the attacker
+ */
+    func randomChest() {
+        
+        
+       
+    }
     
     
     
