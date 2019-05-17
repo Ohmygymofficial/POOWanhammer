@@ -10,14 +10,37 @@ import Foundation
 class Warrior : Fighter {
     
     
-    init() {
-        super.init(name: Fighter.nameOfTheFighter(category: Category.warrior), numberFetich: Fighter.setNumberFetich())
+    // To have choice with init
+    convenience init() {
+        self.init(name: Fighter.nameOfTheFighter(category: Category.warrior), numberFetich: Fighter.setNumberFetich(demo: false))
         self.weapon = Weapon(nameOfWeapon: "son épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
         self.special = Special.doubleAttack
         self.lifePoint = 100
         // self.strenght = 10
         self.category = Category.warrior
     }
+    
+    // Constructor for demo mode
+    override init(name: String, numberFetich: Int) {
+        super.init(name: name, numberFetich: numberFetich)
+        self.weapon = Weapon(nameOfWeapon: "son épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
+        self.special = Special.doubleAttack
+        self.lifePoint = 100
+        // self.strenght = 10
+        self.category = Category.warrior
+    }
+    
+    /*
+    init() {
+        super.init(name: Fighter.nameOfTheFighter(category: Category.warrior), numberFetich: Fighter.setNumberFetich(demo: false))
+        self.weapon = Weapon(nameOfWeapon: "son épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
+        self.special = Special.doubleAttack
+        self.lifePoint = 100
+        // self.strenght = 10
+        self.category = Category.warrior
+    }
+ */
+
 
     
     /**

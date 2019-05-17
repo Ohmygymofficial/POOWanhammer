@@ -26,12 +26,48 @@ class Fighter { // by default, we choose Warrior
         self.name = name
         self.numberFetich = numberFetich
     }
- 
+    
     
     /**
      specialAttack : Nothing on mother Class
      */
     func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {}
+    
+    
+    
+    /**
+     changeWeapon() : Fighter's have new weapon and new power
+     */
+    func changeWeapon(attackerChoosen: Fighter) -> Weapon {
+        
+        var newWeapon = Weapon(nameOfWeapon: "ChestSurprise", powerOfWeapon: 0, weaponType: .chestSurprise)
+        
+        // launch Damage Array
+        let weaponChestContent = [
+            Weapon(nameOfWeapon: "une épée dorée", powerOfWeapon: 15, weaponType: .goldSword),
+            Weapon(nameOfWeapon: "une hâche de Rahan", powerOfWeapon: 25, weaponType: .rahanAxe),
+            Weapon(nameOfWeapon: "une grenade", powerOfWeapon: 30, weaponType: .grenade),
+            Weapon(nameOfWeapon: "un fléau d'arme", powerOfWeapon: 25, weaponType: .weaponFlail),
+            Weapon(nameOfWeapon: "un tire-bouchon", powerOfWeapon: 5, weaponType: .corkscrew),
+            ]
+        
+        // launch Heal Array
+        let weaponHealContent = [
+            Weapon(nameOfWeapon: "une purée de brocoli", powerOfWeapon: 15, weaponType: .broccoli),
+            Weapon(nameOfWeapon: "une barre protéinée", powerOfWeapon: 25, weaponType: .proteinBar),
+            Weapon(nameOfWeapon: "une whey à la banane", powerOfWeapon: 30, weaponType: .bananaWhey),
+            Weapon(nameOfWeapon: "une framboise fraiche", powerOfWeapon: 25, weaponType: .raspberry),
+            Weapon(nameOfWeapon: "un BigMac", powerOfWeapon: 5, weaponType: .bigMac),
+            ]
+        
+        
+        if attackerChoosen.category == Category.wizard {
+            newWeapon = weaponHealContent[Int(arc4random_uniform(UInt32(weaponHealContent.count)))]
+        } else {
+            newWeapon = weaponChestContent[Int(arc4random_uniform(UInt32(weaponChestContent.count)))]
+        }
+        return newWeapon
+    }
     
     
     
@@ -69,7 +105,13 @@ class Fighter { // by default, we choose Warrior
     /**
      numberFetich : ask FetichNumber of the fighter
      */
-    static func setNumberFetich() -> Int {
+    static func setNumberFetich(demo: Bool) -> Int {
+        
+        //in demo mode : give random Fetich Number
+        if demo == true {
+            return Int.random(in: 1..<5)
+        }
+        
         let numberTestOk = ""
         repeat { // repeat while var is empty
             print("Quel est ton numéro fétiche entre 1 et 5 ")
@@ -93,7 +135,7 @@ class Fighter { // by default, we choose Warrior
     
     
     
-
+    
     
     /**
      fighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
@@ -133,7 +175,7 @@ class Fighter { // by default, we choose Warrior
     
     
     //func attack
-
+    
     
     // func heal
     // func isDead

@@ -132,9 +132,10 @@ class Players {
     
     
     /**
-     giveFighterName : Take all the UserName
+     initializeFighter : Initialize Fighter by Category (Name, and Number Fetich)
      */
-    func chooseFighterCategory() {
+    func initializeFighter() {
+        
         while fightersArray.count < 3 { // to be sure that each team have 3 fighters
             if fightersArray.count == 2 {
                 print("\r\rEt donc, quel sera ton dernier fighter ? ")
@@ -162,7 +163,7 @@ class Players {
                 case "4":
                     if numberOfWizard >= 2 {
                         print("Désolé, vous ne pouvez pas choisir que des magiciens dans votre Team ;)")
-                        return chooseFighterCategory()
+                        return initializeFighter()
                     }
                     numberOfWizard += 1
                     let fighterInLoad = Wizard()
@@ -170,20 +171,52 @@ class Players {
                 case "5":
                     Fighter.FightersSettings()
                     pause()
-                    return chooseFighterCategory()
+                    return initializeFighter()
                     
                 default:
                     print("Je n'ai pas compris ton choix")
-                    return chooseFighterCategory()
+                    return initializeFighter()
                 }
             }
         }
     }
     
     /**
+     initializeRandomFighterDemo1() : To give Demo Fighter
+     */
+    func initializeRandomFighterDemo1() {
+        
+        let fighterDemo1 = Warrior(name: "Casius", numberFetich: 1)
+        fightersArray.append(fighterDemo1)
+        
+        let fighterDemo2 = Dwarf(name: "Kulk", numberFetich: 2)
+        fightersArray.append(fighterDemo2)
+        
+        let fighterDemo3 = Colossus(name: "BouL", numberFetich: 3)
+        fightersArray.append(fighterDemo3)
+        
+    }
+    
+    /**
+     initializeRandomFighterDemo2() : To give Demo Fighter
+     */
+    func initializeRandomFighterDemo2() {
+        
+        let fighterDemo1 = Wizard(name: "Mayou", numberFetich: 5)
+        fightersArray.append(fighterDemo1)
+        
+        let fighterDemo2 = Warrior(name: "Minnosh", numberFetich: 4)
+        fightersArray.append(fighterDemo2)
+        
+        let fighterDemo3 = Colossus(name: "Tenshu", numberFetich: 3)
+        fightersArray.append(fighterDemo3)
+        
+    }
+    
+    /**
      chooseAttackerFrom() : Who give the attack
      */
-    func chooseAttackerFrom(user : Players) -> Fighter {
+    func chooseAttackerFrom(gamer : Players) -> Fighter {
         // take a temporary value for the fighter
         var attackerChoosen = Fighter(name: "", numberFetich: 1)
         // to make sure that user input is not empty
@@ -195,15 +228,16 @@ class Players {
             // to be on the good index
             answer -= 1
             // Check if choice exist in the Player Array
-            if user.fightersArray.indices.contains(answer) {
-                attackerChoosen = user.fightersArray[answer]
+            if gamer.fightersArray.indices.contains(answer) {
+                attackerChoosen = gamer.fightersArray[answer]
                 // if not
             } else {
                 print("Saisir un chiffre proposé, merci !")
             }
-        } while !user.fightersArray.indices.contains(answer) || answer == 0
+        } while !gamer.fightersArray.indices.contains(answer) || answer == 0
         return attackerChoosen
     }
+    
     
     
 }

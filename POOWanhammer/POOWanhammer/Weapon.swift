@@ -14,7 +14,7 @@ class Weapon {
     // We defined here all the different weapons possibles of fighters
     enum WeaponType {
         
-        case sword, axe, wand, fist
+        case sword, axe, wand, fist, goldSword, rahanAxe, grenade, weaponFlail, corkscrew, broccoli, proteinBar, bananaWhey, raspberry, bigMac, chestSurprise
         //case axe = "sa hâche"
         //case wand = "sa baguette"
         // case fist = "son poing"
