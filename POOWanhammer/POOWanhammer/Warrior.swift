@@ -37,7 +37,7 @@ class Warrior : Fighter {
     /**
      specialWarrior : Double Attack for Warrior special attack
      */
-    override func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque  A CODER ")
     }

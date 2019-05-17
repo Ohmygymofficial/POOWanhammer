@@ -31,7 +31,11 @@ class Fighter { // by default, we choose Warrior
     /**
      specialAttack : Nothing on mother Class
      */
-    func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {}
+    func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tIl a droit à une nouvelle attaque")
+        
+        
+    }
     
     
     

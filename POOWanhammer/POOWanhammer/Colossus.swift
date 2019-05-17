@@ -35,7 +35,7 @@ class Colossus : Fighter {
     /**
      specialColossus : Fear for Colossus special attack
      */
-    override func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour  A CODER")
     }
