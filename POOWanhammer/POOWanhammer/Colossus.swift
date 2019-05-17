@@ -15,7 +15,7 @@ class Colossus : Fighter {
     
     convenience init() {
         self.init(name: Fighter.nameOfTheFighter(category: Category.colossus), numberFetich: Fighter.setNumberFetich(demo: false))
-        self.weapon = Weapon(nameOfWeapon: "sa main", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
+        self.weapon = Weapon(nameOfWeapon: "une main entourée de fer", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
         self.special = Special.fear
         self.lifePoint = 200
         // self.strenght = 5
@@ -25,7 +25,7 @@ class Colossus : Fighter {
     // Constructor for demo mode
     override init(name: String, numberFetich: Int) {
         super.init(name: name, numberFetich: numberFetich)
-        self.weapon = Weapon(nameOfWeapon: "sa main", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
+        self.weapon = Weapon(nameOfWeapon: "une main entourée de fer", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
         self.special = Special.fear
         self.lifePoint = 200
         // self.strenght = 5

@@ -13,7 +13,7 @@ class Fighter { // by default, we choose Warrior
     var name : String
     var numberFetich : Int
     var category = Category.warrior
-    var weapon = Weapon(nameOfWeapon: "son épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
+    var weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
     var special = Special.doubleAttack
     var lifePoint: Int = 100
     // var strenght: Int = 10

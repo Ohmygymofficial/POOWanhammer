@@ -102,35 +102,63 @@ class Game {
     func fight() {
         //choose the good Team attacker and defender
         let attackerIs = playersArray[wichTeam]
-        let defenderIs = playersArray[wichTeam + 1]
         
         print("Avec qui souhaites=-tu agir ?")
         var n = 1
         for character in attackerIs.fightersArray {
-            print("Tape \(n) pour \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+            print("Tape \(n) pour choisir \(attackerIs.symbol)\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             n += 1
         }
-        
-        let attackerChoosen = attackerIs.chooseAttackerFrom(gamer: attackerIs)
+        // we take the Attacker
+        let attackerChoosen = attackerIs.chooseFighter(gamer: attackerIs)
         print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
         
         
         // random chest appear or not 1/5 luck : Content depend of the category of the fighter
-        let randomNumberChest = Int.random(in: 1..<2)
+        let randomNumberChest = Int.random(in: 1..<5)
         if randomNumberChest == 1 {
-            print("Avant le chest : L'arme est: \(attackerChoosen.weapon.nameOfWeapon)")
+            print("😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
+            Others.pause()
+            print("Tu avais \(attackerChoosen.weapon.nameOfWeapon)")
             let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
             attackerChoosen.weapon = newWeapon
-            print("Nouvelle arme : \(attackerChoosen.weapon.nameOfWeapon)")
+            print("Tu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
+            print("Ta puissance d'action est passée à : \(attackerChoosen.weapon.powerOfWeapon)")
+            Others.pause()
+        }
+            
+            // game.chooseDefender()
+            var whoReceiveAction = playersArray[wichTeam + 1]
+            var healOrAttack = "attaquer"
+            if attackerChoosen.category != Category.wizard {
+                print("Qui souhaites-tu attaquer ?")
+            } else {
+                print("Qui souhaites-tu guérir ?")
+                whoReceiveAction = playersArray[wichTeam]
+                healOrAttack = "soigner"
+            }
+        
+        n = 1
+        for character in whoReceiveAction.fightersArray {
+            print("Tape \(n) pour \(healOrAttack) \(whoReceiveAction.symbol)\(character.name) le \(character.category). PV = \(character.lifePoint)")
+            n += 1
+        }
+        
+        // we take the fighter whoReceive The action
+        let whoReceiveChoosen = whoReceiveAction.chooseFighter(gamer: whoReceiveAction)
+        print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+        
+        
+        
+        
         }
         
         
+        
         // game.randomFetich()
-        // game.chooseDefender()
         // game.bonusZone()
         
-        
-    }
+
     
     
 
@@ -149,7 +177,7 @@ class Game {
      demoMode: Fighter/teamName/UserName selected by the program
      */
     func demoMode() {
-        
+
         
         // TEAM 1
         demo = true

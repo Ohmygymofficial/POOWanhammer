@@ -18,7 +18,6 @@ class Others { // create to ask some static thing at users
      */
     static func checkInt() -> Int {
         
-        print("JE SUIS EN TRAIN DE CODER POUR RECUPERER LE FIGHTER EN VERIFIANT LINDEX Etc")
         if let answer = readLine() {
             if let answerOk = Int(answer) { // check if it's Int
                 return answerOk

@@ -213,10 +213,11 @@ class Players {
         
     }
     
+
     /**
-     chooseAttackerFrom() : Who give the attack
+     chooseFighter() : Who give the attack
      */
-    func chooseAttackerFrom(gamer : Players) -> Fighter {
+    func chooseFighter(gamer : Players) -> Fighter {
         // take a temporary value for the fighter
         var attackerChoosen = Fighter(name: "", numberFetich: 1)
         // to make sure that user input is not empty
@@ -234,7 +235,7 @@ class Players {
             } else {
                 print("Saisir un chiffre proposé, merci !")
             }
-        } while !gamer.fightersArray.indices.contains(answer) || answer == 0
+        } while !gamer.fightersArray.indices.contains(answer) || answer == -1
         return attackerChoosen
     }
     

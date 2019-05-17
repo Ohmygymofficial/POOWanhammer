@@ -12,7 +12,7 @@ class Dwarf : Fighter {
     
     convenience init() {
         self.init(name: Fighter.nameOfTheFighter(category: Category.dwarf), numberFetich: Fighter.setNumberFetich(demo: false))
-        self.weapon = Weapon(nameOfWeapon: "sa hache", powerOfWeapon: 20, weaponType: Weapon.WeaponType.axe)
+        self.weapon = Weapon(nameOfWeapon: "une hache", powerOfWeapon: 20, weaponType: Weapon.WeaponType.axe)
         self.special = Special.doubleDamage
         self.lifePoint = 80
         // self.strenght = 20
@@ -22,7 +22,7 @@ class Dwarf : Fighter {
     // Constructor for demo mode
     override init(name: String, numberFetich: Int) {
         super.init(name: name, numberFetich: numberFetich)
-        self.weapon = Weapon(nameOfWeapon: "sa hache", powerOfWeapon: 20, weaponType: Weapon.WeaponType.axe)
+        self.weapon = Weapon(nameOfWeapon: "une hache", powerOfWeapon: 20, weaponType: Weapon.WeaponType.axe)
         self.special = Special.doubleDamage
         self.lifePoint = 80
         // self.strenght = 20

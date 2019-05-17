@@ -12,7 +12,7 @@ class Wizard : Fighter {
     
     convenience init() {
         self.init(name: Fighter.nameOfTheFighter(category: Category.wizard), numberFetich: Fighter.setNumberFetich(demo: false))
-        self.weapon = Weapon(nameOfWeapon: "sa baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
+        self.weapon = Weapon(nameOfWeapon: "une baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
         self.special = Special.fireball
         self.lifePoint = 125
         // self.strenght = 15
@@ -22,7 +22,7 @@ class Wizard : Fighter {
     // Constructor for demo mode
     override init(name: String, numberFetich: Int) {
         super.init(name: name, numberFetich: numberFetich)
-        self.weapon = Weapon(nameOfWeapon: "sa baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
+        self.weapon = Weapon(nameOfWeapon: "une baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
         self.special = Special.fireball
         self.lifePoint = 125
         // self.strenght = 15
