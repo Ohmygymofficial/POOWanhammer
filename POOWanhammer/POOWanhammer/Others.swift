@@ -69,41 +69,30 @@ class Others { // create to ask some static thing at users
     /**
      distributionCareOrDamage : To update lifePoint of the good fighter (depend of the action)
      */
-    static func distributionCareOrDamage(attackerChoosen: Fighter,whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
+    static func distributionCareOrDamage(attackerChoosen: Fighter,whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
         
-        /* MICHEL MICHEL : A finir ...
+        //MICHEL MICHEL : A finir ...
         // var powerOfTheAction
         // Depend of "Weapon Strenght" if it's a normal action
         var powerOfTheAction = attackerChoosen.weapon.powerOfWeapon
-        // depend If the Attacker have a Bonus zone
         
-        if bonusZone = true {
-        powerOfTheAction = attackerChoosen.weapon.powerOfWeapon
-            bonusZone = false
-        }
         // depend If the Attacker have a Bonus zone
-        if UnluckZone = true {
-            powerOfTheAction = attackerChoosen.weapon.powerOfWeapon
-            UnluckZone = false
+        if bonusZone == true {
+                powerOfTheAction = attackerChoosen.bonusZone.powerOfBonus
         }
-        */
+        
         
         //Update LifePoint of the Fighter
         if attackerChoosen.category != Category.wizard {
             whoReceiveChoosen.lifePoint -= attackerChoosen.weapon.powerOfWeapon
             // give 0 value if the fighter is dead (no negative count)
             if whoReceiveChoosen.lifePoint <= 0 {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWAOOWWWW il y en a un qui est mort : c'est : \(whoReceiveChoosen.name)")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(whoReceiveChoosen.name) est mort !🦴🦴🦴")
                 whoReceiveChoosen.lifePoint = 0
             }
         } else {
             whoReceiveChoosen.lifePoint += attackerChoosen.weapon.powerOfWeapon
         }
-        //update TeamLifePoint
-        Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-        
-        // print result
-        Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
         
     }
 

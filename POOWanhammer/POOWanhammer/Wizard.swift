@@ -49,12 +49,6 @@ class Wizard : Fighter {
             if defenderIs.fightersArray[i].lifePoint > 0 {
                 defenderIs.fightersArray[i].lifePoint -= fireballDamage
                 print("\(fireballDamage) points de dommages à \(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category). Il se retrouve à \(defenderIs.fightersArray[i].lifePoint)")
-                //Fighter.isDead(i: i, fighterArray: fighterArray)
-                /*
-                 if fighterArray[i].lifePoint <= 0 { //check if one of them is dead and print it
-                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[i].name) le \(fighterArray[i].category) est mort ! 🦴🦴🦴")
-                 }
-                 */
             }
         }
     }

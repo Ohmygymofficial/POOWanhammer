@@ -19,6 +19,7 @@
 		B19715E3228C7CE500ED2EF6 /* Dwarf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19715E2228C7CE500ED2EF6 /* Dwarf.swift */; };
 		B19715E5228C7D5500ED2EF6 /* Colossus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19715E4228C7D5500ED2EF6 /* Colossus.swift */; };
 		B19715E7228C7D8400ED2EF6 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19715E6228C7D8400ED2EF6 /* Wizard.swift */; };
+		B359E781229316A300A3AB7B /* Bonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E780229316A300A3AB7B /* Bonus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		B19715E2228C7CE500ED2EF6 /* Dwarf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dwarf.swift; sourceTree = "<group>"; };
 		B19715E4228C7D5500ED2EF6 /* Colossus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colossus.swift; sourceTree = "<group>"; };
 		B19715E6228C7D8400ED2EF6 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
+		B359E780229316A300A3AB7B /* Bonus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bonus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				B19715DE228C7B7300ED2EF6 /* Special.swift */,
 				B12B8D7E2285DD1200B05367 /* Category.swift */,
 				B12B8D802285DD3A00B05367 /* Weapon.swift */,
+				B359E780229316A300A3AB7B /* Bonus.swift */,
 			);
 			path = POOWanhammer;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				B19715E3228C7CE500ED2EF6 /* Dwarf.swift in Sources */,
 				B19715E7228C7D8400ED2EF6 /* Wizard.swift in Sources */,
 				B12B8D792285DB2500B05367 /* Others.swift in Sources */,
+				B359E781229316A300A3AB7B /* Bonus.swift in Sources */,
 				B12B8D702285DA5000B05367 /* main.swift in Sources */,
 				B12B8D812285DD3A00B05367 /* Weapon.swift in Sources */,
 				B12B8D772285DA9500B05367 /* Game.swift in Sources */,

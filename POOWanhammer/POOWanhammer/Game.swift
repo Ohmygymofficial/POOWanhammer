@@ -16,11 +16,18 @@ class Game {
     // to check if it's the first User Input
     var firstUI = true
     
-    // to switch team one or team two
-    var wichTeam = 0
     
     // var to autorize demoMode
     var demo = false
+    
+    // var to know if the fighter have a bonus zone
+    var bonusZone = false
+    
+    // var to know if the bonus Zone is luck or Unluck
+    var bonusIsLuck = true
+    
+
+    
     
     
     
@@ -100,9 +107,9 @@ class Game {
     func fight() {
         
         // initialisation of attacker
-        var attackerIs = playersArray[wichTeam]
+        var attackerIs = playersArray[0]
         // initialisation of defender / whoReceive the action
-        var defenderIs = playersArray[wichTeam + 1]
+        var defenderIs = playersArray[1]
         
         //update TeamLifePoint
         Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
@@ -141,6 +148,10 @@ class Game {
             
             // distribution damage or care
             Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+            //update TeamLifePoint
+            Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+            // print result
+            Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
             
             
             // initialisation of FetichZone
@@ -151,18 +162,38 @@ class Game {
                 attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
                 print(" A verifier si les specials attack sont ok")
                 Others.pause()
+                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+                //update TeamLifePoint
+                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                // print result
+                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
             }
         
         
     
         // initialisation of BonusZone
-            let randomBonusZone = Int.random(in: 1..<20)
+            let randomBonusZone = Int.random(in: 1..<3)
             if randomBonusZone == 1 {
                 //launch unluck
-            } else if randomBonusZone == 19 {
+                let resultBonusZone = attackerChoosen.takeUnluckZone(attackerChoosen: attackerChoosen)
+                bonusZone = true
+                bonusIsLuck = false
+                attackerChoosen.bonusZone = resultBonusZone
+            } else if randomBonusZone == 3 {
                 //launch bonus
+                let resultBonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
+                bonusZone = true
+                bonusIsLuck = true
+                attackerChoosen.bonusZone = resultBonusZone
+                Others.pause()
+                // distribution damage or care
+                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+                //update TeamLifePoint
+                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                // print result
+                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
+                
             }
-            
             
             
         // Switch the attacker and defender

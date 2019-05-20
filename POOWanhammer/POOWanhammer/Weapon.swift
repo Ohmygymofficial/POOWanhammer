@@ -15,9 +15,6 @@ class Weapon {
     enum WeaponType {
         
         case sword, axe, wand, fist, goldSword, rahanAxe, grenade, weaponFlail, corkscrew, broccoli, proteinBar, bananaWhey, raspberry, bigMac, chestSurprise
-        //case axe = "sa hâche"
-        //case wand = "sa baguette"
-        // case fist = "son poing"
     }
     
     var nameOfWeapon : String

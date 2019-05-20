@@ -16,6 +16,7 @@ class Fighter { // by default, we choose Warrior
     var weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
     var special = Special.doubleAttack
     var lifePoint: Int = 100
+    var bonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
     
     
     // to archive all the fighter name and check is Unique
@@ -73,12 +74,32 @@ class Fighter { // by default, we choose Warrior
     /**
      takeBonusZone
      */
-    func takeBonusZone () {
+    func takeBonusZone(attackerChoosen: Fighter) -> Bonus {
         
-        let bonusZoneFighter = ["prend confiance et envoit un autre coup puissant au ventre de ","dans son élan d'attaque, ajoute un revers puissant en pleine figure de ","énervé, prend appui sur un arbre, et envoi un coup fatal en pleine gorge de ","utilise son courage pour ajouter une série de 6 coups de tête en plein nez de ","nous fait un coup retourné supplémentaire en plein dos de "]
-        let instantDamageValue = [50,60,90,60,50]
-        let bonusZoneWizard = ["rassemble sa concentration et arrive à ajouter un sort de soin puissant pour ","ajoute 2 mouvements spéciaux et envoi un soin pour ","utilise sa dernière formule ! Un soin puissant est invoqué pour "]
-        let instantCareValue = [50,60,90]
+        
+        var resultbonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
+        
+        let bonusZoneFighter = [
+        Bonus(HistoryOfBonus: "prend confiance et envoit un autre coup puissant au ventre de ", powerOfBonus: 50, bonusType: .fBonus1),
+        Bonus(HistoryOfBonus: "dans son élan d'attaque, ajoute un revers puissant en pleine figure de ", powerOfBonus: 60, bonusType: .fBonus2),
+        Bonus(HistoryOfBonus: "énervé, prend appui sur un arbre, et envoi un coup fatal en pleine gorge de ", powerOfBonus: 90, bonusType: .fBonus3),
+        Bonus(HistoryOfBonus: "utilise son courage pour ajouter une série de 6 coups de tête en plein nez de ", powerOfBonus: 60, bonusType: .fBonus4),
+        Bonus(HistoryOfBonus: "nous fait un coup retourné supplémentaire en plein dos de ", powerOfBonus: 50, bonusType: .fBonus5),
+        ]
+        
+        let bonusZoneWizard = [
+            Bonus(HistoryOfBonus: "rassemble sa concentration et arrive à ajouter un sort de soin puissant pour ", powerOfBonus: 50, bonusType: .wBonus1),
+            Bonus(HistoryOfBonus: "ajoute 2 mouvements spéciaux et envoi un soin pour ", powerOfBonus: 60, bonusType: .wBonus2),
+            Bonus(HistoryOfBonus: "utilise sa dernière formule ! Un soin puissant est invoqué pour ", powerOfBonus: 90, bonusType: .wBonus3),
+            ]
+        
+        if attackerChoosen.category == Category.wizard {
+            resultbonusZone = bonusZoneWizard[Int(arc4random_uniform(UInt32(bonusZoneWizard.count)))]
+        } else {
+            resultbonusZone = bonusZoneFighter[Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))]
+        }
+        return resultbonusZone
+
         
         
     }
@@ -87,13 +108,33 @@ class Fighter { // by default, we choose Warrior
     /**
      takeUnluckZone
      */
-    func takeUnluckZone () {
+    func takeUnluckZone(attackerChoosen: Fighter) -> Bonus{
         
-        let unluckyZoneFighter = ["prend confiance et envoit un autre coup puissant .... mais il glisse et crée une blessure au ventre sur ","dans son élan d'attaque, ajoute un revers puissant..mais il manque son coup et crée une blessure au bras sur ","énervé, prend appui sur un arbre, pour envoyer un coup fatal en pleine gorge...mais l'arbre est glissant, il rate son attaque et crée une profonde blessure sur ","utilise son courage pour ajouter des coups de tête...mais désorienté, il crée des blessures sur ","nous fait un coup retourné supplémentaire ...son arme lui glisse des mains et il crée une entaille sur "]
-        let instantDamageValue = [50,60,90,60,50]
-        let unluckyZoneWizard = ["rassemble sa concentration pour lancer un soin puissant...mais il est déconcentré et son soin est envoyé sur ","ajoute 2 mouvements spéciaux pour soigner encore ! Mouvements râtés....les soins arrivent sur ","utilise sa dernière formule ! Un soin puissant est invoqué! Mais la formule est pas la bonne... et elle soigne "]
-        let instantCareValue = [50,60,90]
         
+        var resultbonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
+        
+        let bonusZoneFighter = [
+            Bonus(HistoryOfBonus: "prend confiance et envoit un autre coup puissant .... mais il glisse et crée une blessure au ventre sur ", powerOfBonus: 50, bonusType: .fBonus1),
+            Bonus(HistoryOfBonus: "dans son élan d'attaque, ajoute un revers puissant..mais il manque son coup et crée une blessure au bras sur ", powerOfBonus: 60, bonusType: .fBonus2),
+            Bonus(HistoryOfBonus: "énervé, prend appui sur un arbre, pour envoyer un coup fatal en pleine gorge...mais l'arbre est glissant, il rate son attaque et crée une profonde blessure sur ", powerOfBonus: 90, bonusType: .fBonus3),
+            Bonus(HistoryOfBonus: "utilise son courage pour ajouter des coups de tête...mais désorienté, il crée des blessures sur ", powerOfBonus: 60, bonusType: .fBonus4),
+            Bonus(HistoryOfBonus: "nous fait un coup retourné supplémentaire ...son arme lui glisse des mains et il crée une entaille sur ", powerOfBonus: 50, bonusType: .fBonus5),
+            ]
+        
+        let bonusZoneWizard = [
+            Bonus(HistoryOfBonus: "rassemble sa concentration pour lancer un soin puissant...mais il est déconcentré et son soin est envoyé sur ", powerOfBonus: 50, bonusType: .wBonus1),
+            Bonus(HistoryOfBonus: "ajoute 2 mouvements spéciaux pour soigner encore ! Mouvements râtés....les soins arrivent sur ", powerOfBonus: 60, bonusType: .wBonus2),
+            Bonus(HistoryOfBonus: "utilise sa dernière formule ! Un soin puissant est invoqué! Mais la formule est pas la bonne... et elle soigne ", powerOfBonus: 90, bonusType: .wBonus3),
+            ]
+        
+        if attackerChoosen.category == Category.wizard {
+            resultbonusZone = bonusZoneWizard[Int(arc4random_uniform(UInt32(bonusZoneWizard.count)))]
+        } else {
+            resultbonusZone = bonusZoneFighter[Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))]
+        }
+        return resultbonusZone
+
+       
         
     }
     
