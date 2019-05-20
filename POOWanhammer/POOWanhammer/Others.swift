@@ -78,24 +78,77 @@ class Others { // create to ask some static thing at users
         
         // depend If the Attacker have a Bonus zone
         if bonusZone == true {
-                powerOfTheAction = attackerChoosen.bonusZone.powerOfBonus
-        }
-        
-        
-        //Update LifePoint of the Fighter
-        if attackerChoosen.category != Category.wizard {
-            whoReceiveChoosen.lifePoint -= attackerChoosen.weapon.powerOfWeapon
-            // give 0 value if the fighter is dead (no negative count)
-            if whoReceiveChoosen.lifePoint <= 0 {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(whoReceiveChoosen.name) est mort !🦴🦴🦴")
-                whoReceiveChoosen.lifePoint = 0
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  BONUS ZONE !!!!!")
+            powerOfTheAction = attackerChoosen.bonusZone.powerOfBonus
+            // and the fighter who receive the action depend of the result of bonusIsLuck
+            if bonusIsLuck == true { //if is lucky
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t LUCKY DAY !!!!!")
+                if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random opponent fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
+                    defenderIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                    // print result
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs])
+                    // give 0 value if the fighter is dead (no negative count)
+                    if defenderIs.fightersArray[randomFighterIs].lifePoint <= 0 {
+                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[randomFighterIs].name) est mort !🦴🦴🦴")
+                        defenderIs.fightersArray[randomFighterIs].lifePoint = 0
+                    }
+                } else { // for wizard : Add powerOfTheAction to a random Team Fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
+                    attackerIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                    // print result
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs])
+                    
+                }
+                
+            } else {
+                //if is UNlucky
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t UNLUCKY BAD DAY !!!!!")
+                if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random TEAM fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
+                    attackerIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
+                    // print result
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs])
+                    
+                    
+                    // give 0 value if the fighter is dead (no negative count)
+                    if defenderIs.fightersArray[randomFighterIs].lifePoint <= 0 {
+                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[randomFighterIs].name) est mort !🦴🦴🦴")
+                        defenderIs.fightersArray[randomFighterIs].lifePoint = 0
+                    }
+                    
+                    
+                } else { // for wizard : Add powerOfTheAction to a random opponent Fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
+                    defenderIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                    // print result
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs])
+                    
+                }
             }
-        } else {
-            whoReceiveChoosen.lifePoint += attackerChoosen.weapon.powerOfWeapon
+        } else { // IF BONUS ZONE IS FALSE
+            if attackerChoosen.category != Category.wizard {
+                whoReceiveChoosen.lifePoint -= attackerChoosen.weapon.powerOfWeapon
+                // give 0 value if the fighter is dead (no negative count)
+                if whoReceiveChoosen.lifePoint <= 0 {
+                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(whoReceiveChoosen.name) est mort !🦴🦴🦴")
+                    whoReceiveChoosen.lifePoint = 0
+                }
+            } else {
+                whoReceiveChoosen.lifePoint += attackerChoosen.weapon.powerOfWeapon
+            }
+            
         }
-        
     }
-
+    
     
     
     /**
@@ -130,7 +183,7 @@ class Others { // create to ask some static thing at users
     /**
      actionPrint : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
      */
-    static func actionPrint(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
+    static func actionPrint(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, bonusZone: Bool) {
         
         // Team.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
         var attackOrCare = ""
@@ -145,28 +198,26 @@ class Others { // create to ask some static thing at users
             attackOrCare = "une attaque"
             gainOrLoose = "perd"
         }
-        /*
-         if geek.bonusOrUnluckZone == true || geek.fromUnluckZone == true { // if fighter came from bonus zone, print different message
-         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
-         if historyPrint.hAttackerFName == historyPrint.hDefenderFName {
-         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t....lui même ^^' !!")
-         } else {
-         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory) !!")
-         }
-         } else {
-         */
+
         if attackerChoosen.name == whoReceiveChoosen.name {
             whoReceive = "lui même"
         } else {
             whoReceive = whoReceiveChoosen.name + " le " + whoReceiveChoosen.category.rawValue
         }
         
+        if bonusZone == true {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(attackerChoosen.name) le \(attackerChoosen.category.rawValue) \(attackerChoosen.bonusZone.HistoryOfBonus)"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(whoReceive)")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.bonusZone.powerOfBonus) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
+        } else {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Voici l'historique de l'action réalisée : "
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(attackerChoosen.name) le \(attackerChoosen.category.rawValue)"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(whoReceive)")
+            // This is the commun message
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.weapon.powerOfWeapon) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
+        }
         
-        // This is the commun message
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.weapon.powerOfWeapon) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
+        //"prend confiance et envoit un autre coup puissant au ventre de "
         
         Others.pause()
     }

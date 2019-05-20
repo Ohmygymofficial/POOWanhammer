@@ -147,7 +147,7 @@ class Game {
             
             
             // distribution damage or care
-            Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+            Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
             //update TeamLifePoint
             Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             // print result
@@ -162,7 +162,7 @@ class Game {
                 attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
                 print(" A verifier si les specials attack sont ok")
                 Others.pause()
-                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
                 //update TeamLifePoint
                 Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                 // print result
@@ -188,11 +188,7 @@ class Game {
                 Others.pause()
                 // distribution damage or care
                 Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
-                //update TeamLifePoint
-                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-                // print result
-                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
-                
+
             }
             
             
