@@ -151,7 +151,7 @@ class Game {
             //update TeamLifePoint
             Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             // print result
-            Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
+            Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
             
             
             // initialisation of FetichZone
@@ -166,7 +166,7 @@ class Game {
                 //update TeamLifePoint
                 Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                 // print result
-                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen)
+                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
             }
         
         
@@ -187,7 +187,7 @@ class Game {
                 attackerChoosen.bonusZone = resultBonusZone
                 Others.pause()
                 // distribution damage or care
-                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
 
             }
             

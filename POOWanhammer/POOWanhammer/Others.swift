@@ -89,7 +89,7 @@ class Others { // create to ask some static thing at users
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs])
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     // give 0 value if the fighter is dead (no negative count)
                     if defenderIs.fightersArray[randomFighterIs].lifePoint <= 0 {
                         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[randomFighterIs].name) est mort !🦴🦴🦴")
@@ -101,7 +101,7 @@ class Others { // create to ask some static thing at users
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs])
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     
                 }
                 
@@ -114,7 +114,7 @@ class Others { // create to ask some static thing at users
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs])
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     
                     
                     // give 0 value if the fighter is dead (no negative count)
@@ -130,7 +130,7 @@ class Others { // create to ask some static thing at users
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs])
+                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     
                 }
             }
