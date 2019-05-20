@@ -22,9 +22,8 @@ class Bonus {
     var bonusType : bonusType
     
     init(HistoryOfBonus: String, powerOfBonus :Int, bonusType: bonusType) {
-        self.HistoryOfBonus = ""
-        self.powerOfBonus = 0
+        self.HistoryOfBonus = HistoryOfBonus
+        self.powerOfBonus = powerOfBonus
         self.bonusType = bonusType
     }
-    
 }

@@ -80,12 +80,12 @@ class Fighter { // by default, we choose Warrior
         var resultbonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
         
         let bonusZoneFighter = [
-        Bonus(HistoryOfBonus: "prend confiance et envoit un autre coup puissant au ventre de ", powerOfBonus: 50, bonusType: .fBonus1),
-        Bonus(HistoryOfBonus: "dans son élan d'attaque, ajoute un revers puissant en pleine figure de ", powerOfBonus: 60, bonusType: .fBonus2),
-        Bonus(HistoryOfBonus: "énervé, prend appui sur un arbre, et envoi un coup fatal en pleine gorge de ", powerOfBonus: 90, bonusType: .fBonus3),
-        Bonus(HistoryOfBonus: "utilise son courage pour ajouter une série de 6 coups de tête en plein nez de ", powerOfBonus: 60, bonusType: .fBonus4),
-        Bonus(HistoryOfBonus: "nous fait un coup retourné supplémentaire en plein dos de ", powerOfBonus: 50, bonusType: .fBonus5),
-        ]
+            Bonus(HistoryOfBonus: "prend confiance et envoit un autre coup puissant au ventre de ", powerOfBonus: 50, bonusType: .fBonus1),
+            Bonus(HistoryOfBonus: "dans son élan d'attaque, ajoute un revers puissant en pleine figure de ", powerOfBonus: 60, bonusType: .fBonus2),
+            Bonus(HistoryOfBonus: "énervé, prend appui sur un arbre, et envoi un coup fatal en pleine gorge de ", powerOfBonus: 90, bonusType: .fBonus3),
+            Bonus(HistoryOfBonus: "utilise son courage pour ajouter une série de 6 coups de tête en plein nez de ", powerOfBonus: 60, bonusType: .fBonus4),
+            Bonus(HistoryOfBonus: "nous fait un coup retourné supplémentaire en plein dos de ", powerOfBonus: 50, bonusType: .fBonus5),
+            ]
         
         let bonusZoneWizard = [
             Bonus(HistoryOfBonus: "rassemble sa concentration et arrive à ajouter un sort de soin puissant pour ", powerOfBonus: 50, bonusType: .wBonus1),
@@ -99,9 +99,7 @@ class Fighter { // by default, we choose Warrior
             resultbonusZone = bonusZoneFighter[Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))]
         }
         return resultbonusZone
-
-        
-        
+ 
     }
     
     

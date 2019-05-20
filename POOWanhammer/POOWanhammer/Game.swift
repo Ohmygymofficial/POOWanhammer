@@ -11,39 +11,26 @@ import Foundation
 class Game {
     //var players : [Players]
     var playersArray = [Players]()
-    
-    
     // to check if it's the first User Input
     var firstUI = true
-    
-    
+    // var to go outside the program
+    var stayInProgram = true
     // var to autorize demoMode
     var demo = false
-    
     // var to know if the fighter have a bonus zone
     var bonusZone = false
-    
     // var to know if the bonus Zone is luck or Unluck
     var bonusIsLuck = true
     
-
-    
-    
-    
-    
-    /**
-     welcome : Say Hello to the Users
-     */
-    func welcome() {
+    init() {
         print("Bienvenue dans le WANHAMMER")
+        start()
     }
     
-    
-    
     /**
-     principalMenu : User have to choose : Play, Dont play, Demo mode
+     start : User have to choose : Play, Dont play, Demo mode
      */
-    func principalMenu() {
+    func start() {
         print("\rQue voulez vous faire ?"
             + "\n1. ▶ Entrer dans le WANHAMMER"
             + "\n2. ❌ Je ne veux pas me battre"
@@ -51,12 +38,12 @@ class Game {
         if let choiceMenu1 = readLine() {
             switch choiceMenu1 {
             case "1":
-                game.initialize() // ask userName and teamName and chooseFighters
+                createPlayers() // ask userName and teamName and chooseFighters
             case "2":
                 print("Lâcheur ! 😜")
                 stayInProgram = false //change BOOL to go outside loop of program
             case "3":
-                game.demoMode() //automatic choice of the userName, TeamName and Fighters
+                demoMode() //automatic choice of the userName, TeamName and Fighters
             default: print("Je n'ai pas compris votre choix.. tapez 1, 2 ou 3")
             }
         }
@@ -65,14 +52,13 @@ class Game {
     
     
     /**
-     initialize : Here User, teamName and Fighters will be choose
+     createPlayers : Here User, teamName and Fighters will be choose
      */
-    func initialize() {
-        
+    func createPlayers() {
         // Initialisation of each team
         for n in 0...1 {
-            let gamer = Players(gamerName: Players.setPlayerName(), teamName: Players.setTeamName())
-            playersArray.append(gamer)
+            let players = Players()
+            playersArray.append(players)
             if firstUI {
                 playersArray[n].symbol = "🔴"
                 print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
@@ -86,11 +72,11 @@ class Game {
             
             // Initialisation of each fighters
             print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
-            gamer.initializeFighter()
+            players.initializeFighter()
             
             // loop with this instance user and "var character" to show the team"
-            print("\n\(gamer.gamerName), voici ta team \(gamer.teamName):")
-            for character in gamer.fightersArray {
+            print("\n\(players.gamerName), voici ta team \(players.teamName):")
+            for character in players.fightersArray {
                 print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             }
             // TEST
@@ -179,6 +165,12 @@ class Game {
                 bonusZone = true
                 bonusIsLuck = false
                 attackerChoosen.bonusZone = resultBonusZone
+                Others.pause()
+                // distribution damage or care
+                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                //reset bonus zone var
+                bonusZone = false
+                bonusIsLuck = true
             } else if randomBonusZone == 3 {
                 //launch bonus
                 let resultBonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
@@ -188,6 +180,9 @@ class Game {
                 Others.pause()
                 // distribution damage or care
                 Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                //reset bonus zone var
+                bonusZone = false
+                bonusIsLuck = true
 
             }
             

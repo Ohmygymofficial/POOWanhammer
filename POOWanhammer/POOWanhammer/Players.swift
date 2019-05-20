@@ -10,8 +10,8 @@ import Foundation
 
 class Players {
     
-    var gamerName : String
-    var teamName : String
+    var gamerName = ""
+    var teamName = ""
     static let numberOfFighters = 3
     var winCounter = 0
     var looseCounter = 0
@@ -25,17 +25,23 @@ class Players {
     var numberOfWizard = 0
     
     
+    init() {
+        self.gamerName = setPlayerName()
+        self.teamName = setTeamName()
+    }
+    
     init(gamerName: String, teamName: String) {
         self.gamerName = gamerName
         self.teamName = teamName
     }
     
+
+    
     
     /**
      setPlayerName : Take all the UserName
      */
-    static func setPlayerName() -> String {
-        
+    func setPlayerName() -> String {
         if game.firstUI {
             print("\r🔴 Joueur 1 : Quel est ton nom de Gamer ?")
         } else { print("\r🔵 Joueur 2 : Quel est ton nom de Gamer ?") }
@@ -44,7 +50,7 @@ class Players {
         if let pseudoOfGamer = readLine() {
             
             // check if already exist
-            let isOk = userAlreadyExist(what: pseudoOfGamer)
+            let isOk = isGamerNameAlreadyExist(gamerName: pseudoOfGamer)
             if isOk  {
                 print("Ce pseudo existe déjà ... ^^  On en choisit un autre ? ")
                 return setPlayerName()
@@ -72,7 +78,7 @@ class Players {
     /**
      setTeamName : Take all the Team Name
      */
-    static func setTeamName() -> String {
+    func setTeamName() -> String {
         
         print("\r Ton nom de TEAM ?")
         
@@ -80,7 +86,7 @@ class Players {
         if let teamOfGamer = readLine() {
             
             // check if already exist
-            let isOk = Players.teamAlreadyExist(what: teamOfGamer)
+            let isOk = isTeamNameAlreadyExist(teamName: teamOfGamer)
             if isOk  { //
                 print("Cette TEAM existe déjà ... ^^  On en choisit une autre ? ")
                 return setTeamName()
@@ -101,12 +107,11 @@ class Players {
     /**
      userAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
-    static func userAlreadyExist(what : String) -> Bool {
-        
+    func isGamerNameAlreadyExist(gamerName: String) -> Bool {
         
         if !game.firstUI { //only if it's the second User Input
             // for the userName (compare to the user 1)
-            if what.uppercased() == game.playersArray[0].gamerName.uppercased() {
+            if gamerName.uppercased() == game.playersArray.first?.gamerName.uppercased() {
                 return true
             }
         }
@@ -116,14 +121,13 @@ class Players {
     
     
     /**
-     teamAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     isTeamNameAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
-    static func teamAlreadyExist(what : String) -> Bool {
-        
+    func isTeamNameAlreadyExist(teamName : String) -> Bool {
         
         if !game.firstUI { //only if it's the second User Input
             // for the teamName (compare to the user 1)
-            if what.uppercased() == game.playersArray[0].teamName.uppercased() {
+            if teamName.uppercased() == game.playersArray.first?.teamName.uppercased() {
                 return true
             }
         }
@@ -181,6 +185,7 @@ class Players {
         }
     }
     
+    
     /**
      initializeRandomFighterDemo1() : To give Demo Fighter
      */
@@ -215,9 +220,9 @@ class Players {
     
 
     /**
-     chooseFighterAttack() : Who give the attack
+     chooseFighterAttack(): Who give the attack
      */
-    func chooseFighterAttack(attackerIs : Players) -> Fighter {
+    func chooseFighterAttack(attackerIs: Players) -> Fighter {
         
           // take a temporary value for the fighter
         var whoAttack = Fighter(name: "", numberFetich: 1)

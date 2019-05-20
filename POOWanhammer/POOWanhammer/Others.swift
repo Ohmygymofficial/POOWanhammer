@@ -90,11 +90,9 @@ class Others { // create to ask some static thing at users
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
                     Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
-                    // give 0 value if the fighter is dead (no negative count)
-                    if defenderIs.fightersArray[randomFighterIs].lifePoint <= 0 {
-                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[randomFighterIs].name) est mort !🦴🦴🦴")
-                        defenderIs.fightersArray[randomFighterIs].lifePoint = 0
-                    }
+                    // check if fighter is Dead
+                    Others.isDead(defenderIs: defenderIs, goodIndex: randomFighterIs)
+                    
                 } else { // for wizard : Add powerOfTheAction to a random Team Fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
                     attackerIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
@@ -116,12 +114,8 @@ class Others { // create to ask some static thing at users
                     // print result
                     Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     
-                    
-                    // give 0 value if the fighter is dead (no negative count)
-                    if defenderIs.fightersArray[randomFighterIs].lifePoint <= 0 {
-                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[randomFighterIs].name) est mort !🦴🦴🦴")
-                        defenderIs.fightersArray[randomFighterIs].lifePoint = 0
-                    }
+                    // check if fighter is Dead
+                    Others.isDead(defenderIs: attackerIs, goodIndex: randomFighterIs)
                     
                     
                 } else { // for wizard : Add powerOfTheAction to a random opponent Fighter
@@ -150,7 +144,17 @@ class Others { // create to ask some static thing at users
     }
     
     
-    
+    /**
+     isDead : check if a fighter is Dead, print message
+    */
+    static func isDead(defenderIs: Players, goodIndex: Int) {
+        
+        if defenderIs.fightersArray[goodIndex].lifePoint <= 0 {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[goodIndex].name) est mort !🦴🦴🦴")
+            defenderIs.fightersArray[goodIndex].lifePoint = 0
+        }
+        
+    }
     /**
      updateTeamLifePointAndArray : To Update lifePoint and remove Dead Fighter
      */
