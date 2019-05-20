@@ -31,10 +31,31 @@ class Wizard : Fighter {
     
     
     /**
-     specialWizard : FireBall for Wizard special attack
+     specialWizard : FireBall for Wizard special attack : Give 30 / 20 or 10 value to the fireball and the good damage on the fighter's
      */
-    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève : A CODER ")
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève :")
+        var fireballDamage = 30 // this the power of this fetichTime
+        var counterFireball = 0
+        //take a first loop to check how many fighters are alive
+        for i in 0..<defenderIs.fightersArray.count {
+            if defenderIs.fightersArray[i].lifePoint > 0 {
+                counterFireball += 1
+            }
+        }
+        fireballDamage = 30 / counterFireball //give a value to fireball 10 20 or 30
+        for i in 0..<defenderIs.fightersArray.count { //aply the damage to the fighters are alive
+            print("\(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category) est  à \(defenderIs.fightersArray[i].lifePoint)")
+            if defenderIs.fightersArray[i].lifePoint > 0 {
+                defenderIs.fightersArray[i].lifePoint -= fireballDamage
+                print("\(fireballDamage) points de dommages à \(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category). Il se retrouve à \(defenderIs.fightersArray[i].lifePoint)")
+                //Fighter.isDead(i: i, fighterArray: fighterArray)
+                /*
+                 if fighterArray[i].lifePoint <= 0 { //check if one of them is dead and print it
+                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[i].name) le \(fighterArray[i].category) est mort ! 🦴🦴🦴")
+                 }
+                 */
+            }
+        }
     }
 }

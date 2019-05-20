@@ -37,9 +37,15 @@ class Warrior : Fighter {
     /**
      specialWarrior : Double Attack for Warrior special attack
      */
-    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque  A CODER ")
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque :")
+        // initialisation of defender / whoReceive the action REFACTO POSSIBLE because already exist in Class Game func fight()
+        Others.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
+        // whoReceiveChoosen is the fighter whoReceive The action
+        let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
+        print("Celui qui va recevoir l'attaque spéciale est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+        // distribution damage or care
+        Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
     }
 }
 

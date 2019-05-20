@@ -215,30 +215,65 @@ class Players {
     
 
     /**
-     chooseFighter() : Who give the attack
+     chooseFighterAttack() : Who give the attack
      */
-    func chooseFighter(gamer : Players) -> Fighter {
-        // take a temporary value for the fighter
-        var attackerChoosen = Fighter(name: "", numberFetich: 1)
+    func chooseFighterAttack(attackerIs : Players) -> Fighter {
+        
+          // take a temporary value for the fighter
+        var whoAttack = Fighter(name: "", numberFetich: 1)
         // to make sure that user input is not empty
         var answer = 0
         
         repeat {
-            
+            answer = Others.checkInt()
+            // to be on the good index
+            answer -= 1
+            // Check if choice exist in the Player Array
+            if attackerIs.fightersArray.indices.contains(answer) {
+                whoAttack = attackerIs.fightersArray[answer]
+                // if not
+            } else {
+                print("Saisir un chiffre proposé, merci !")
+            }
+        } while !attackerIs.fightersArray.indices.contains(answer) || answer == -1
+        return whoAttack
+    }
+    
+    
+    /**
+     chooseFighterDefend() : Who defend
+     */
+    func chooseFighterDefend(defenderIs : Players, attackerIs : Players, attackerChoosen: Fighter) -> Fighter {
+        
+        // take a temporary value for the fighter
+        var whoReceiveChoosen = Fighter(name: "", numberFetich: 1)
+        // take a temporary value for the Player
+        var gamer = Players(gamerName: "", teamName: "")
+        // to make sure that user input is not empty
+        var answer = 0
+        
+        
+        // condition to check in Defender Array or Attacker Array = IF IT'S A WIZARD
+        if attackerChoosen.category != Category.wizard {
+            gamer = defenderIs
+        } else {
+            gamer = attackerIs
+        }
+        
+        repeat {
             answer = Others.checkInt()
             // to be on the good index
             answer -= 1
             // Check if choice exist in the Player Array
             if gamer.fightersArray.indices.contains(answer) {
-                attackerChoosen = gamer.fightersArray[answer]
+                whoReceiveChoosen = gamer.fightersArray[answer]
                 // if not
             } else {
                 print("Saisir un chiffre proposé, merci !")
             }
         } while !gamer.fightersArray.indices.contains(answer) || answer == -1
-        return attackerChoosen
+        return whoReceiveChoosen
     }
-    
     
     
 }

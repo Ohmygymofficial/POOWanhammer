@@ -35,8 +35,22 @@ class Colossus : Fighter {
     /**
      specialColossus : Fear for Colossus special attack
      */
-    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter) {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour  A CODER")
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
+        // propose attacker fighter :
+        Others.printListOfAttacker(attackerIs: attackerIs)
+        // attackerChoosen is the good fighter who give the action
+        let attackerChoosen = attackerIs.chooseFighterAttack(attackerIs: attackerIs)
+        print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
+        
+        // initialisation of defender / whoReceive the action
+        Others.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
+        // whoReceiveChoosen is the fighter whoReceive The action
+        let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
+        print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+        
+        // distribution damage or care
+        Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+
     }
 }
