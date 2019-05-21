@@ -34,7 +34,6 @@ class Dwarf : Fighter {
      specialDwarf : Double Damage for Dwarf special attack
      */
     override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tIl inflige à nouveau \(attackerChoosen.weapon.powerOfWeapon) de dégâts à \(whoReceiveChoosen.name)")
-            whoReceiveChoosen.lifePoint -= attackerChoosen.weapon.powerOfWeapon
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain inflige double dégâts ce tour-ci !")
         }
 }

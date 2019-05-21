@@ -99,13 +99,10 @@ class Game {
         
         //update TeamLifePoint
         Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-        
-        
         while attackerIs.lifeTeam > 0 && defenderIs.lifeTeam > 0 {
             
             // print the attacker for make choice
             Others.printListOfAttacker(attackerIs: attackerIs)
-            
             // attackerChoosen is the good fighter who give the action
             let attackerChoosen = attackerIs.chooseFighterAttack(attackerIs : attackerIs)
             print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
@@ -130,29 +127,36 @@ class Game {
             // whoReceiveChoosen is the fighter whoReceive The action
             let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
             print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
-            
-            
             // distribution damage or care
             Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
-            //update TeamLifePoint
-            Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             // print result
             Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+            //update TeamLifePoint
+            Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             
             
             // initialisation of FetichZone
             let randomFetichNumber = Int.random(in: 1..<6)
             if randomFetichNumber == attackerChoosen.numberFetich {
+                //check if one team is dead
+                let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+                if isFinish { return fight() }
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME ! C'est ton jour de chance !!😇😇😇😇")
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
                 attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
                 print(" A verifier si les specials attack sont ok")
                 Others.pause()
+                switch attackerChoosen.category {
+                case Category.dwarf, Category.warrior, Category.colossus:
                 Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
-                //update TeamLifePoint
-                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                 // print result
                 Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+                //update TeamLifePoint
+                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                case Category.wizard:
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                }
             }
         
         
@@ -160,6 +164,8 @@ class Game {
         // initialisation of BonusZone
             let randomBonusZone = Int.random(in: 1..<3)
             if randomBonusZone == 1 {
+                let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+                if isFinish { return fight() }
                 //launch unluck
                 let resultBonusZone = attackerChoosen.takeUnluckZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
@@ -171,7 +177,9 @@ class Game {
                 //reset bonus zone var
                 bonusZone = false
                 bonusIsLuck = true
-            } else if randomBonusZone == 3 {
+            } else if randomBonusZone == 2 {
+                let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+                if isFinish { return fight() }
                 //launch bonus
                 let resultBonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
                 bonusZone = true

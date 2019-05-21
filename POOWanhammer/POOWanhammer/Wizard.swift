@@ -45,7 +45,6 @@ class Wizard : Fighter {
         }
         fireballDamage = 30 / counterFireball //give a value to fireball 10 20 or 30
         for i in 0..<defenderIs.fightersArray.count { //aply the damage to the fighters are alive
-            print("\(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category) est  à \(defenderIs.fightersArray[i].lifePoint)")
             if defenderIs.fightersArray[i].lifePoint > 0 {
                 defenderIs.fightersArray[i].lifePoint -= fireballDamage
                 print("\(fireballDamage) points de dommages à \(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category). Il se retrouve à \(defenderIs.fightersArray[i].lifePoint)")

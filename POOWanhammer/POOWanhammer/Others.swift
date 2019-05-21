@@ -86,20 +86,20 @@ class Others { // create to ask some static thing at users
                 if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random opponent fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
                     defenderIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
-                    //update TeamLifePoint
-                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
                     Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
-                    // check if fighter is Dead
-                    Others.isDead(defenderIs: defenderIs, goodIndex: randomFighterIs)
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                    
                     
                 } else { // for wizard : Add powerOfTheAction to a random Team Fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
                     attackerIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
-                    //update TeamLifePoint
-                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
                     Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                    
                     
                 }
                 
@@ -109,22 +109,19 @@ class Others { // create to ask some static thing at users
                 if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random TEAM fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
                     attackerIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
-                    //update TeamLifePoint
-                    Others.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
                     // print result
                     Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
-                    
-                    // check if fighter is Dead
-                    Others.isDead(defenderIs: attackerIs, goodIndex: randomFighterIs)
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
                     
                     
                 } else { // for wizard : Add powerOfTheAction to a random opponent Fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
                     defenderIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
-                    //update TeamLifePoint
-                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     // print result
                     Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    //update TeamLifePoint
+                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     
                 }
             }
@@ -145,16 +142,20 @@ class Others { // create to ask some static thing at users
     
     
     /**
-     isDead : check if a fighter is Dead, print message
-    */
-    static func isDead(defenderIs: Players, goodIndex: Int) {
+     checkTeamAreAlive : check if a team is Dead
+     */
+    static func checkTeamAreAlive(attackerIs: Players, defenderIs: Players) -> Bool {
         
-        if defenderIs.fightersArray[goodIndex].lifePoint <= 0 {
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW BONUS ZONE : LE WANHAMMER SE REDUIT : \(defenderIs.fightersArray[goodIndex].name) est mort !🦴🦴🦴")
-            defenderIs.fightersArray[goodIndex].lifePoint = 0
-        }
-        
+        //Stop the fight if a team is dead during a Round
+        if defenderIs.fightersArray.count == 0 {
+            return true
+        } else if attackerIs.fightersArray.count == 0 {
+            return true
+        } else { return false }
     }
+    
+    
+   
     /**
      updateTeamLifePointAndArray : To Update lifePoint and remove Dead Fighter
      */
@@ -164,7 +165,7 @@ class Others { // create to ask some static thing at users
         var i = 0
         for fighter in defenderIs.fightersArray {
             if fighter.lifePoint <= 0 {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre fighter \(fighter.name) va être sorti du tableau car il est mort !")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOOWWWW : Le fighter \(fighter.name) va être sorti du tableau car il est mort !")
                 defenderIs.fightersArray.remove(at: i)
             }
             i += 1
