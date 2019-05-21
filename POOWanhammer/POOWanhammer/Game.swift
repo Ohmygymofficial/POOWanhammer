@@ -140,7 +140,10 @@ class Game {
             if randomFetichNumber == attackerChoosen.numberFetich {
                 //check if one team is dead
                 let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-                if isFinish { return fight() }
+                if isFinish {
+                    print("FINISH")
+                    return fight()
+                }
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME ! C'est ton jour de chance !!😇😇😇😇")
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
                 attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
@@ -165,7 +168,10 @@ class Game {
             let randomBonusZone = Int.random(in: 1..<3)
             if randomBonusZone == 1 {
                 let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-                if isFinish { return fight() }
+                if isFinish {
+                    print("FINISH")
+                    return fight()
+                }
                 //launch unluck
                 let resultBonusZone = attackerChoosen.takeUnluckZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
@@ -179,7 +185,10 @@ class Game {
                 bonusIsLuck = true
             } else if randomBonusZone == 2 {
                 let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-                if isFinish { return fight() }
+                if isFinish {
+                    print("FINISH")
+                    return fight()
+                }
                 //launch bonus
                 let resultBonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
@@ -193,18 +202,19 @@ class Game {
                 bonusIsLuck = true
 
             }
-            
-            
         // Switch the attacker and defender
         swap(&attackerIs, &defenderIs)
         
         
         
         }
+        // Initialisation of Congrats
+        print("Les scores de la partie à printer")
+        // reset
+        print("Proposer un reset avec revanche")
     }
     
-    // Initialisation of Congrats
-    // reset
+
     
     
     /**
