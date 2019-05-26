@@ -22,6 +22,10 @@ class Fighter { // by default, we choose Warrior
     // to archive all the fighter name and check is Unique
     static var allFighterName = [String]()
     
+    // array for demo mode
+    static var arrayDemoFighterName = ["Casius", "Kulk", "BouL", "Mayou", "Tenshu", "Minnosh"]
+    
+    
     
     init(name: String, numberFetich: Int) {
         self.name = name
@@ -142,9 +146,10 @@ class Fighter { // by default, we choose Warrior
      */
     static func nameOfTheFighter(category: Category) -> String {
         
-        print("\r Quel est le doux prenom de ce \(category) ?")
-        
         var nameOfFighterOk = ""
+        
+        // normal mode
+        print("\r Quel est le doux prenom de ce \(category) ?")
         if let nameOfFighter = readLine() {
             
             // check if already exist

@@ -38,12 +38,15 @@ class Game {
         if let choiceMenu1 = readLine() {
             switch choiceMenu1 {
             case "1":
-                createPlayers() // ask userName and teamName and chooseFighters
+                demoMode()
+                // createPlayersAndFighters() // ask userName and teamName and chooseFighters
             case "2":
                 print("Lâcheur ! 😜")
                 stayInProgram = false //change BOOL to go outside loop of program
             case "3":
-                demoMode() //automatic choice of the userName, TeamName and Fighters
+                demo = true
+                demoMode()
+                // createPlayersAndFighters() // userName and teamName and chooseFighters
             default: print("Je n'ai pas compris votre choix.. tapez 1, 2 ou 3")
             }
         }
@@ -52,9 +55,10 @@ class Game {
     
     
     /**
-     createPlayers : Here User, teamName and Fighters will be choose
+     createPlayersAndFighters : Here User, teamName and Fighters will be choose
      */
-    func createPlayers() {
+    func createPlayersAndFighters() {
+        
         // Initialisation of each team
         for n in 0...1 {
             let players = Players()
@@ -67,9 +71,6 @@ class Game {
                 playersArray[n].symbol = "🔵"
                 print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
             }
-            
-            
-            
             // Initialisation of each fighters
             print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
             players.initializeFighter()
@@ -222,6 +223,76 @@ class Game {
      */
     func demoMode() {
         
+        var players = Players(gamerName: "", teamName: "")
+        // Initialisation of each team
+        for n in 0...1 {
+            if demo {
+                if firstUI {
+                    players = Players(gamerName: "Erwan", teamName: "Wawan")
+                    playersArray.append(players)
+                    playersArray[n].symbol = "🔴"
+                    players.initializeRandomFighterDemo1()
+                    firstUI = false
+                } else {
+                    players = Players(gamerName: "Marine", teamName: "Cat")
+                    playersArray.append(players)
+                    playersArray[n].symbol = "🔵"
+                    players.initializeRandomFighterDemo2()
+                }
+            } else {
+                players = Players()
+                playersArray.append(players)
+                if firstUI {
+                    playersArray[n].symbol = "🔴"
+                    print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
+                    firstUI = false
+                } else {
+                    playersArray[n].symbol = "🔵"
+                    print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
+                }
+                // Initialisation of each fighters
+                print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
+                players.initializeFighter()
+            }
+
+            // loop with this instance user and "var character" to show the team"
+            print("\n\(players.gamerName), voici ta team \(players.teamName):")
+            for character in players.fightersArray {
+                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+            }
+        }
+        // TEST
+        Others.pause()
+    }
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        for n in 0...1 {
+            // TEAM 1
+            demo = true
+            var gamer = Players(gamerName: "Erwan", teamName: "Wawan")
+            gamer.symbol = "🔴"
+            playersArray.append(gamer)
+            // Initialisation of each fighters
+            gamer.initializeRandomFighterDemo1()
+            
+            
+            // loop with this instance user and "var character" to show the team"
+            print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
+            for character in gamer.fightersArray {
+                print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+            }
+            
+            
+        }
         
         // TEAM 1
         demo = true
@@ -252,6 +323,9 @@ class Game {
         }
         Others.pause()
     }
+ */
+        
+ 
     
     
 }

@@ -12,7 +12,7 @@ class Players {
     
     var gamerName = ""
     var teamName = ""
-    static let numberOfFighters = 3
+    static let maxFighters = 3
     var winCounter = 0
     var looseCounter = 0
     var lifeTeam = 0
@@ -139,8 +139,9 @@ class Players {
      initializeFighter : Initialize Fighter by Category (Name, and Number Fetich)
      */
     func initializeFighter() {
+
         
-        while fightersArray.count < 3 { // to be sure that each team have 3 fighters
+        while fightersArray.count < Players.maxFighters { // to be sure that each team have 3 fighters
             if fightersArray.count == 2 {
                 print("\r\rEt donc, quel sera ton dernier fighter ? ")
             } else {
@@ -202,6 +203,7 @@ class Players {
         
     }
     
+    
     /**
      initializeRandomFighterDemo2() : To give Demo Fighter
      */
@@ -217,6 +219,7 @@ class Players {
         fightersArray.append(fighterDemo3)
         
     }
+    
     
 
     /**
