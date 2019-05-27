@@ -181,7 +181,7 @@ class Game {
             }
             
             // initialisation of BonusZone
-            let randomBonusZone = Int.random(in: 1..<3)
+            let randomBonusZone = Int.random(in: 1..<19)
             if randomBonusZone == 1 {
                 Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
                 //launch unluck
@@ -194,7 +194,7 @@ class Game {
                 bonusZone = false
                 bonusIsLuck = true
                 
-            } else if randomBonusZone == 2 {
+            } else if randomBonusZone == 19 {
                 Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
                 //launch bonus
                 attackerChoosen.bonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
