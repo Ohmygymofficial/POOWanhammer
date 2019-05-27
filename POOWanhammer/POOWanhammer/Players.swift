@@ -17,62 +17,53 @@ class Players {
     var looseCounter = 0
     var lifeTeam = 0
     var symbol = "X"
-    
-    // var fighterArray
     var fightersArray = [Fighter]()
-    
-    // check numberOfWizard
     var numberOfWizard = 0
     
-    
+    // init 1 with method
     init() {
         self.gamerName = setPlayerName()
         self.teamName = setTeamName()
     }
     
+    // init 2 : with a manual gamer and teamName
     init(gamerName: String, teamName: String) {
         self.gamerName = gamerName
         self.teamName = teamName
     }
-    
-
     
     
     /**
      setPlayerName : Take all the UserName
      */
     func setPlayerName() -> String {
+        
         if game.firstUI {
             print("\r🔴 Joueur 1 : Quel est ton nom de Gamer ?")
         } else { print("\r🔵 Joueur 2 : Quel est ton nom de Gamer ?") }
         
         var pseudoOfGamerOk = ""
         if let pseudoOfGamer = readLine() {
-            
             // check if already exist
             let isOk = isGamerNameAlreadyExist(gamerName: pseudoOfGamer)
             if isOk  {
                 print("Ce pseudo existe déjà ... ^^  On en choisit un autre ? ")
                 return setPlayerName()
             }
-            
             // Check if it's empty
             if pseudoOfGamer == ""  { //
                 print("Vous devez choisir un nom de Gamer : Avec des lettres ;)")
                 return setPlayerName()
             }
-            
             if pseudoOfGamer.rangeOfCharacter(from: .decimalDigits) != nil {
                 print("Merci de ne saisir que des lettres :)")
                 return setPlayerName()
             }
-            
             // if the code can read this, is that the User Input is ok !
             pseudoOfGamerOk = pseudoOfGamer
         }
         return pseudoOfGamerOk
     }
-    
     
     
     /**
@@ -81,7 +72,6 @@ class Players {
     func setTeamName() -> String {
         
         print("\r Ton nom de TEAM ?")
-        
         var teamOfGamerOk = ""
         if let teamOfGamer = readLine() {
             
@@ -105,7 +95,7 @@ class Players {
     
     
     /**
-     userAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     isGamerNameAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
     func isGamerNameAlreadyExist(gamerName: String) -> Bool {
         
@@ -140,8 +130,7 @@ class Players {
      */
     func initializeFighter() {
 
-        
-        while fightersArray.count < Players.maxFighters { // to be sure that each team have 3 fighters
+        while fightersArray.count < Players.maxFighters { // use static let to block at 3 fighters
             if fightersArray.count == 2 {
                 print("\r\rEt donc, quel sera ton dernier fighter ? ")
             } else {
@@ -174,7 +163,7 @@ class Players {
                     let fighterInLoad = Wizard()
                     fightersArray.append(fighterInLoad)
                 case "5":
-                    Fighter.FightersSettings()
+                    fighterInLoad.fightersSettings()
                     pause()
                     return initializeFighter()
                     
@@ -188,7 +177,7 @@ class Players {
     
     
     /**
-     initializeRandomFighterDemo1() : To give Demo Fighter
+     initializeRandomFighterDemo1() : To give Demo Fighter for team 1
      */
     func initializeRandomFighterDemo1() {
         
@@ -205,7 +194,7 @@ class Players {
     
     
     /**
-     initializeRandomFighterDemo2() : To give Demo Fighter
+     initializeRandomFighterDemo2() : To give Demo Fighter for team 2
      */
     func initializeRandomFighterDemo2() {
         
@@ -219,7 +208,6 @@ class Players {
         fightersArray.append(fighterDemo3)
         
     }
-    
     
 
     /**
@@ -260,7 +248,6 @@ class Players {
         // to make sure that user input is not empty
         var answer = 0
         
-        
         // condition to check in Defender Array or Attacker Array = IF IT'S A WIZARD
         if attackerChoosen.category != Category.wizard {
             gamer = defenderIs
@@ -282,8 +269,6 @@ class Players {
         } while !gamer.fightersArray.indices.contains(answer) || answer == -1
         return whoReceiveChoosen
     }
-    
-    
 }
 
 

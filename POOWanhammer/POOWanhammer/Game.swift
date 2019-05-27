@@ -11,8 +11,6 @@ import Foundation
 class Game {
     //var players : [Players]
     var playersArray = [Players]()
-    // to check if it's the first User Input
-    var firstUI = true
     // var to go outside the program
     var stayInProgram = true
     // var to autorize demoMode
@@ -21,6 +19,8 @@ class Game {
     var bonusZone = false
     // var to know if the bonus Zone is luck or Unluck
     var bonusIsLuck = true
+    // to check if it's the first User Input
+    var firstUI = true
     
     init() {
         print("Bienvenue dans le WANHAMMER")
@@ -38,15 +38,15 @@ class Game {
         if let choiceMenu1 = readLine() {
             switch choiceMenu1 {
             case "1":
-                demoMode()
-                // createPlayersAndFighters() // ask userName and teamName and chooseFighters
+                // demoMode()
+                createPlayersAndFighters() // ask userName and teamName and chooseFighters
             case "2":
                 print("Lâcheur ! 😜")
                 stayInProgram = false //change BOOL to go outside loop of program
             case "3":
                 demo = true
-                demoMode()
-                // createPlayersAndFighters() // userName and teamName and chooseFighters
+                //demoMode()
+                createPlayersAndFighters() // userName and teamName and chooseFighters
             default: print("Je n'ai pas compris votre choix.. tapez 1, 2 ou 3")
             }
         }
@@ -59,6 +59,7 @@ class Game {
      */
     func createPlayersAndFighters() {
         
+        /*  A SUPPRIMER APRES AVOIR VERIFIE ET SUPPRIMER L'ERREUR DU THREAD1
         // Initialisation of each team
         for n in 0...1 {
             let players = Players()
@@ -83,6 +84,48 @@ class Game {
             // TEST
             Others.pause()
         }
+    */
+        
+        var players = Players(gamerName: "", teamName: "")
+        // Initialisation of each team
+        for n in 0...1 {
+            if demo {
+                if firstUI {
+                    players = Players(gamerName: "Erwan", teamName: "Wawan")
+                    playersArray.append(players)
+                    playersArray[n].symbol = "🔴"
+                    players.initializeRandomFighterDemo1()
+                    firstUI = false
+                } else {
+                    players = Players(gamerName: "Marine", teamName: "Cat")
+                    playersArray.append(players)
+                    playersArray[n].symbol = "🔵"
+                    players.initializeRandomFighterDemo2()
+                }
+            } else {
+                players = Players()
+                playersArray.append(players)
+                if firstUI {
+                    playersArray[n].symbol = "🔴"
+                    print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
+                    firstUI = false
+                } else {
+                    playersArray[n].symbol = "🔵"
+                    print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
+                }
+                // Initialisation of each fighters
+                print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
+                players.initializeFighter()
+            }
+            
+            // loop with this instance user and "var character" to show the team"
+            print("\n\(players.gamerName), voici ta team \(players.teamName):")
+            for character in players.fightersArray {
+                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+            }
+        }
+        // PAUSE
+        Others.pause()
     }
     
     
@@ -108,30 +151,26 @@ class Game {
             let attackerChoosen = attackerIs.chooseFighterAttack(attackerIs : attackerIs)
             print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
             
-            
             // initialisation of RandomChest
-            // random chest appear or not 1/5 luck : Content depend of the category of the fighter
-            let randomNumberChest = Int.random(in: 1..<5)
+            // random chest appear or not 1/3 luck : Content depend of the category of the fighter
+            let randomNumberChest = Int.random(in: 1..<4)
             if randomNumberChest == 1 {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
-                Others.pause()
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
-                let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
-                attackerChoosen.weapon = newWeapon
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est passée à : \(attackerChoosen.weapon.powerOfWeapon)")
-                Others.pause()
+                attackerChoosen.openRandomChest(attackerChoosen: attackerChoosen)
             }
-            
+             
             // print the defender for make choice
             Others.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
+            
             // whoReceiveChoosen is the fighter whoReceive The action
             let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
             print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+            
             // distribution damage or care
             Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+            
             // print result
             Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+            
             //update TeamLifePoint
             Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             
@@ -139,31 +178,8 @@ class Game {
             // initialisation of FetichZone
             let randomFetichNumber = Int.random(in: 1..<6)
             if randomFetichNumber == attackerChoosen.numberFetich {
-                //check if one team is dead
-                let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-                if isFinish {
-                    print("FINISH")
-                    return fight()
-                }
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME ! C'est ton jour de chance !!😇😇😇😇")
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
-                attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
-                print(" A verifier si les specials attack sont ok")
-                Others.pause()
-                switch attackerChoosen.category {
-                case Category.dwarf, Category.warrior, Category.colossus:
-                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
-                // print result
-                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
-                //update TeamLifePoint
-                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-                case Category.wizard:
-                    //update TeamLifePoint
-                    Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-                }
+                attackerChoosen.useFetichNumber(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
             }
-        
-        
     
         // initialisation of BonusZone
             let randomBonusZone = Int.random(in: 1..<3)
@@ -261,7 +277,7 @@ class Game {
                 print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             }
         }
-        // TEST
+        // PAUSE
         Others.pause()
     }
     

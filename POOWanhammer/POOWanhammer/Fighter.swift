@@ -18,14 +18,8 @@ class Fighter { // by default, we choose Warrior
     var lifePoint: Int = 100
     var bonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
     
-    
-    // to archive all the fighter name and check is Unique
+    // to archivechest all the fighter name and check is Unique
     static var allFighterName = [String]()
-    
-    // array for demo mode
-    static var arrayDemoFighterName = ["Casius", "Kulk", "BouL", "Mayou", "Tenshu", "Minnosh"]
-    
-    
     
     init(name: String, numberFetich: Int) {
         self.name = name
@@ -37,7 +31,6 @@ class Fighter { // by default, we choose Warrior
      specialAttack : Nothing on mother Class
      */
     func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {}
-    
     
     
     /**
@@ -65,7 +58,6 @@ class Fighter { // by default, we choose Warrior
             Weapon(nameOfWeapon: "un BigMac", powerOfWeapon: 5, weaponType: .bigMac),
             ]
         
-        
         if attackerChoosen.category == Category.wizard {
             newWeapon = weaponHealContent[Int(arc4random_uniform(UInt32(weaponHealContent.count)))]
         } else {
@@ -79,7 +71,6 @@ class Fighter { // by default, we choose Warrior
      takeBonusZone
      */
     func takeBonusZone(attackerChoosen: Fighter) -> Bonus {
-        
         
         var resultbonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
         
@@ -103,7 +94,6 @@ class Fighter { // by default, we choose Warrior
             resultbonusZone = bonusZoneFighter[Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))]
         }
         return resultbonusZone
- 
     }
     
     
@@ -111,7 +101,6 @@ class Fighter { // by default, we choose Warrior
      takeUnluckZone
      */
     func takeUnluckZone(attackerChoosen: Fighter) -> Bonus{
-        
         
         var resultbonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
         
@@ -135,9 +124,6 @@ class Fighter { // by default, we choose Warrior
             resultbonusZone = bonusZoneFighter[Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))]
         }
         return resultbonusZone
-
-       
-        
     }
     
     
@@ -153,7 +139,7 @@ class Fighter { // by default, we choose Warrior
         if let nameOfFighter = readLine() {
             
             // check if already exist
-            let isOk =  fighterAlreadyExist(what: nameOfFighter)
+            let isOk =  isFighterAlreadyExist(what: nameOfFighter)
             if isOk  { //
                 print("Ce prenom de Fighter existe déjà ... ^^  On en choisit une autre ? ")
                 return nameOfTheFighter(category: category)
@@ -204,13 +190,10 @@ class Fighter { // by default, we choose Warrior
     }
     
     
-    
-    
-    
     /**
-     fighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     isFighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
-    static func fighterAlreadyExist(what : String) -> Bool {
+    static func isFighterAlreadyExist(what : String) -> Bool {
         
         // peut être créer un tableau qui stocke les noms des fighters, toute team confondue, et compare en LOOP dedans ?
         
@@ -234,7 +217,7 @@ class Fighter { // by default, we choose Warrior
     /**
      FightersSettings : To print the caracteristic of the Fighters
      */
-    static func FightersSettings() {
+    func fightersSettings() {
         print("Voici les caractéristiques des personnages :"
             + "\n 🗡 Le \(Category.warrior.rawValue): PV : 100, Dégâts : 10, spécial : Double Attaque"
             + "\n 👨‍🎤 Le \(Category.dwarf.rawValue) : PV : 80, Arme : Hâche, Dégâts : 20, spécial : Double Dégâts"
@@ -243,11 +226,69 @@ class Fighter { // by default, we choose Warrior
     }
     
     
+    /**
+     func openRandomChest() : to take new weapon in random Chest when is appear
+     */
+    func openRandomChest(attackerChoosen: Fighter) {
+        
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
+        Others.pause()
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
+        let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
+        attackerChoosen.weapon = newWeapon
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est passée à : \(attackerChoosen.weapon.powerOfWeapon)")
+        Others.pause()
+        
+        // LILIAN LILIAN : Voir comment gerer le willSet et didSet
+        /*
+        var newWeaponStrenght = attackerChoosen.weapon.powerOfWeapon
+        if randomNumberChest == 1 {
+            let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
+            attackerChoosen.weapon = newWeapon
+            var newWeaponStrenght = attackerChoosen.weapon.powerOfWeapon {
+                willSet {
+                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
+                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
+                }
+                didSet {
+                    if oldValue > newWeaponStrenght {
+                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est descendue de \(oldValue) à \(newWeaponStrenght)")
+                    } else if oldValue <  newWeaponStrenght{
+                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée de \(oldValue) à \(newWeaponStrenght)")
+                    } else { print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Ta puissance d'action reste la meme") }
+                }
+            }
+         */
+    }
     
-    //func attack
     
-    
-    // func heal
-    // func isDead
+        /**
+         func useFetichNumber() : to take new weapon in random Chest when is appear
+         */
+        func useFetichNumber(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
+            //check if one team is dead
+            let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+            if isFinish {
+                print("On dirait bien qu'il n'y a plus besoin d'attaquer !")
+                return game.fight()
+            }
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME ! C'est ton jour de chance !!😇😇😇😇")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
+            attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+            print(" A verifier si les specials attack sont ok")
+            Others.pause()
+            switch attackerChoosen.category {
+            case Category.dwarf, Category.warrior, Category.colossus:
+                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                // print result
+                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+                //update TeamLifePoint
+                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+            case Category.wizard:
+                //update TeamLifePoint
+                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+        }
+    }
     
 }
