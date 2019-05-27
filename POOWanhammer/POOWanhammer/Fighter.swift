@@ -268,11 +268,8 @@ class Fighter { // by default, we choose Warrior
          */
         func useFetichNumber(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
             //check if one team is dead
-            let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-            if isFinish {
-                print("On dirait bien qu'il n'y a plus besoin d'attaquer !")
-                return game.fight()
-            }
+            Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+            
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME ! C'est ton jour de chance !!😇😇😇😇")
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
             attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
@@ -280,9 +277,9 @@ class Fighter { // by default, we choose Warrior
             Others.pause()
             switch attackerChoosen.category {
             case Category.dwarf, Category.warrior, Category.colossus:
-                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
                 // print result
-                Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+                Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
                 //update TeamLifePoint
                 Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             case Category.wizard:

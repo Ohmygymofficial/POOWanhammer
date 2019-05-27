@@ -24,6 +24,7 @@ class Others { // create to ask some static thing at users
         }
     }
     
+    
     /**
      printListOfDefender() : Print List of attacker
      */
@@ -45,8 +46,7 @@ class Others { // create to ask some static thing at users
     }
     
     
-    
-    
+
     /**
      checkInt
      */
@@ -65,11 +65,10 @@ class Others { // create to ask some static thing at users
     
     
     
-    
     /**
-     distributionCareOrDamage : To update lifePoint of the good fighter (depend of the action)
+     updateCareOrDamage : To update lifePoint of the good fighter (depend of the action)
      */
-    static func distributionCareOrDamage(attackerChoosen: Fighter,whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
+    static func updateCareOrDamage(attackerChoosen: Fighter,whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
         
         //MICHEL MICHEL : A finir ...
         // var powerOfTheAction
@@ -87,20 +86,16 @@ class Others { // create to ask some static thing at users
                     let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
                     defenderIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-                    
-                    
                 } else { // for wizard : Add powerOfTheAction to a random Team Fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
                     attackerIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-                    
-                    
                 }
                 
             } else {
@@ -110,7 +105,7 @@ class Others { // create to ask some static thing at users
                     let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
                     attackerIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
                     
@@ -119,7 +114,7 @@ class Others { // create to ask some static thing at users
                     let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
                     defenderIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
                     // print result
-                    Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                     
@@ -136,7 +131,6 @@ class Others { // create to ask some static thing at users
             } else {
                 whoReceiveChoosen.lifePoint += attackerChoosen.weapon.powerOfWeapon
             }
-            
         }
     }
     
@@ -144,18 +138,20 @@ class Others { // create to ask some static thing at users
     /**
      checkTeamAreAlive : check if a team is Dead
      */
-    static func checkTeamAreAlive(attackerIs: Players, defenderIs: Players) -> Bool {
+    static func checkTeamAreAlive(attackerIs: Players, defenderIs: Players) {
         
         //Stop the fight if a team is dead during a Round
         if defenderIs.fightersArray.count == 0 {
-            return true
+            print("La team \(defenderIs.teamName) n'a plus de points de vie ! Tous les fighters sont morts !")
+            return game.fight()
         } else if attackerIs.fightersArray.count == 0 {
-            return true
-        } else { return false }
+            print("La team \(attackerIs.teamName) n'a plus de points de vie ! Tous les fighters sont morts !")
+            return game.fight()
+        }
     }
     
     
-   
+    
     /**
      updateTeamLifePointAndArray : To Update lifePoint and remove Dead Fighter
      */
@@ -188,7 +184,7 @@ class Others { // create to ask some static thing at users
     /**
      actionPrint : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
      */
-    static func actionPrint(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, bonusZone: Bool) {
+    static func printAction(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, bonusZone: Bool) {
         
         // Team.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
         var attackOrCare = ""
@@ -203,7 +199,7 @@ class Others { // create to ask some static thing at users
             attackOrCare = "une attaque"
             gainOrLoose = "perd"
         }
-
+        
         if attackerChoosen.name == whoReceiveChoosen.name {
             whoReceive = "lui même"
         } else {
@@ -215,19 +211,14 @@ class Others { // create to ask some static thing at users
                 + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(whoReceive)")
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.bonusZone.powerOfBonus) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
         } else {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Voici l'historique de l'action réalisée : "
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(attackerChoosen.name) le \(attackerChoosen.category.rawValue)"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(whoReceive)")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Voici l'historique de l'action réalisée : "
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(attackerChoosen.name) le \(attackerChoosen.category.rawValue)"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(whoReceive)")
             // This is the commun message
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.weapon.powerOfWeapon) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
         }
-        
-        //"prend confiance et envoit un autre coup puissant au ventre de "
-        
         Others.pause()
     }
-    
-    
     
     
     /**
@@ -239,5 +230,73 @@ class Others { // create to ask some static thing at users
         _ = readLine()
         
     }
+    
+    
+    /**
+     printFinalScore : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
+     */
+    static func printFinalScore(defenderIs: Players, attackerIs: Players) {
+        print("Cette partie est terminé, voici les scores :"
+        + "\(attackerIs.gamerName) avec sa team \(attackerIs.teamName) termine avec \(attackerIs.lifeTeam)"
+        + "\(defenderIs.gamerName) avec sa team \(defenderIs.teamName) termine avec \(defenderIs.lifeTeam)")
+    }
+    
+    
+    /**
+     updateCounterLooseAndWin : To update score of each Gamer Team
+     */
+    static func updateCounterLooseAndWin(defenderIs: Players, attackerIs: Players) {
+        
+        if attackerIs.lifeTeam > defenderIs.lifeTeam {
+            attackerIs.winCounter += 1
+            defenderIs.looseCounter += 1
+        } else {
+            attackerIs.looseCounter += 1
+            defenderIs.winCounter += 1
+        }
+        print("Etat des manches gagnées pour \(attackerIs.gamerName) avec sa team \(attackerIs.teamName) : \(attackerIs.winCounter)")
+        print("Etat des manches gagnées pour \(defenderIs.gamerName) avec sa team \(defenderIs.teamName) : \(defenderIs.winCounter)")
+    }
+    
+    
+    /**
+     resetTeamForRevenge : To reset Fighters and start a new fight
+     */
+    static func resetTeamForRevenge(defenderIs: Players, attackerIs: Players) {
+     
+        var playerIs = attackerIs
+        for _ in 0...1 {
+            //remove all fighter in FighterArray
+            playerIs.fightersArray.removeAll()
+            // add new fighter with fighterArraySaved
+            for fighter in playerIs.fightersArraySaved {
+                if fighter.category == Category.warrior {
+                    let fighterInResetMode = Warrior(name: fighter.name, numberFetich: fighter.numberFetich)
+                    playerIs.fightersArray.append(fighterInResetMode)
+                }
+                if fighter.category == Category.dwarf {
+                    let fighterInResetMode = Dwarf(name: fighter.name, numberFetich: fighter.numberFetich)
+                    playerIs.fightersArray.append(fighterInResetMode)
+                }
+                if fighter.category == Category.colossus {
+                    let fighterInResetMode = Colossus(name: fighter.name, numberFetich: fighter.numberFetich)
+                    playerIs.fightersArray.append(fighterInResetMode)
+                }
+                if fighter.category == Category.wizard {
+                    let fighterInResetMode = Wizard(name: fighter.name, numberFetich: fighter.numberFetich)
+                    playerIs.fightersArray.append(fighterInResetMode)
+                }
+            }
+            // loop with this instance user and "var character" to show the team"
+            print("\n\(playerIs.gamerName), voici ta team \(playerIs.teamName) remise sur pied !!!! ")
+            for character in playerIs.fightersArray {
+                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+            }
+            playerIs = defenderIs
+            pause()
+        }
+        print("\r\r\rUne nouvelle bataille peut maintenant commencer !!!!")
+    }
+    
 }
 

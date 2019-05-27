@@ -60,31 +60,31 @@ class Game {
     func createPlayersAndFighters() {
         
         /*  A SUPPRIMER APRES AVOIR VERIFIE ET SUPPRIMER L'ERREUR DU THREAD1
-        // Initialisation of each team
-        for n in 0...1 {
-            let players = Players()
-            playersArray.append(players)
-            if firstUI {
-                playersArray[n].symbol = "🔴"
-                print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
-                firstUI = false
-            } else {
-                playersArray[n].symbol = "🔵"
-                print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
-            }
-            // Initialisation of each fighters
-            print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
-            players.initializeFighter()
-            
-            // loop with this instance user and "var character" to show the team"
-            print("\n\(players.gamerName), voici ta team \(players.teamName):")
-            for character in players.fightersArray {
-                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
-            }
-            // TEST
-            Others.pause()
-        }
-    */
+         // Initialisation of each team
+         for n in 0...1 {
+         let players = Players()
+         playersArray.append(players)
+         if firstUI {
+         playersArray[n].symbol = "🔴"
+         print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
+         firstUI = false
+         } else {
+         playersArray[n].symbol = "🔵"
+         print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
+         }
+         // Initialisation of each fighters
+         print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
+         players.initializeFighter()
+         
+         // loop with this instance user and "var character" to show the team"
+         print("\n\(players.gamerName), voici ta team \(players.teamName):")
+         for character in players.fightersArray {
+         print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+         }
+         // TEST
+         Others.pause()
+         }
+         */
         
         var players = Players(gamerName: "", teamName: "")
         // Initialisation of each team
@@ -157,7 +157,7 @@ class Game {
             if randomNumberChest == 1 {
                 attackerChoosen.openRandomChest(attackerChoosen: attackerChoosen)
             }
-             
+            
             // print the defender for make choice
             Others.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
             
@@ -166,10 +166,10 @@ class Game {
             print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
             
             // distribution damage or care
-            Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+            Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
             
             // print result
-            Others.actionPrint(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+            Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
             
             //update TeamLifePoint
             Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
@@ -180,60 +180,75 @@ class Game {
             if randomFetichNumber == attackerChoosen.numberFetich {
                 attackerChoosen.useFetichNumber(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
             }
-    
-        // initialisation of BonusZone
+            
+            // initialisation of BonusZone
             let randomBonusZone = Int.random(in: 1..<3)
             if randomBonusZone == 1 {
-                let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-                if isFinish {
-                    print("FINISH")
-                    return fight()
-                }
+                Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
                 //launch unluck
-                let resultBonusZone = attackerChoosen.takeUnluckZone(attackerChoosen: attackerChoosen)
+                attackerChoosen.bonusZone = attackerChoosen.takeUnluckZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
                 bonusIsLuck = false
-                attackerChoosen.bonusZone = resultBonusZone
-                Others.pause()
                 // distribution damage or care
-                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
                 //reset bonus zone var
                 bonusZone = false
                 bonusIsLuck = true
+                
             } else if randomBonusZone == 2 {
-                let isFinish = Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-                if isFinish {
-                    print("FINISH")
-                    return fight()
-                }
+                Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
                 //launch bonus
-                let resultBonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
+                attackerChoosen.bonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
                 bonusIsLuck = true
-                attackerChoosen.bonusZone = resultBonusZone
-                Others.pause()
+                // attackerChoosen.bonusZone = resultBonusZone
                 // distribution damage or care
-                Others.distributionCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
                 //reset bonus zone var
                 bonusZone = false
                 bonusIsLuck = true
-
+                
             }
-        // Switch the attacker and defender
-        swap(&attackerIs, &defenderIs)
-        
-        
-        
+            
+            askForRevenge(defenderIs: defenderIs, attackerIs: attackerIs)
+            fight()
+            // Switch the attacker and defender
+            swap(&attackerIs, &defenderIs)
+            
+            
+            
         }
         // Initialisation of Congrats
-        print("Les scores de la partie à printer")
-        // reset
+        Others.printFinalScore(defenderIs: defenderIs, attackerIs: attackerIs)
+        // update counter of Win and Loose
+        Others.updateCounterLooseAndWin(defenderIs: defenderIs, attackerIs: attackerIs)
+        // revenge or stop ?
+        askForRevenge(defenderIs: defenderIs, attackerIs: attackerIs)
         print("Proposer un reset avec revanche")
     }
     
-
+    /**
+     askForRevenge : Users can choice if they want to continu or stop the game
+     */
+    func askForRevenge(defenderIs: Players, attackerIs: Players) {
+        print("\rUne petite revanche ?"
+            + "\n1. ▶ Oui !"
+            + "\n2. ❌ Non, on quitte le WanHammer")
+        if let choiceMenu1 = readLine() {
+            switch choiceMenu1 {
+            case "1":
+                Others.resetTeamForRevenge(defenderIs: defenderIs, attackerIs: attackerIs) // ask userName and teamName and chooseFighters
+            case "2":
+                print("Lâcheur ! 😜")
+                stayInProgram = false //change BOOL to go outside loop of program
+            default: print("Je n'ai pas compris votre choix.. tapez 1 ou 2")
+            }
+        }
+    }
     
     
+    
+    /* MICHEL MICHEL  DEMO MODE PEUT ETRE SUPPRIME, REDUIT GRACE A LA VAR DEMO  juste a supprimer erreur de THREAD avec LILIAN
     /**
      demoMode: Fighter/teamName/UserName selected by the program
      */
@@ -270,7 +285,7 @@ class Game {
                 print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
                 players.initializeFighter()
             }
-
+            
             // loop with this instance user and "var character" to show the team"
             print("\n\(players.gamerName), voici ta team \(players.teamName):")
             for character in players.fightersArray {
@@ -281,67 +296,67 @@ class Game {
         Others.pause()
     }
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-        for n in 0...1 {
-            // TEAM 1
-            demo = true
-            var gamer = Players(gamerName: "Erwan", teamName: "Wawan")
-            gamer.symbol = "🔴"
-            playersArray.append(gamer)
-            // Initialisation of each fighters
-            gamer.initializeRandomFighterDemo1()
-            
-            
-            // loop with this instance user and "var character" to show the team"
-            print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
-            for character in gamer.fightersArray {
-                print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
-            }
-            
-            
-        }
-        
-        // TEAM 1
-        demo = true
-        var gamer = Players(gamerName: "Erwan", teamName: "Wawan")
-        gamer.symbol = "🔴"
-        playersArray.append(gamer)
-        // Initialisation of each fighters
-        gamer.initializeRandomFighterDemo1()
-        
-        
-        // loop with this instance user and "var character" to show the team"
-        print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
-        for character in gamer.fightersArray {
-            print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
-        }
-        
-        // TEAM 2
-        gamer = Players(gamerName: "Marine", teamName: "Cat")
-        gamer.symbol = "🔵"
-        playersArray.append(gamer)
-        // Initialisation of each fighters
-        gamer.initializeRandomFighterDemo2()
-        
-        // loop with this instance user and "var character" to show the team"
-        print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
-        for character in gamer.fightersArray {
-            print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
-        }
-        Others.pause()
-    }
- */
-        
- 
+    
+    
+    
+    */
+    
+    
+    
+    
+    
+    /*
+     for n in 0...1 {
+     // TEAM 1
+     demo = true
+     var gamer = Players(gamerName: "Erwan", teamName: "Wawan")
+     gamer.symbol = "🔴"
+     playersArray.append(gamer)
+     // Initialisation of each fighters
+     gamer.initializeRandomFighterDemo1()
+     
+     
+     // loop with this instance user and "var character" to show the team"
+     print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
+     for character in gamer.fightersArray {
+     print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+     }
+     
+     
+     }
+     
+     // TEAM 1
+     demo = true
+     var gamer = Players(gamerName: "Erwan", teamName: "Wawan")
+     gamer.symbol = "🔴"
+     playersArray.append(gamer)
+     // Initialisation of each fighters
+     gamer.initializeRandomFighterDemo1()
+     
+     
+     // loop with this instance user and "var character" to show the team"
+     print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
+     for character in gamer.fightersArray {
+     print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+     }
+     
+     // TEAM 2
+     gamer = Players(gamerName: "Marine", teamName: "Cat")
+     gamer.symbol = "🔵"
+     playersArray.append(gamer)
+     // Initialisation of each fighters
+     gamer.initializeRandomFighterDemo2()
+     
+     // loop with this instance user and "var character" to show the team"
+     print("\n\(gamer.symbol) \(gamer.gamerName), voici ta team \(gamer.teamName):")
+     for character in gamer.fightersArray {
+     print("\(gamer.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+     }
+     Others.pause()
+     }
+     */
+    
+    
     
     
 }

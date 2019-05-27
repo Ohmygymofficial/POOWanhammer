@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "POOWanhammer/Game.swift"
-            timestampString = "580667688.573684"
+            filePath = "POOWanhammer/Others.swift"
+            timestampString = "580672307.0748169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "demoMode()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "POOWanhammer/Game.swift"
-            timestampString = "580667688.574036"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "fight()"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "resetTeamForRevenge(defenderIs:attackerIs:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

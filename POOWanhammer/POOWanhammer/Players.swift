@@ -18,6 +18,7 @@ class Players {
     var lifeTeam = 0
     var symbol = "X"
     var fightersArray = [Fighter]()
+    var fightersArraySaved = [Fighter]()
     var numberOfWizard = 0
     
     // init 1 with method
@@ -148,12 +149,15 @@ class Players {
                 case "1":
                     fighterInLoad = Warrior()
                     fightersArray.append(fighterInLoad)
+                    fightersArraySaved.append(fighterInLoad)
                 case "2":
                     let fighterInLoad = Dwarf()
                     fightersArray.append(fighterInLoad)
+                    fightersArraySaved.append(fighterInLoad)
                 case "3":
                     let fighterInLoad = Colossus()
                     fightersArray.append(fighterInLoad)
+                    fightersArraySaved.append(fighterInLoad)
                 case "4":
                     if numberOfWizard >= 2 {
                         print("Désolé, vous ne pouvez pas choisir que des magiciens dans votre Team ;)")
@@ -162,6 +166,7 @@ class Players {
                     numberOfWizard += 1
                     let fighterInLoad = Wizard()
                     fightersArray.append(fighterInLoad)
+                    fightersArraySaved.append(fighterInLoad)
                 case "5":
                     fighterInLoad.fightersSettings()
                     pause()
@@ -183,12 +188,15 @@ class Players {
         
         let fighterDemo1 = Warrior(name: "Casius", numberFetich: 1)
         fightersArray.append(fighterDemo1)
+        fightersArraySaved.append(fighterDemo1)
         
         let fighterDemo2 = Dwarf(name: "Kulk", numberFetich: 2)
         fightersArray.append(fighterDemo2)
+        fightersArraySaved.append(fighterDemo2)
         
         let fighterDemo3 = Colossus(name: "BouL", numberFetich: 3)
         fightersArray.append(fighterDemo3)
+        fightersArraySaved.append(fighterDemo3)
         
     }
     
@@ -200,12 +208,15 @@ class Players {
         
         let fighterDemo1 = Wizard(name: "Mayou", numberFetich: 5)
         fightersArray.append(fighterDemo1)
+        fightersArraySaved.append(fighterDemo1)
         
         let fighterDemo2 = Warrior(name: "Minnosh", numberFetich: 4)
         fightersArray.append(fighterDemo2)
+        fightersArraySaved.append(fighterDemo2)
         
         let fighterDemo3 = Colossus(name: "Tenshu", numberFetich: 3)
         fightersArray.append(fighterDemo3)
+        fightersArraySaved.append(fighterDemo3)
         
     }
     
