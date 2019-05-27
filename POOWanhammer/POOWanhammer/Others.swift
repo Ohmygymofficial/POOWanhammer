@@ -254,8 +254,8 @@ class Others { // create to ask some static thing at users
             attackerIs.looseCounter += 1
             defenderIs.winCounter += 1
         }
-        print("Etat des manches gagnées pour \(attackerIs.gamerName) avec sa team \(attackerIs.teamName) : \(attackerIs.winCounter)")
-        print("Etat des manches gagnées pour \(defenderIs.gamerName) avec sa team \(defenderIs.teamName) : \(defenderIs.winCounter)")
+        print("\rEtat des manches gagnées pour \(attackerIs.gamerName) avec sa team \(attackerIs.teamName) : \(attackerIs.winCounter)")
+        print("\rEtat des manches gagnées pour \(defenderIs.gamerName) avec sa team \(defenderIs.teamName) : \(defenderIs.winCounter)")
     }
     
     

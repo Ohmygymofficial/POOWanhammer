@@ -209,9 +209,6 @@ class Game {
                 bonusIsLuck = true
                 
             }
-            
-            askForRevenge(defenderIs: defenderIs, attackerIs: attackerIs)
-            fight()
             // Switch the attacker and defender
             swap(&attackerIs, &defenderIs)
             
@@ -224,7 +221,6 @@ class Game {
         Others.updateCounterLooseAndWin(defenderIs: defenderIs, attackerIs: attackerIs)
         // revenge or stop ?
         askForRevenge(defenderIs: defenderIs, attackerIs: attackerIs)
-        print("Proposer un reset avec revanche")
     }
     
     /**
