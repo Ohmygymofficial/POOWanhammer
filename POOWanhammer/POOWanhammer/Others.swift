@@ -237,8 +237,8 @@ class Others { // create to ask some static thing at users
      */
     static func printFinalScore(defenderIs: Players, attackerIs: Players) {
         print("Cette partie est terminé, voici les scores :"
-        + "\(attackerIs.gamerName) avec sa team \(attackerIs.teamName) termine avec \(attackerIs.lifeTeam)"
-        + "\(defenderIs.gamerName) avec sa team \(defenderIs.teamName) termine avec \(defenderIs.lifeTeam)")
+        + "\r\(attackerIs.gamerName) avec sa team \(attackerIs.teamName) termine avec \(attackerIs.lifeTeam)"
+        + "\r\(defenderIs.gamerName) avec sa team \(defenderIs.teamName) termine avec \(defenderIs.lifeTeam)")
     }
     
     

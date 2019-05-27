@@ -12,7 +12,7 @@ import Foundation
 let game = Game()
 
 
-if game.stayInProgram {
+while game.stayInProgram {
     // When team are create by players, the fight start.
     game.fight()
 }
