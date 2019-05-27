@@ -59,33 +59,6 @@ class Game {
      */
     func createPlayersAndFighters() {
         
-        /*  A SUPPRIMER APRES AVOIR VERIFIE ET SUPPRIMER L'ERREUR DU THREAD1
-         // Initialisation of each team
-         for n in 0...1 {
-         let players = Players()
-         playersArray.append(players)
-         if firstUI {
-         playersArray[n].symbol = "🔴"
-         print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
-         firstUI = false
-         } else {
-         playersArray[n].symbol = "🔵"
-         print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
-         }
-         // Initialisation of each fighters
-         print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
-         players.initializeFighter()
-         
-         // loop with this instance user and "var character" to show the team"
-         print("\n\(players.gamerName), voici ta team \(players.teamName):")
-         for character in players.fightersArray {
-         print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
-         }
-         // TEST
-         Others.pause()
-         }
-         */
-        
         var players = Players(gamerName: "", teamName: "")
         // Initialisation of each team
         for n in 0...1 {
@@ -103,7 +76,7 @@ class Game {
                     players.initializeFighterDemo2()
                 }
             } else { // if it's normal mode
-                players = Players()
+                players = Players(firstUI: firstUI)
                 playersArray.append(players)
                 if firstUI {
                     playersArray[n].symbol = "🔴"

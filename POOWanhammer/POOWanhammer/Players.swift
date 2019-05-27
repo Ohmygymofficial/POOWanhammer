@@ -22,8 +22,8 @@ class Players {
     var numberOfWizard = 0
     
     // init 1 with method
-    init() {
-        self.gamerName = setPlayerName()
+    init(firstUI: Bool) {
+        self.gamerName = setPlayerName(firstUI: firstUI)
         self.teamName = setTeamName()
     }
     
@@ -37,28 +37,29 @@ class Players {
     /**
      setPlayerName : Take all the UserName
      */
-    func setPlayerName() -> String {
+    func setPlayerName(firstUI: Bool) -> String {
         
-        if game.firstUI {
+        if firstUI {
             print("\r🔴 Joueur 1 : Quel est ton nom de Gamer ?")
-        } else { print("\r🔵 Joueur 2 : Quel est ton nom de Gamer ?") }
-        
+        } else {
+            print("\r🔵 Joueur 2 : Quel est ton nom de Gamer ?")
+        }
         var pseudoOfGamerOk = ""
         if let pseudoOfGamer = readLine() {
             // check if already exist
             let isOk = isGamerNameAlreadyExist(gamerName: pseudoOfGamer)
             if isOk  {
                 print("Ce pseudo existe déjà ... ^^  On en choisit un autre ? ")
-                return setPlayerName()
+                return setPlayerName(firstUI: firstUI)
             }
             // Check if it's empty
             if pseudoOfGamer == ""  { //
                 print("Vous devez choisir un nom de Gamer : Avec des lettres ;)")
-                return setPlayerName()
+                return setPlayerName(firstUI: firstUI)
             }
             if pseudoOfGamer.rangeOfCharacter(from: .decimalDigits) != nil {
                 print("Merci de ne saisir que des lettres :)")
-                return setPlayerName()
+                return setPlayerName(firstUI: firstUI)
             }
             // if the code can read this, is that the User Input is ok !
             pseudoOfGamerOk = pseudoOfGamer

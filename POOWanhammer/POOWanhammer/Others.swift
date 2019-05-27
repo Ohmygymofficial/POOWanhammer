@@ -24,7 +24,6 @@ class Others { // create to ask some static thing at users
         }
     }
     
-    
     /**
      printListOfDefender() : Print List of attacker
      */
@@ -44,7 +43,6 @@ class Others { // create to ask some static thing at users
             n += 1
         }
     }
-    
     
 
     /**
@@ -144,7 +142,7 @@ class Others { // create to ask some static thing at users
         }
     }
     
-    
+
     
     /**
      updateTeamLifePointAndArray : To Update lifePoint and remove Dead Fighter

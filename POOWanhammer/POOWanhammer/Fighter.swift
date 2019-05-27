@@ -231,35 +231,16 @@ class Fighter { // by default, we choose Warrior
      */
     func openRandomChest(attackerChoosen: Fighter) {
         
+        
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
         Others.pause()
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
+        let oldValue = attackerChoosen.weapon.powerOfWeapon
         let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
         attackerChoosen.weapon = newWeapon
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est passée à : \(attackerChoosen.weapon.powerOfWeapon)")
+        compareNewAndOldWeaponStrength(newValue: newWeapon.powerOfWeapon, oldValue: oldValue)
         Others.pause()
-        
-        // LILIAN LILIAN : Voir comment gerer le willSet et didSet
-        /*
-        var newWeaponStrenght = attackerChoosen.weapon.powerOfWeapon
-        if randomNumberChest == 1 {
-            let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
-            attackerChoosen.weapon = newWeapon
-            var newWeaponStrenght = attackerChoosen.weapon.powerOfWeapon {
-                willSet {
-                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
-                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
-                }
-                didSet {
-                    if oldValue > newWeaponStrenght {
-                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est descendue de \(oldValue) à \(newWeaponStrenght)")
-                    } else if oldValue <  newWeaponStrenght{
-                        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée de \(oldValue) à \(newWeaponStrenght)")
-                    } else { print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Ta puissance d'action reste la meme") }
-                }
-            }
-         */
     }
     
     
@@ -285,6 +266,20 @@ class Fighter { // by default, we choose Warrior
             case Category.wizard:
                 //update TeamLifePoint
                 Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+        }
+    }
+    
+    /**
+     compareNewAndOldWeaponStrength() : To print different message depend of the new Strength of Weapon
+     */
+    func compareNewAndOldWeaponStrength(newValue: Int, oldValue: Int) {
+        
+        if oldValue > newValue {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est descendue à : \(newValue)")
+        } else if oldValue < newValue {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée à : \(newValue)")
+        } else {
+            print("La valeur de ton arme est restée identique")
         }
     }
     
