@@ -270,7 +270,7 @@ class Fighter { // by default, we choose Warrior
             //check if one team is dead
             Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
             
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME ! C'est ton jour de chance !!😇😇😇😇")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😍😍😍😍 FETICH TIME ! C'est ton jour de chance !!😍😍😍😍")
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
             attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
             print(" A verifier si les specials attack sont ok")

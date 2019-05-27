@@ -70,14 +70,12 @@ class Others { // create to ask some static thing at users
      */
     static func updateCareOrDamage(attackerChoosen: Fighter,whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
         
-        //MICHEL MICHEL : A finir ...
-        // var powerOfTheAction
-        // Depend of "Weapon Strenght" if it's a normal action
+        // var powerOfTheAction : Depend of "Weapon Strenght" if it's a normal action
         var powerOfTheAction = attackerChoosen.weapon.powerOfWeapon
         
         // depend If the Attacker have a Bonus zone
         if bonusZone == true {
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  BONUS ZONE !!!!!")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 😎😎😎 BONUS ZONE 😎😎😎!!!!!")
             powerOfTheAction = attackerChoosen.bonusZone.powerOfBonus
             // and the fighter who receive the action depend of the result of bonusIsLuck
             if bonusIsLuck == true { //if is lucky
@@ -97,10 +95,8 @@ class Others { // create to ask some static thing at users
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
                 }
-                
-            } else {
-                //if is UNlucky
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t UNLUCKY BAD DAY !!!!!")
+            } else {   //if is UNlucky
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 🤬🤬🤬 UNLUCKY BAD DAY 🤬🤬🤬!!!!!")
                 if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random TEAM fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
                     attackerIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
@@ -108,8 +104,7 @@ class Others { // create to ask some static thing at users
                     Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
-                    
-                    
+                
                 } else { // for wizard : Add powerOfTheAction to a random opponent Fighter
                     let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
                     defenderIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
@@ -117,7 +112,6 @@ class Others { // create to ask some static thing at users
                     Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
                     //update TeamLifePoint
                     Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-                    
                 }
             }
         } else { // IF BONUS ZONE IS FALSE
@@ -167,16 +161,14 @@ class Others { // create to ask some static thing at users
             i += 1
         }
         
-        //Update Array and LifePoint of the Team
-        defenderIs.lifeTeam = 0
-        for i in 0..<defenderIs.fightersArray.count {
-            defenderIs.lifeTeam += defenderIs.fightersArray[i].lifePoint
-        }
-        
-        //Update Array and LifePoint of the Team
-        attackerIs.lifeTeam = 0
-        for i in 0..<attackerIs.fightersArray.count {
-            attackerIs.lifeTeam += attackerIs.fightersArray[i].lifePoint
+        //Update Array and LifePoint of each Team
+        var playerIs = defenderIs
+        for _ in 0...1 {
+            playerIs.lifeTeam = 0
+            for i in 0..<playerIs.fightersArray.count {
+                playerIs.lifeTeam += playerIs.fightersArray[i].lifePoint
+            }
+            playerIs = attackerIs
         }
     }
     
@@ -199,7 +191,7 @@ class Others { // create to ask some static thing at users
             attackOrCare = "une attaque"
             gainOrLoose = "perd"
         }
-        
+        // to print on "himself" if the attacker is unluck
         if attackerChoosen.name == whoReceiveChoosen.name {
             whoReceive = "lui même"
         } else {

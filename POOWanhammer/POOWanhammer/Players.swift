@@ -184,7 +184,7 @@ class Players {
     /**
      initializeRandomFighterDemo1() : To give Demo Fighter for team 1
      */
-    func initializeRandomFighterDemo1() {
+    func initializeFighterDemo1() {
         
         let fighterDemo1 = Warrior(name: "Casius", numberFetich: 1)
         fightersArray.append(fighterDemo1)
@@ -204,7 +204,7 @@ class Players {
     /**
      initializeRandomFighterDemo2() : To give Demo Fighter for team 2
      */
-    func initializeRandomFighterDemo2() {
+    func initializeFighterDemo2() {
         
         let fighterDemo1 = Wizard(name: "Mayou", numberFetich: 5)
         fightersArray.append(fighterDemo1)
