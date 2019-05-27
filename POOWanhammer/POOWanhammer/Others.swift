@@ -75,7 +75,7 @@ class Others { // create to ask some static thing at users
         
         // depend If the Attacker have a Bonus zone
         if bonusZone == true {
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 😎😎😎 BONUS ZONE 😎😎😎!!!!!")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 🅱🅱🅱 BONUS ZONE 🅱🅱🅱!!!!!")
             powerOfTheAction = attackerChoosen.bonusZone.powerOfBonus
             // and the fighter who receive the action depend of the result of bonusIsLuck
             if bonusIsLuck == true { //if is lucky

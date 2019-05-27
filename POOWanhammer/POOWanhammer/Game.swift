@@ -119,9 +119,9 @@ class Game {
             }
             
             // loop with this instance user and "var character" to show the team"
-            print("\n\(players.gamerName), voici ta team \(players.teamName):")
+            print("\n\(players.symbol) \(players.gamerName), voici ta team \(players.teamName):")
             for character in players.fightersArray {
-                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+                print("\(players.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             }
         }
         // PAUSE
