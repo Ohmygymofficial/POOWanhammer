@@ -119,7 +119,7 @@ class Others { // create to ask some static thing at users
                 whoReceiveChoosen.lifePoint -= attackerChoosen.weapon.powerOfWeapon
                 // give 0 value if the fighter is dead (no negative count)
                 if whoReceiveChoosen.lifePoint <= 0 {
-                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(whoReceiveChoosen.name) est mort !🦴🦴🦴")
+                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t☠☠☠ WOWWWW LE WANHAMMER SE REDUIT : \(whoReceiveChoosen.name) est mort !☠☠☠")
                     whoReceiveChoosen.lifePoint = 0
                 }
             } else {
@@ -155,7 +155,7 @@ class Others { // create to ask some static thing at users
         var i = 0
         for fighter in defenderIs.fightersArray {
             if fighter.lifePoint <= 0 {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOOWWWW : Le fighter \(fighter.name) va être sorti du tableau car il est mort !")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t☠☠☠ WOOWWWW : Le fighter \(fighter.name) va être sorti du tableau car il est mort ! ☠☠☠")
                 defenderIs.fightersArray.remove(at: i)
             }
             i += 1
@@ -280,9 +280,10 @@ class Others { // create to ask some static thing at users
                 }
             }
             // loop with this instance user and "var character" to show the team"
-            print("\n\(playerIs.gamerName), voici ta team \(playerIs.teamName) remise sur pied !!!! ")
+            print("💚💚💚💚💚💚💚💚💚💚💚💚💚💚")
+            print("\n\(playerIs.symbol) \(playerIs.gamerName), voici ta team \(playerIs.teamName) remise sur pied !!!! ")
             for character in playerIs.fightersArray {
-                print("\(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
+                print("\(playerIs.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             }
             playerIs = defenderIs
             pause()
