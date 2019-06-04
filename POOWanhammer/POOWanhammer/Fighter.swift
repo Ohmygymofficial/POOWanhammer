@@ -10,8 +10,8 @@ import Foundation
 
 class Fighter { // by default, we choose Warrior
     
-    var name : String
-    var numberFetich : Int
+    var name = ""
+    var numberFetich = 0
     var category = Category.warrior
     var weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
     var special = Special.doubleAttack
@@ -19,13 +19,20 @@ class Fighter { // by default, we choose Warrior
     var bonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
     
     // to archivechest all the fighter name and check is Unique
-    static var allFighterName = [String]()
+    var allFighterName = [String]()
     
+    
+    // init 1 with method
+    init() {
+        self.name = nameOfTheFighter(category: Category.warrior)
+        self.numberFetich = setNumberFetich(demo: false)
+    }
+    
+    // init 2 :
     init(name: String, numberFetich: Int) {
         self.name = name
         self.numberFetich = numberFetich
     }
-    
     
     /**
      specialAttack : Nothing on mother Class
@@ -130,7 +137,7 @@ class Fighter { // by default, we choose Warrior
     /**
      nameOfTheFighter : Take all the fighter Name
      */
-    static func nameOfTheFighter(category: Category) -> String {
+    func nameOfTheFighter(category: Category) -> String {
         
         var nameOfFighterOk = ""
         
@@ -161,7 +168,7 @@ class Fighter { // by default, we choose Warrior
     /**
      numberFetich : ask FetichNumber of the fighter
      */
-    static func setNumberFetich(demo: Bool) -> Int {
+    func setNumberFetich(demo: Bool) -> Int {
         
         //in demo mode : give random Fetich Number
         if demo == true {
@@ -193,7 +200,7 @@ class Fighter { // by default, we choose Warrior
     /**
      isFighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
-    static func isFighterAlreadyExist(what : String) -> Bool {
+    func isFighterAlreadyExist(what : String) -> Bool {
         
         // peut être créer un tableau qui stocke les noms des fighters, toute team confondue, et compare en LOOP dedans ?
         
@@ -211,7 +218,6 @@ class Fighter { // by default, we choose Warrior
         allFighterName.append(what)
         return false
     }
-    
     
     
     /**
@@ -233,41 +239,42 @@ class Fighter { // by default, we choose Warrior
         
         
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
-        Others.pause()
+        game.pause()
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
         let oldValue = attackerChoosen.weapon.powerOfWeapon
         let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
         attackerChoosen.weapon = newWeapon
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
         compareNewAndOldWeaponStrength(newValue: newWeapon.powerOfWeapon, oldValue: oldValue)
-        Others.pause()
+        game.pause()
     }
     
     
-        /**
-         func useFetichNumber() : to take new weapon in random Chest when is appear
-         */
-        func useFetichNumber(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
-            //check if one team is dead
-            Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-            
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😍😍😍😍 FETICH TIME ! C'est ton jour de chance !!😍😍😍😍")
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
-            attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
-            print(" A verifier si les specials attack sont ok")
-            Others.pause()
-            switch attackerChoosen.category {
-            case Category.dwarf, Category.warrior, Category.colossus:
-                Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
-                // print result
-                Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
-                //update TeamLifePoint
-                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-            case Category.wizard:
-                //update TeamLifePoint
-                Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+    /**
+     func useFetichNumber() : to take new weapon in random Chest when is appear
+     */
+    func useFetichNumber(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
+        //check if one team is dead
+        defenderIs.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+        
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😍😍😍😍 FETICH TIME ! C'est ton jour de chance !!😍😍😍😍")
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
+        attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
+        print(" A verifier si les specials attack sont ok")
+        game.pause()
+        switch attackerChoosen.category {
+        case Category.dwarf, Category.warrior, Category.colossus:
+            updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+            // print result
+            game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+            //update TeamLifePoint
+            defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+        case Category.wizard:
+            //update TeamLifePoint
+            defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
         }
     }
+    
     
     /**
      compareNewAndOldWeaponStrength() : To print different message depend of the new Strength of Weapon
@@ -280,6 +287,70 @@ class Fighter { // by default, we choose Warrior
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée à : \(newValue)")
         } else {
             print("La valeur de ton arme est restée identique")
+        }
+    }
+    
+    
+    /**
+     updateCareOrDamage : To update lifePoint of the good fighter (depend of the action)
+     */
+    func updateCareOrDamage(attackerChoosen: Fighter,whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
+        
+        // var powerOfTheAction : Depend of "Weapon Strenght" if it's a normal action
+        var powerOfTheAction = attackerChoosen.weapon.powerOfWeapon
+        
+        // depend If the Attacker have a Bonus zone
+        if bonusZone == true {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 🅱🅱🅱 BONUS ZONE 🅱🅱🅱!!!!!")
+            powerOfTheAction = attackerChoosen.bonusZone.powerOfBonus
+            // and the fighter who receive the action depend of the result of bonusIsLuck
+            if bonusIsLuck == true { //if is lucky
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t LUCKY DAY !!!!!")
+                if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random opponent fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
+                    defenderIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
+                    // print result
+                    game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    //update TeamLifePoint
+                    defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                } else { // for wizard : Add powerOfTheAction to a random Team Fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
+                    attackerIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
+                    // print result
+                    game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    //update TeamLifePoint
+                    attackerIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                }
+            } else {   //if is UNlucky
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 🤬🤬🤬 UNLUCKY BAD DAY 🤬🤬🤬!!!!!")
+                if attackerChoosen.category != Category.wizard { // for Fighters : give Damage to a random TEAM fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(attackerIs.fightersArray.count)))
+                    attackerIs.fightersArray[randomFighterIs].lifePoint -= powerOfTheAction
+                    // print result
+                    game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: attackerIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    //update TeamLifePoint
+                    attackerIs.updateTeamLifePointAndArray(defenderIs: attackerIs, attackerIs: attackerIs)
+                    
+                } else { // for wizard : Add powerOfTheAction to a random opponent Fighter
+                    let randomFighterIs = Int(arc4random_uniform(UInt32(defenderIs.fightersArray.count)))
+                    defenderIs.fightersArray[randomFighterIs].lifePoint += powerOfTheAction
+                    // print result
+                    game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: defenderIs.fightersArray[randomFighterIs], bonusZone: bonusZone)
+                    //update TeamLifePoint
+                    defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+                }
+            }
+        } else { // IF BONUS ZONE IS FALSE
+            if attackerChoosen.category != Category.wizard {
+                whoReceiveChoosen.lifePoint -= attackerChoosen.weapon.powerOfWeapon
+                // give 0 value if the fighter is dead (no negative count)
+                if whoReceiveChoosen.lifePoint <= 0 {
+                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t☠☠☠ WOWWWW LE WANHAMMER SE REDUIT : \(whoReceiveChoosen.name) est mort !☠☠☠")
+                    whoReceiveChoosen.lifePoint = 0
+                }
+            } else {
+                whoReceiveChoosen.lifePoint += attackerChoosen.weapon.powerOfWeapon
+            }
         }
     }
     

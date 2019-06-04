@@ -11,8 +11,9 @@ class Warrior : Fighter {
     
     
     // To have choice with init
-    convenience init() {
-        self.init(name: Fighter.nameOfTheFighter(category: Category.warrior), numberFetich: Fighter.setNumberFetich(demo: false))
+    override init() {
+        super.init()
+        self.name = nameOfTheFighter(category: Category.warrior)
         self.weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
         self.special = Special.doubleAttack
         self.lifePoint = 100
@@ -27,9 +28,6 @@ class Warrior : Fighter {
         self.lifePoint = 100
         self.category = Category.warrior
     }
-    
-
-
 
     
     /**
@@ -38,7 +36,7 @@ class Warrior : Fighter {
     override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque :")
         // initialisation of defender / whoReceive the action REFACTO POSSIBLE because already exist in Class Game func fight()
-        Others.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
+        defenderIs.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
         // whoReceiveChoosen is the fighter whoReceive The action
         let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
         print("Celui qui va recevoir l'attaque spéciale est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")

@@ -10,8 +10,9 @@ import Foundation
 
 class Wizard : Fighter {
     
-    convenience init() {
-        self.init(name: Fighter.nameOfTheFighter(category: Category.wizard), numberFetich: Fighter.setNumberFetich(demo: false))
+    override init() {
+        super.init()
+        self.name = nameOfTheFighter(category: Category.wizard)
         self.weapon = Weapon(nameOfWeapon: "une baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
         self.special = Special.fireball
         self.lifePoint = 125

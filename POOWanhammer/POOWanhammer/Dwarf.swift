@@ -10,8 +10,9 @@ import Foundation
 
 class Dwarf : Fighter {
     
-    convenience init() {
-        self.init(name: Fighter.nameOfTheFighter(category: Category.dwarf), numberFetich: Fighter.setNumberFetich(demo: false))
+    override init() {
+        super.init()
+        self.name = nameOfTheFighter(category: Category.dwarf)
         self.weapon = Weapon(nameOfWeapon: "une hache", powerOfWeapon: 20, weaponType: Weapon.WeaponType.axe)
         self.special = Special.doubleDamage
         self.lifePoint = 80

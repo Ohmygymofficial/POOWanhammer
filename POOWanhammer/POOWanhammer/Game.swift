@@ -9,6 +9,8 @@
 import Foundation
 
 class Game {
+    // var players as instance of class
+    var players = Players(gamerName: "", teamName: "")
     //var players : [Players]
     var playersArray = [Players]()
     // var to go outside the program
@@ -59,7 +61,6 @@ class Game {
      */
     func createPlayersAndFighters() {
         
-        var players = Players(gamerName: "", teamName: "")
         // Initialisation of each team
         for n in 0...1 {
             if demo { // if it's demo mode
@@ -98,7 +99,7 @@ class Game {
             }
         }
         // PAUSE
-        Others.pause()
+        pause()
     }
     
 
@@ -114,11 +115,11 @@ class Game {
         var defenderIs = playersArray[1]
         
         //update TeamLifePoint
-        Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+        players.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
         while attackerIs.lifeTeam > 0 && defenderIs.lifeTeam > 0 {
             
             // print the attacker for make choice
-            Others.printListOfAttacker(attackerIs: attackerIs)
+            players.printListOfAttacker(attackerIs: attackerIs)
             // attackerChoosen is the good fighter who give the action
             let attackerChoosen = attackerIs.chooseFighterAttack(attackerIs : attackerIs)
             print("L'attaquant choisit est : \(attackerChoosen.name) le \(attackerChoosen.category)")
@@ -131,20 +132,20 @@ class Game {
             }
             
             // print the defender for make choice
-            Others.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
+            players.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
             
             // whoReceiveChoosen is the fighter whoReceive The action
             let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
             print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
             
             // distribution damage or care
-            Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+            whoReceiveChoosen.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
             
             // print result
-            Others.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
+            printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
             
             //update TeamLifePoint
-            Others.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+            players.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
             
             
             // initialisation of FetichZone
@@ -156,26 +157,26 @@ class Game {
             // initialisation of BonusZone
             let randomBonusZone = Int.random(in: 1..<19)
             if randomBonusZone == 1 {
-                Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+                players.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
                 //launch unluck
                 attackerChoosen.bonusZone = attackerChoosen.takeUnluckZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
                 bonusIsLuck = false
                 // distribution damage or care
-                Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                attackerChoosen.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
                 //reset bonus zone var
                 bonusZone = false
                 bonusIsLuck = true
                 
             } else if randomBonusZone == 19 {
-                Others.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+                players.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
                 //launch bonus
                 attackerChoosen.bonusZone = attackerChoosen.takeBonusZone(attackerChoosen: attackerChoosen)
                 bonusZone = true
                 bonusIsLuck = true
                 // attackerChoosen.bonusZone = resultBonusZone
                 // distribution damage or care
-                Others.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+                attackerChoosen.updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
                 //reset bonus zone var
                 bonusZone = false
                 bonusIsLuck = true
@@ -186,9 +187,9 @@ class Game {
         }
         // END OF GAME : ONE TEAM IS DEAD
         // Initialisation of Congrats
-        Others.printFinalScore(defenderIs: defenderIs, attackerIs: attackerIs)
+        printFinalScore(defenderIs: defenderIs, attackerIs: attackerIs)
         // update counter of Win and Loose
-        Others.updateCounterLooseAndWin(defenderIs: defenderIs, attackerIs: attackerIs)
+        attackerIs.updateCounterLooseAndWin(defenderIs: defenderIs, attackerIs: attackerIs)
         // revenge or stop ?
         askForRevenge(defenderIs: defenderIs, attackerIs: attackerIs)
     }
@@ -203,7 +204,7 @@ class Game {
         if let choiceMenu1 = readLine() {
             switch choiceMenu1 {
             case "1":
-                Others.resetTeamForRevenge(defenderIs: defenderIs, attackerIs: attackerIs) // ask userName and teamName and chooseFighters
+                defenderIs.resetTeamForRevenge(defenderIs: defenderIs, attackerIs: attackerIs) // ask userName and teamName and chooseFighters
             case "2":
                 print("Lâcheur ! 😜")
                 stayInProgram = false //change BOOL to go outside loop of program
@@ -211,4 +212,84 @@ class Game {
             }
         }
     }
+    
+    
+    /**
+     actionPrint : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
+     */
+    func printAction(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, bonusZone: Bool) {
+        
+        // Team.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
+        var attackOrCare = ""
+        var gainOrLoose = ""
+        var whoReceive = ""
+        
+        // take a var to print different word (depend of category : Wizard or no)
+        if attackerChoosen.category == Category.wizard {
+            attackOrCare = "un soin"
+            gainOrLoose = "reçoit"
+        } else {
+            attackOrCare = "une attaque"
+            gainOrLoose = "perd"
+        }
+        // to print on "himself" if the attacker is unluck
+        if attackerChoosen.name == whoReceiveChoosen.name {
+            whoReceive = "lui même"
+        } else {
+            whoReceive = whoReceiveChoosen.name + " le " + whoReceiveChoosen.category.rawValue
+        }
+        
+        if bonusZone == true {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(attackerChoosen.name) le \(attackerChoosen.category.rawValue) \(attackerChoosen.bonusZone.HistoryOfBonus)"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(whoReceive)")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.bonusZone.powerOfBonus) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
+        } else {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Voici l'historique de l'action réalisée : "
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \(attackerChoosen.name) le \(attackerChoosen.category.rawValue)"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(whoReceive)")
+            // This is the commun message
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.weapon.powerOfWeapon) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
+        }
+        pause()
+    }
+    
+    
+    
+    /**
+     printFinalScore : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
+     */
+    func printFinalScore(defenderIs: Players, attackerIs: Players) {
+        print("Cette partie est terminé, voici les scores :"
+            + "\r\(attackerIs.gamerName) avec sa team \(attackerIs.teamName) termine avec \(attackerIs.lifeTeam)"
+            + "\r\(defenderIs.gamerName) avec sa team \(defenderIs.teamName) termine avec \(defenderIs.lifeTeam)")
+    }
+    
+    /**
+     pause : To make a pause in execution, and wait about touch press about user
+     */
+    func pause() {
+        
+        print("Appuyer sur Entrer pour continuer..")
+        _ = readLine()
+        
+    }
+    
+    
+    /**
+     checkInt
+     */
+    func checkInt() -> Int {
+        
+        if let answer = readLine() {
+            if let answerOk = Int(answer) { // check if it's Int
+                return answerOk
+            } else { // if it's Int, so print :
+                print("Cela ne peut être qu'un numéro !")
+            }
+        }
+        // return this method until is not INT
+        return checkInt()
+    }
+    
+    
 }
