@@ -111,7 +111,6 @@ class Players {
     }
     
     
-    
     /**
      isTeamNameAlreadyExist : func to check if one User Input already exist thanks to the return
      */
@@ -317,8 +316,6 @@ class Players {
     }
     
 
-    
-    
     /**
      updateTeamLifePointAndArray : To Update lifePoint and remove Dead Fighter
      */
@@ -418,9 +415,6 @@ class Players {
         }
         print("\r\r\rUne nouvelle bataille peut maintenant commencer !!!!")
     }
-    
-    
-    
 }
 
 

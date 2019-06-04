@@ -36,5 +36,5 @@ class Dwarf : Fighter {
      */
     override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain inflige double dégâts ce tour-ci !")
-        }
+    }
 }

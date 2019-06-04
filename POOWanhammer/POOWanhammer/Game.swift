@@ -29,10 +29,11 @@ class Game {
         start()
     }
     
+    
     /**
      start : User have to choose : Play, Dont play, Demo mode
      */
-    func start() {
+    private func start() {
         print("\rQue voulez vous faire ?"
             + "\n1. ▶ Entrer dans le WANHAMMER"
             + "\n2. ❌ Je ne veux pas me battre"
@@ -55,11 +56,10 @@ class Game {
     }
     
     
-    
     /**
      createPlayersAndFighters : Here User, teamName and Fighters will be choose
      */
-    func createPlayersAndFighters() {
+    private func createPlayersAndFighters() {
         
         // Initialisation of each team
         for n in 0...1 {
@@ -102,7 +102,6 @@ class Game {
         pause()
     }
     
-
     
     /**
      fight() : The fight Begin here
@@ -194,10 +193,11 @@ class Game {
         askForRevenge(defenderIs: defenderIs, attackerIs: attackerIs)
     }
     
+    
     /**
      askForRevenge : Users can choice if they want to continu or stop the game
      */
-    func askForRevenge(defenderIs: Players, attackerIs: Players) {
+    private func askForRevenge(defenderIs: Players, attackerIs: Players) {
         print("\rUne petite revanche ?"
             + "\n1. ▶ Oui !"
             + "\n2. ❌ Non, on quitte le WanHammer")
@@ -254,15 +254,15 @@ class Game {
     }
     
     
-    
     /**
      printFinalScore : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
      */
-    func printFinalScore(defenderIs: Players, attackerIs: Players) {
+    private func printFinalScore(defenderIs: Players, attackerIs: Players) {
         print("Cette partie est terminé, voici les scores :"
             + "\r\(attackerIs.gamerName) avec sa team \(attackerIs.teamName) termine avec \(attackerIs.lifeTeam)"
             + "\r\(defenderIs.gamerName) avec sa team \(defenderIs.teamName) termine avec \(defenderIs.lifeTeam)")
     }
+    
     
     /**
      pause : To make a pause in execution, and wait about touch press about user
@@ -290,6 +290,4 @@ class Game {
         // return this method until is not INT
         return checkInt()
     }
-    
-    
 }

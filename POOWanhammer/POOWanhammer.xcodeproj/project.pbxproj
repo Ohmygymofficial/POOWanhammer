@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B12B8D702285DA5000B05367 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B8D6F2285DA5000B05367 /* main.swift */; };
 		B12B8D772285DA9500B05367 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B8D762285DA9500B05367 /* Game.swift */; };
-		B12B8D792285DB2500B05367 /* Others.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B8D782285DB2500B05367 /* Others.swift */; };
 		B12B8D7B2285DC1E00B05367 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B8D7A2285DC1E00B05367 /* Players.swift */; };
 		B12B8D7D2285DCB600B05367 /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B8D7C2285DCB600B05367 /* Fighter.swift */; };
 		B12B8D7F2285DD1200B05367 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B8D7E2285DD1200B05367 /* Category.swift */; };
@@ -39,7 +38,6 @@
 		B12B8D6C2285DA5000B05367 /* POOWanhammer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = POOWanhammer; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12B8D6F2285DA5000B05367 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B12B8D762285DA9500B05367 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		B12B8D782285DB2500B05367 /* Others.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Others.swift; sourceTree = "<group>"; };
 		B12B8D7A2285DC1E00B05367 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
 		B12B8D7C2285DCB600B05367 /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
 		B12B8D7E2285DD1200B05367 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			children = (
 				B12B8D6F2285DA5000B05367 /* main.swift */,
 				B12B8D762285DA9500B05367 /* Game.swift */,
-				B12B8D782285DB2500B05367 /* Others.swift */,
 				B12B8D7A2285DC1E00B05367 /* Players.swift */,
 				B12B8D7C2285DCB600B05367 /* Fighter.swift */,
 				B19715E0228C7C8B00ED2EF6 /* Warrior.swift */,
@@ -161,7 +158,6 @@
 				B19715DF228C7B7300ED2EF6 /* Special.swift in Sources */,
 				B19715E3228C7CE500ED2EF6 /* Dwarf.swift in Sources */,
 				B19715E7228C7D8400ED2EF6 /* Wizard.swift in Sources */,
-				B12B8D792285DB2500B05367 /* Others.swift in Sources */,
 				B359E781229316A300A3AB7B /* Bonus.swift in Sources */,
 				B12B8D702285DA5000B05367 /* main.swift in Sources */,
 				B12B8D812285DD3A00B05367 /* Weapon.swift in Sources */,

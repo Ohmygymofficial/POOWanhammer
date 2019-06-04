@@ -10,7 +10,7 @@ import Foundation
 
 class Colossus : Fighter {
     
- 
+    
     override init() {
         super.init()
         self.name = nameOfTheFighter(category: Category.colossus)

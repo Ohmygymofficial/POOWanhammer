@@ -28,7 +28,7 @@ class Warrior : Fighter {
         self.lifePoint = 100
         self.category = Category.warrior
     }
-
+    
     
     /**
      specialWarrior : Double Attack for Warrior special attack

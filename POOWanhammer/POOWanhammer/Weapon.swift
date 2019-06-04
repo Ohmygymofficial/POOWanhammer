@@ -26,5 +26,4 @@ class Weapon {
         self.powerOfWeapon = powerOfWeapon
         self.weaponType = weaponType
     }
-    
 }
