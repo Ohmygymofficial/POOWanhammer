@@ -101,7 +101,7 @@ class Players {
      */
     func isGamerNameAlreadyExist(gamerName: String) -> Bool {
         
-        if !game.firstUI { //only if it's the second User Input
+        if firstUI { //only if it's the second User Input
             // for the userName (compare to the user 1)
             if gamerName.uppercased() == game.playersArray.first?.gamerName.uppercased() {
                 return true
@@ -116,7 +116,7 @@ class Players {
      */
     func isTeamNameAlreadyExist(teamName : String) -> Bool {
         
-        if !game.firstUI { //only if it's the second User Input
+        if firstUI { //only if it's the second User Input
             // for the teamName (compare to the user 1)
             if teamName.uppercased() == game.playersArray.first?.teamName.uppercased() {
                 return true
@@ -130,7 +130,7 @@ class Players {
      initializeFighter : Initialize Fighter by Category (Name, and Number Fetich)
      */
     func initializeFighter() {
-
+        
         while fightersArray.count < maxFighters { // use let declared to block at 3 fighters
             if fightersArray.count == 2 {
                 print("\r\rEt donc, quel sera ton dernier fighter ? ")
@@ -148,16 +148,13 @@ class Players {
                 switch choiceMenu1 {
                 case "1":
                     fighterInLoad = Warrior()
-                    fightersArray.append(fighterInLoad)
-                    fightersArraySaved.append(fighterInLoad)
+                    addFighterInArray(fighterInLoad: fighterInLoad)
                 case "2":
                     let fighterInLoad = Dwarf()
-                    fightersArray.append(fighterInLoad)
-                    fightersArraySaved.append(fighterInLoad)
+                    addFighterInArray(fighterInLoad: fighterInLoad)
                 case "3":
                     let fighterInLoad = Colossus()
-                    fightersArray.append(fighterInLoad)
-                    fightersArraySaved.append(fighterInLoad)
+                    addFighterInArray(fighterInLoad: fighterInLoad)
                 case "4":
                     if numberOfWizard >= 2 {
                         print("Désolé, vous ne pouvez pas choisir que des magiciens dans votre Team ;)")
@@ -165,11 +162,10 @@ class Players {
                     }
                     numberOfWizard += 1
                     let fighterInLoad = Wizard()
-                    fightersArray.append(fighterInLoad)
-                    fightersArraySaved.append(fighterInLoad)
+                    addFighterInArray(fighterInLoad: fighterInLoad)
                 case "5":
                     fighterInLoad.fightersSettings()
-                    pause()
+                    game.makePause()
                     return initializeFighter()
                     
                 default:
@@ -178,6 +174,15 @@ class Players {
                 }
             }
         }
+    }
+    
+    
+    /**
+     addFighterInArray
+     */
+    func addFighterInArray(fighterInLoad : Fighter) {
+        fightersArray.append(fighterInLoad)
+        fightersArraySaved.append(fighterInLoad)
     }
     
     
@@ -197,7 +202,6 @@ class Players {
         let fighterDemo3 = Colossus(name: "BouL", numberFetich: 3)
         fightersArray.append(fighterDemo3)
         fightersArraySaved.append(fighterDemo3)
-        
     }
     
     
@@ -217,16 +221,15 @@ class Players {
         let fighterDemo3 = Colossus(name: "Tenshu", numberFetich: 3)
         fightersArray.append(fighterDemo3)
         fightersArraySaved.append(fighterDemo3)
-        
     }
     
-
+    
     /**
      chooseFighterAttack(): Who give the attack
      */
     func chooseFighterAttack(attackerIs: Players) -> Fighter {
         
-          // take a temporary value for the fighter
+        // take a temporary value for the fighter
         var whoAttack = Fighter(name: "", numberFetich: 1)
         // to make sure that user input is not empty
         var answer = 0
@@ -315,7 +318,7 @@ class Players {
         }
     }
     
-
+    
     /**
      updateTeamLifePointAndArray : To Update lifePoint and remove Dead Fighter
      */
@@ -410,9 +413,11 @@ class Players {
             for character in playerIs.fightersArray {
                 print("\(playerIs.symbol) \(character.name) le \(character.category) avec \(character.weapon.nameOfWeapon) de puissance \(character.weapon.powerOfWeapon). PV = \(character.lifePoint)")
             }
+            updateTeamLifePointAndArray(defenderIs: playerIs, attackerIs: attackerIs)
             playerIs = defenderIs
-            pause()
+            game.makePause()
         }
+        updateTeamLifePointAndArray(defenderIs: playerIs, attackerIs: attackerIs)
         print("\r\r\rUne nouvelle bataille peut maintenant commencer !!!!")
     }
 }

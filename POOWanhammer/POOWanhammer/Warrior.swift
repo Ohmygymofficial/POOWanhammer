@@ -16,7 +16,7 @@ class Warrior : Fighter {
         self.name = nameOfTheFighter(category: Category.warrior)
         self.weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
         self.special = Special.doubleAttack
-        self.lifePoint = 100
+        self.lifePoint = 10
         self.category = Category.warrior
     }
     
@@ -25,7 +25,7 @@ class Warrior : Fighter {
         super.init(name: name, numberFetich: numberFetich)
         self.weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
         self.special = Special.doubleAttack
-        self.lifePoint = 100
+        self.lifePoint = 10
         self.category = Category.warrior
     }
     

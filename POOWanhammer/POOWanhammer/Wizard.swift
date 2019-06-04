@@ -25,7 +25,7 @@ class Wizard : Fighter {
         super.init(name: name, numberFetich: numberFetich)
         self.weapon = Weapon(nameOfWeapon: "une baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
         self.special = Special.fireball
-        self.lifePoint = 125
+        self.lifePoint = 12
         // self.strenght = 15
         self.category = Category.wizard
     }

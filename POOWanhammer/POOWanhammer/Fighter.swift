@@ -205,7 +205,7 @@ class Fighter { // by default, we choose Warrior
         // peut être créer un tableau qui stocke les noms des fighters, toute team confondue, et compare en LOOP dedans ?
         
         // add one "" to initialize the array on the first User Input
-        if game.firstUI {
+        if firstUI {
             allFighterName.append("")
         }
         
@@ -239,14 +239,14 @@ class Fighter { // by default, we choose Warrior
         
         
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
-        game.pause()
+        game.makePause()
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
         let oldValue = attackerChoosen.weapon.powerOfWeapon
         let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
         attackerChoosen.weapon = newWeapon
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
         compareNewAndOldWeaponStrength(newValue: newWeapon.powerOfWeapon, oldValue: oldValue)
-        game.pause()
+        game.makePause()
     }
     
     
@@ -260,8 +260,7 @@ class Fighter { // by default, we choose Warrior
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😍😍😍😍 FETICH TIME ! C'est ton jour de chance !!😍😍😍😍")
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
         attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs)
-        print(" A verifier si les specials attack sont ok")
-        game.pause()
+        game.makePause()
         switch attackerChoosen.category {
         case Category.dwarf, Category.warrior, Category.colossus:
             updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
@@ -286,7 +285,7 @@ class Fighter { // by default, we choose Warrior
         } else if oldValue < newValue {
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée à : \(newValue)")
         } else {
-            print("La valeur de ton arme est restée identique")
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tLa valeur de ton arme est restée identique")
         }
     }
     

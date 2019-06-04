@@ -8,6 +8,9 @@
 
 import Foundation
 
+// to check if it's the first User Input
+var firstUI = true
+
 // Create an instance of Game class
 let game = Game()
 

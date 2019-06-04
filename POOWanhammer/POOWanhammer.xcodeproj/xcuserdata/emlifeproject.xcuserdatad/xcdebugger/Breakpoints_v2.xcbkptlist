@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "POOWanhammer/main.swift"
-            timestampString = "581350644.546225"
+            filePath = "POOWanhammer/Players.swift"
+            timestampString = "581354010.101494"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "387"
+            endingLineNumber = "387"
+            landmarkName = "resetTeamForRevenge(defenderIs:attackerIs:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "POOWanhammer/Players.swift"
-            timestampString = "581350644.5462739"
+            timestampString = "581354010.101827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "setPlayerName(firstUI:)"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
+            landmarkName = "resetTeamForRevenge(defenderIs:attackerIs:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

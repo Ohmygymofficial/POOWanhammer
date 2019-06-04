@@ -21,8 +21,6 @@ class Game {
     var bonusZone = false
     // var to know if the bonus Zone is luck or Unluck
     var bonusIsLuck = true
-    // to check if it's the first User Input
-    var firstUI = true
     
     init() {
         print("Bienvenue dans le WANHAMMER")
@@ -99,7 +97,7 @@ class Game {
             }
         }
         // PAUSE
-        pause()
+        makePause()
     }
     
     
@@ -250,7 +248,7 @@ class Game {
             // This is the commun message
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Celui-ci \(gainOrLoose) \(attackerChoosen.weapon.powerOfWeapon) PV et en possède maintenant \(whoReceiveChoosen.lifePoint)")
         }
-        pause()
+        makePause()
     }
     
     
@@ -267,11 +265,9 @@ class Game {
     /**
      pause : To make a pause in execution, and wait about touch press about user
      */
-    func pause() {
-        
+    func makePause()  {
         print("Appuyer sur Entrer pour continuer..")
         _ = readLine()
-        
     }
     
     

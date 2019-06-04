@@ -26,7 +26,7 @@ class Colossus : Fighter {
         super.init(name: name, numberFetich: numberFetich)
         self.weapon = Weapon(nameOfWeapon: "une main entourée de fer", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
         self.special = Special.fear
-        self.lifePoint = 200
+        self.lifePoint = 20
         // self.strenght = 5
         self.category = Category.colossus
     }
@@ -46,6 +46,6 @@ class Colossus : Fighter {
         defenderIs.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
         // whoReceiveChoosen is the fighter whoReceive The action
         let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
-        print("Celui qui va recevoir l'action est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+        print("Celui qui va recevoir l'action spéciale est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
     }
 }
