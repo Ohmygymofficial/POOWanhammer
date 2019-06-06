@@ -11,9 +11,10 @@ import Foundation
 class Colossus : Fighter {
     
     
-    override init() {
-        super.init()
+    override init(firstUI: Bool) {
+        super.init(firstUI: firstUI)
         self.name = nameOfTheFighter(category: Category.colossus)
+        self.numberFetich = setNumberFetich(demo: false)
         self.weapon = Weapon(nameOfWeapon: "une main entourée de fer", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
         self.special = Special.fear
         self.lifePoint = 200

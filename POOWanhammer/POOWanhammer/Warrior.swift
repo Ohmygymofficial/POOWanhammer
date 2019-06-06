@@ -11,9 +11,10 @@ class Warrior : Fighter {
     
     
     // To have choice with init
-    override init() {
-        super.init()
+    override init(firstUI: Bool) {
+        super.init(firstUI: firstUI)
         self.name = nameOfTheFighter(category: Category.warrior)
+        self.numberFetich = setNumberFetich(demo: false)
         self.weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
         self.special = Special.doubleAttack
         self.lifePoint = 10

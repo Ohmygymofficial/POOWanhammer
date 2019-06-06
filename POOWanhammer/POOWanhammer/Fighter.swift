@@ -17,15 +17,14 @@ class Fighter { // by default, we choose Warrior
     var special = Special.doubleAttack
     var lifePoint: Int = 100
     var bonusZone = Bonus(HistoryOfBonus: "", powerOfBonus: 0, bonusType: .randomBonusZone)
-    
-    // to archivechest all the fighter name and check is Unique
-    var allFighterName = [String]()
+    var firstUI = true
+    // Static to archive all the fighter name and check is Unique
+    static var allFighterName = [String]()
     
     
     // init 1 with method
-    init() {
-        self.name = nameOfTheFighter(category: Category.warrior)
-        self.numberFetich = setNumberFetich(demo: false)
+    init(firstUI: Bool) {
+        self.firstUI = firstUI
     }
     
     // init 2 :
@@ -33,6 +32,7 @@ class Fighter { // by default, we choose Warrior
         self.name = name
         self.numberFetich = numberFetich
     }
+    
     
     /**
      specialAttack : Nothing on mother Class
@@ -142,19 +142,19 @@ class Fighter { // by default, we choose Warrior
         var nameOfFighterOk = ""
         
         // normal mode
-        print("\r Quel est le doux prenom de ce \(category) ?")
+        print("\r Quel est le doux prenom de ce \(category.rawValue) ?")
         if let nameOfFighter = readLine() {
+            
+            // Check if it's empty
+            if nameOfFighter == ""  { //
+                print("Vous devez choisir un nom de Fighter ;)")
+                return nameOfTheFighter(category: category)
+            }
             
             // check if already exist
             let isOk =  isFighterAlreadyExist(what: nameOfFighter)
             if isOk  { //
                 print("Ce prenom de Fighter existe déjà ... ^^  On en choisit une autre ? ")
-                return nameOfTheFighter(category: category)
-            }
-            
-            // Check if it's empty
-            if nameOfFighter == ""  { //
-                print("Vous devez choisir un nom de Fighter avec des lettres ;)")
                 return nameOfTheFighter(category: category)
             }
             
@@ -200,22 +200,15 @@ class Fighter { // by default, we choose Warrior
     /**
      isFighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
-    func isFighterAlreadyExist(what : String) -> Bool {
-        
-        // peut être créer un tableau qui stocke les noms des fighters, toute team confondue, et compare en LOOP dedans ?
-        
-        // add one "" to initialize the array on the first User Input
-        if firstUI {
-            allFighterName.append("")
-        }
-        
-        for eachFighter in allFighterName {
+    func isFighterAlreadyExist(what: String) -> Bool {
+ 
+        for eachFighter in Fighter.allFighterName {
             if what.uppercased() == eachFighter.uppercased() {
                 return true
             }
         }
         // if it's OK : We add this one in the Array
-        allFighterName.append(what)
+        Fighter.allFighterName.append(what)
         return false
     }
     
@@ -224,7 +217,7 @@ class Fighter { // by default, we choose Warrior
      FightersSettings : To print the caracteristic of the Fighters
      */
     func fightersSettings() {
-        print("Voici les caractéristiques des personnages :"
+        print("\n\n Voici les caractéristiques des personnages :"
             + "\n 🗡 Le \(Category.warrior.rawValue): PV : 100, Dégâts : 10, spécial : Double Attaque"
             + "\n 👨‍🎤 Le \(Category.dwarf.rawValue) : PV : 80, Arme : Hâche, Dégâts : 20, spécial : Double Dégâts"
             + "\n 👹 Le \(Category.colossus.rawValue) : PV : 200, Dégâts : 5, spécial : Frayeur (Adversaire perd son tour)"

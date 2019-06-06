@@ -20,10 +20,14 @@ class Players {
     var fightersArray = [Fighter]()
     var fightersArraySaved = [Fighter]()
     var numberOfWizard = 0
+    // to check if it's the first User Input
+    var firstUI = true
+
     
     // init 1 with method
     init(firstUI: Bool) {
-        self.gamerName = setPlayerName(firstUI: firstUI)
+        self.firstUI = firstUI
+        self.gamerName = setPlayerName()
         self.teamName = setTeamName()
     }
     
@@ -37,7 +41,7 @@ class Players {
     /**
      setPlayerName : Take all the UserName
      */
-    func setPlayerName(firstUI: Bool) -> String {
+    func setPlayerName() -> String {
         
         if firstUI {
             print("\r🔴 Joueur 1 : Quel est ton nom de Gamer ?")
@@ -46,23 +50,28 @@ class Players {
         }
         var pseudoOfGamerOk = ""
         if let pseudoOfGamer = readLine() {
+            
+            /*
             // check if already exist
             let isOk = isGamerNameAlreadyExist(gamerName: pseudoOfGamer)
             if isOk  {
                 print("Ce pseudo existe déjà ... ^^  On en choisit un autre ? ")
-                return setPlayerName(firstUI: firstUI)
+                return setPlayerName()
             }
+ */
+            
             // Check if it's empty
             if pseudoOfGamer == ""  { //
                 print("Vous devez choisir un nom de Gamer : Avec des lettres ;)")
-                return setPlayerName(firstUI: firstUI)
+                return setPlayerName()
             }
             if pseudoOfGamer.rangeOfCharacter(from: .decimalDigits) != nil {
                 print("Merci de ne saisir que des lettres :)")
-                return setPlayerName(firstUI: firstUI)
+                return setPlayerName()
             }
             // if the code can read this, is that the User Input is ok !
             pseudoOfGamerOk = pseudoOfGamer
+            
         }
         return pseudoOfGamerOk
     }
@@ -76,13 +85,15 @@ class Players {
         print("\r Ton nom de TEAM ?")
         var teamOfGamerOk = ""
         if let teamOfGamer = readLine() {
-            
+
+            /*
             // check if already exist
             let isOk = isTeamNameAlreadyExist(teamName: teamOfGamer)
             if isOk  { //
                 print("Cette TEAM existe déjà ... ^^  On en choisit une autre ? ")
                 return setTeamName()
             }
+            */
             
             // Check if it's empty
             if teamOfGamer == ""  { //
@@ -96,12 +107,13 @@ class Players {
     }
     
     
+    /*
     /**
      isGamerNameAlreadyExist : func to check if one User Input already exist thanks to the return
      */
     func isGamerNameAlreadyExist(gamerName: String) -> Bool {
         
-        if firstUI { //only if it's the second User Input
+        if !firstUI { //only if it's the second User Input
             // for the userName (compare to the user 1)
             if gamerName.uppercased() == game.playersArray.first?.gamerName.uppercased() {
                 return true
@@ -109,14 +121,16 @@ class Players {
         }
         return false
     }
+ */
     
     
+    /*
     /**
      isTeamNameAlreadyExist : func to check if one User Input already exist thanks to the return
      */
-    func isTeamNameAlreadyExist(teamName : String) -> Bool {
+    func isTeamNameAlreadyExist(teamName: String) -> Bool {
         
-        if firstUI { //only if it's the second User Input
+        if !firstUI { //only if it's the second User Input
             // for the teamName (compare to the user 1)
             if teamName.uppercased() == game.playersArray.first?.teamName.uppercased() {
                 return true
@@ -124,6 +138,7 @@ class Players {
         }
         return false
     }
+ */
     
     
     /**
@@ -147,13 +162,13 @@ class Players {
             if let choiceMenu1 = readLine() {
                 switch choiceMenu1 {
                 case "1":
-                    fighterInLoad = Warrior()
+                    fighterInLoad = Warrior(firstUI: firstUI)
                     addFighterInArray(fighterInLoad: fighterInLoad)
                 case "2":
-                    let fighterInLoad = Dwarf()
+                    let fighterInLoad = Dwarf(firstUI: firstUI)
                     addFighterInArray(fighterInLoad: fighterInLoad)
                 case "3":
-                    let fighterInLoad = Colossus()
+                    let fighterInLoad = Colossus(firstUI: firstUI)
                     addFighterInArray(fighterInLoad: fighterInLoad)
                 case "4":
                     if numberOfWizard >= 2 {
@@ -161,11 +176,12 @@ class Players {
                         return initializeFighter()
                     }
                     numberOfWizard += 1
-                    let fighterInLoad = Wizard()
+                    let fighterInLoad = Wizard(firstUI: firstUI)
                     addFighterInArray(fighterInLoad: fighterInLoad)
                 case "5":
                     fighterInLoad.fightersSettings()
-                    game.makePause()
+                    print("Appuyer sur Entrer pour continuer..")
+                    _ = readLine()
                     return initializeFighter()
                     
                 default:

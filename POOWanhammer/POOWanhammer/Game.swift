@@ -11,7 +11,7 @@ import Foundation
 class Game {
     // var players as instance of class
     var players = Players(gamerName: "", teamName: "")
-    //var players : [Players]
+    //var playersArray : [Players]
     var playersArray = [Players]()
     // var to go outside the program
     var stayInProgram = true
@@ -21,6 +21,9 @@ class Game {
     var bonusZone = false
     // var to know if the bonus Zone is luck or Unluck
     var bonusIsLuck = true
+    // to check if it's the first User Input
+    var firstUI = true
+    
     
     init() {
         print("Bienvenue dans le WANHAMMER")
@@ -68,6 +71,7 @@ class Game {
                     playersArray[n].symbol = "🔴"
                     players.initializeFighterDemo1()
                     firstUI = false
+                    players.firstUI = false
                 } else {
                     players = Players(gamerName: "Marine", teamName: "Cat")
                     playersArray.append(players)
@@ -80,7 +84,6 @@ class Game {
                 if firstUI {
                     playersArray[n].symbol = "🔴"
                     print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Tu entres dans le WanHammer avec ta TEAM \(playersArray[n].teamName)! Force à toi !")
-                    firstUI = false
                 } else {
                     playersArray[n].symbol = "🔵"
                     print("\(playersArray[n].symbol) \(playersArray[n].gamerName) : Ta TEAM \(playersArray[n].teamName) va affronter \(playersArray[n - 1].gamerName) avec sa team \(playersArray[n - 1].teamName) ! Soit courageux ! ")
@@ -88,6 +91,8 @@ class Game {
                 // Initialisation of each fighters
                 print("\r Maintenant, il va falloir choisir qui entrent avec toi dans l'arène :")
                 players.initializeFighter()
+                firstUI = false
+                players.firstUI = false
             }
             
             // loop with this instance user and "var character" to show the team"
