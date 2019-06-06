@@ -49,7 +49,7 @@ class Wizard : Fighter {
         for i in 0..<defenderIs.fightersArray.count { //aply the damage to the fighters are alive
             if defenderIs.fightersArray[i].lifePoint > 0 {
                 defenderIs.fightersArray[i].lifePoint -= fireballDamage
-                print("\(fireballDamage) points de dommages à \(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category). Il se retrouve à \(defenderIs.fightersArray[i].lifePoint)")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\(fireballDamage) points de dommages à \(defenderIs.fightersArray[i].name) le \(defenderIs.fightersArray[i].category). Il se retrouve à \(defenderIs.fightersArray[i].lifePoint)")
             }
         }
     }
