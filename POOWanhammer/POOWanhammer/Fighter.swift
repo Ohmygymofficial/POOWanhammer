@@ -35,9 +35,111 @@ class Fighter { // by default, we choose Warrior
     
     
     /**
-     specialAttack : Nothing on mother Class
+     nameOfTheFighter : Take all the fighter Name
      */
-    func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {}
+    func nameOfTheFighter(category: Category) -> String {
+        
+        var nameOfFighterOk = ""
+        
+        // normal mode
+        print("\r Quel est le doux prenom de ce \(category.rawValue) ?")
+        if let nameOfFighter = readLine() {
+            
+            // Check if it's empty
+            if nameOfFighter == ""  { //
+                print("Vous devez choisir un nom de Fighter ;)")
+                return nameOfTheFighter(category: category)
+            }
+            
+            // check if already exist
+            let isOk =  isFighterAlreadyExist(what: nameOfFighter)
+            if isOk  { //
+                print("Ce prenom de Fighter existe déjà ... ^^  On en choisit une autre ? ")
+                return nameOfTheFighter(category: category)
+            }
+            
+            // if the code can read this, is that the User Input is ok !
+            nameOfFighterOk = nameOfFighter
+        }
+        return nameOfFighterOk
+    }
+    
+    /**
+     isFighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
+     */
+    func isFighterAlreadyExist(what: String) -> Bool {
+        
+        for eachFighter in Fighter.allFighterName {
+            if what.uppercased() == eachFighter.uppercased() {
+                return true
+            }
+        }
+        // if it's OK : We add this one in the Array
+        Fighter.allFighterName.append(what)
+        return false
+    }
+    
+    
+    /**
+     numberFetich : ask FetichNumber of the fighter
+     */
+    func setNumberFetich(demo: Bool) -> Int {
+        
+        //in demo mode : give random Fetich Number
+        if demo == true {
+            return Int.random(in: 1..<5)
+        }
+        
+        let numberTestOk = ""
+        repeat { // repeat while var is empty
+            print("Quel est ton numéro fétiche entre 1 et 5 ")
+            if let numberTest = readLine() {
+                if let numberTestOk = Int(numberTest) { // check if it's Int
+                    if numberTestOk > 0, numberTestOk < 6 {
+                        return numberTestOk
+                    } else { // if it's not 1 2 3 4 5  print this :
+                        print("Le chiffre doit être supérieur à 0, et inférieur à 6")
+                    }
+                } else { // if it's Int, so print :
+                    print("Cela ne peut être qu'un numéro !")
+                }
+                
+            } else {
+                print("Tu dois donner un numéro fétiche à ton Fighter dans la fonction numberTest ;)")
+            }
+        } while numberTestOk == ""
+        return 1
+    }
+    
+
+    /**
+     FightersSettings : To print the caracteristic of the Fighters
+     */
+    func fightersSettings() {
+        print("\n\n Voici les caractéristiques des personnages :"
+            + "\n 🗡 Le \(Category.warrior.rawValue): PV : 100, Dégâts : 10, spécial : Double Attaque"
+            + "\n 👨‍🎤 Le \(Category.dwarf.rawValue) : PV : 80, Arme : Hâche, Dégâts : 20, spécial : Double Dégâts"
+            + "\n 👹 Le \(Category.colossus.rawValue) : PV : 200, Dégâts : 5, spécial : Frayeur (Adversaire perd son tour)"
+            + "\n 🧙‍♀️ Le \(Category.wizard.rawValue) : PV : 150, Soins : +15, spécial : FireBall dégâts 30")
+    }
+    
+    
+    /**
+     func openRandomChest() : to take new weapon in random Chest when is appear
+     */
+    func openRandomChest(attackerChoosen: Fighter) {
+        
+        
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
+        game.makePause()
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
+        let oldValue = attackerChoosen.weapon.powerOfWeapon
+        let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
+        attackerChoosen.weapon = newWeapon
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
+        compareNewAndOldWeaponStrength(newValue: newWeapon.powerOfWeapon, oldValue: oldValue)
+        game.makePause()
+    }
     
     
     /**
@@ -71,6 +173,43 @@ class Fighter { // by default, we choose Warrior
             newWeapon = weaponChestContent[Int(arc4random_uniform(UInt32(weaponChestContent.count)))]
         }
         return newWeapon
+    }
+    
+    
+    /**
+     compareNewAndOldWeaponStrength() : To print different message depend of the new Strength of Weapon
+     */
+    func compareNewAndOldWeaponStrength(newValue: Int, oldValue: Int) {
+        
+        if oldValue > newValue {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est descendue à : \(newValue)")
+        } else if oldValue < newValue {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée à : \(newValue)")
+        } else {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tLa valeur de ton arme est restée identique")
+        }
+    }
+    
+    
+    /**
+     func useFetichNumber() : to use Fetich Action
+     */
+    func useFetichNumber(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
+        //check if one team is dead
+        defenderIs.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
+        
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😍😍😍😍 FETICH TIME ! C'est ton jour de chance !!😍😍😍😍")
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
+        attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+        //update TeamLifePoint
+        defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
+    }
+ 
+    
+    /**
+     specialAttack : Nothing on mother Class
+     */
+    func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
     }
     
     
@@ -131,145 +270,6 @@ class Fighter { // by default, we choose Warrior
             resultbonusZone = bonusZoneFighter[Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))]
         }
         return resultbonusZone
-    }
-    
-    
-    /**
-     nameOfTheFighter : Take all the fighter Name
-     */
-    func nameOfTheFighter(category: Category) -> String {
-        
-        var nameOfFighterOk = ""
-        
-        // normal mode
-        print("\r Quel est le doux prenom de ce \(category.rawValue) ?")
-        if let nameOfFighter = readLine() {
-            
-            // Check if it's empty
-            if nameOfFighter == ""  { //
-                print("Vous devez choisir un nom de Fighter ;)")
-                return nameOfTheFighter(category: category)
-            }
-            
-            // check if already exist
-            let isOk =  isFighterAlreadyExist(what: nameOfFighter)
-            if isOk  { //
-                print("Ce prenom de Fighter existe déjà ... ^^  On en choisit une autre ? ")
-                return nameOfTheFighter(category: category)
-            }
-            
-            // if the code can read this, is that the User Input is ok !
-            nameOfFighterOk = nameOfFighter
-        }
-        return nameOfFighterOk
-    }
-    
-    
-    /**
-     numberFetich : ask FetichNumber of the fighter
-     */
-    func setNumberFetich(demo: Bool) -> Int {
-        
-        //in demo mode : give random Fetich Number
-        if demo == true {
-            return Int.random(in: 1..<5)
-        }
-        
-        let numberTestOk = ""
-        repeat { // repeat while var is empty
-            print("Quel est ton numéro fétiche entre 1 et 5 ")
-            if let numberTest = readLine() {
-                if let numberTestOk = Int(numberTest) { // check if it's Int
-                    if numberTestOk > 0, numberTestOk < 6 {
-                        return numberTestOk
-                    } else { // if it's not 1 2 3 4 5  print this :
-                        print("Le chiffre doit être supérieur à 0, et inférieur à 6")
-                    }
-                } else { // if it's Int, so print :
-                    print("Cela ne peut être qu'un numéro !")
-                }
-                
-            } else {
-                print("Tu dois donner un numéro fétiche à ton Fighter dans la fonction numberTest ;)")
-            }
-        } while numberTestOk == ""
-        return 1
-    }
-    
-    
-    /**
-     isFighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
-     */
-    func isFighterAlreadyExist(what: String) -> Bool {
- 
-        for eachFighter in Fighter.allFighterName {
-            if what.uppercased() == eachFighter.uppercased() {
-                return true
-            }
-        }
-        // if it's OK : We add this one in the Array
-        Fighter.allFighterName.append(what)
-        return false
-    }
-    
-    
-    /**
-     FightersSettings : To print the caracteristic of the Fighters
-     */
-    func fightersSettings() {
-        print("\n\n Voici les caractéristiques des personnages :"
-            + "\n 🗡 Le \(Category.warrior.rawValue): PV : 100, Dégâts : 10, spécial : Double Attaque"
-            + "\n 👨‍🎤 Le \(Category.dwarf.rawValue) : PV : 80, Arme : Hâche, Dégâts : 20, spécial : Double Dégâts"
-            + "\n 👹 Le \(Category.colossus.rawValue) : PV : 200, Dégâts : 5, spécial : Frayeur (Adversaire perd son tour)"
-            + "\n 🧙‍♀️ Le \(Category.wizard.rawValue) : PV : 150, Soins : +15, spécial : FireBall dégâts 30")
-    }
-    
-    
-    /**
-     func openRandomChest() : to take new weapon in random Chest when is appear
-     */
-    func openRandomChest(attackerChoosen: Fighter) {
-        
-        
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 WAOOOW ! Un coffre est tombé devant toi !!😇😇😇😇")
-        game.makePause()
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu avais \(attackerChoosen.weapon.nameOfWeapon)")
-        let oldValue = attackerChoosen.weapon.powerOfWeapon
-        let newWeapon = attackerChoosen.changeWeapon(attackerChoosen: attackerChoosen)
-        attackerChoosen.weapon = newWeapon
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTu t'équipes maintenant d'\(attackerChoosen.weapon.nameOfWeapon)")
-        compareNewAndOldWeaponStrength(newValue: newWeapon.powerOfWeapon, oldValue: oldValue)
-        game.makePause()
-    }
-    
-    
-    /**
-     func useFetichNumber() : to use Fetich Action
-     */
-    func useFetichNumber(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
-        //check if one team is dead
-        defenderIs.checkTeamAreAlive(attackerIs: attackerIs, defenderIs: defenderIs)
-        
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😍😍😍😍 FETICH TIME ! C'est ton jour de chance !!😍😍😍😍")
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTon \(attackerChoosen.category.rawValue) utilise sa \(attackerChoosen.special.rawValue)")
-        attackerChoosen.specialAttack(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
-            //update TeamLifePoint
-            defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
-    }
-    
-    
-    /**
-     compareNewAndOldWeaponStrength() : To print different message depend of the new Strength of Weapon
-     */
-    func compareNewAndOldWeaponStrength(newValue: Int, oldValue: Int) {
-        
-        if oldValue > newValue {
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est descendue à : \(newValue)")
-        } else if oldValue < newValue {
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTa puissance d'action est montée à : \(newValue)")
-        } else {
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tLa valeur de ton arme est restée identique")
-        }
     }
     
     
@@ -335,5 +335,4 @@ class Fighter { // by default, we choose Warrior
             }
         }
     }
-    
 }
