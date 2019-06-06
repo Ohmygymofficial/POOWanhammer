@@ -64,6 +64,7 @@ class Fighter { // by default, we choose Warrior
         return nameOfFighterOk
     }
     
+    
     /**
      isFighterAlreadyExist : Static func to check if one User Input already exist thanks to the return
      */
@@ -111,7 +112,7 @@ class Fighter { // by default, we choose Warrior
         return 1
     }
     
-
+    
     /**
      FightersSettings : To print the caracteristic of the Fighters
      */
@@ -204,7 +205,7 @@ class Fighter { // by default, we choose Warrior
         //update TeamLifePoint
         defenderIs.updateTeamLifePointAndArray(defenderIs: defenderIs, attackerIs: attackerIs)
     }
- 
+    
     
     /**
      specialAttack : Nothing on mother Class

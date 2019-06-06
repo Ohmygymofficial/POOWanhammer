@@ -17,7 +17,7 @@ class Warrior : Fighter {
         self.numberFetich = setNumberFetich(demo: false)
         self.weapon = Weapon(nameOfWeapon: "une épée", powerOfWeapon: 10, weaponType: Weapon.WeaponType.sword)
         self.special = Special.doubleAttack
-        self.lifePoint = 10
+        self.lifePoint = 100
         self.category = Category.warrior
     }
     
