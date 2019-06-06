@@ -27,7 +27,7 @@ class Colossus : Fighter {
         super.init(name: name, numberFetich: numberFetich)
         self.weapon = Weapon(nameOfWeapon: "une main entourée de fer", powerOfWeapon: 5, weaponType: Weapon.WeaponType.fist)
         self.special = Special.fear
-        self.lifePoint = 20
+        self.lifePoint = 200
         // self.strenght = 5
         self.category = Category.colossus
     }
@@ -35,7 +35,7 @@ class Colossus : Fighter {
     /**
      specialColossus : Fear for Colossus special attack
      */
-    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
         // propose attacker fighter :
         attackerIs.printListOfAttacker(attackerIs: attackerIs)
@@ -48,5 +48,8 @@ class Colossus : Fighter {
         // whoReceiveChoosen is the fighter whoReceive The action
         let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
         print("Celui qui va recevoir l'action spéciale est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+        updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
+        // print result
+        game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
     }
 }

@@ -344,7 +344,7 @@ class Players {
         var i = 0
         for fighter in defenderIs.fightersArray {
             if fighter.lifePoint <= 0 {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t☠☠☠ WOOWWWW : Le fighter \(fighter.name) va être sorti du tableau car il est mort ! ☠☠☠")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t☠☠☠ Votre fighter \(fighter.name) est évacué de l'arène car il est mort ! ☠☠☠")
                 defenderIs.fightersArray.remove(at: i)
             }
             i += 1

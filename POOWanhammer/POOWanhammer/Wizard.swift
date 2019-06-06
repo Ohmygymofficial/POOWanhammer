@@ -26,7 +26,7 @@ class Wizard : Fighter {
         super.init(name: name, numberFetich: numberFetich)
         self.weapon = Weapon(nameOfWeapon: "une baguette", powerOfWeapon: 15, weaponType: Weapon.WeaponType.wand)
         self.special = Special.fireball
-        self.lifePoint = 12
+        self.lifePoint = 125
         // self.strenght = 15
         self.category = Category.wizard
     }
@@ -35,7 +35,7 @@ class Wizard : Fighter {
     /**
      specialWizard : FireBall for Wizard special attack : Give 30 / 20 or 10 value to the fireball and the good damage on the fighter's
      */
-    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players) {
+    override func specialAttack(attackerChoosen: Fighter, whoReceiveChoosen: Fighter, defenderIs: Players, attackerIs: Players, bonusIsLuck: Bool, bonusZone: Bool) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève :")
         var fireballDamage = 30 // this the power of this fetichTime
         var counterFireball = 0
