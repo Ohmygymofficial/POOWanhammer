@@ -47,7 +47,7 @@ class Colossus : Fighter {
         defenderIs.printListOfDefender(attackerIs: attackerIs, defenderIs: defenderIs, attackerChoosen: attackerChoosen)
         // whoReceiveChoosen is the fighter whoReceive The action
         let whoReceiveChoosen = defenderIs.chooseFighterDefend(defenderIs: defenderIs, attackerIs: attackerIs, attackerChoosen: attackerChoosen)
-        print("Celui qui va recevoir l'action spéciale est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category)")
+        print("Celui qui va recevoir l'action spéciale est : \(whoReceiveChoosen.name) le \(whoReceiveChoosen.category.rawValue)")
         updateCareOrDamage(attackerChoosen: attackerChoosen,whoReceiveChoosen: whoReceiveChoosen, defenderIs: defenderIs, attackerIs: attackerIs, bonusIsLuck: bonusIsLuck, bonusZone: bonusZone)
         // print result
         game.printAction(attackerChoosen: attackerChoosen, whoReceiveChoosen: whoReceiveChoosen, bonusZone: bonusZone)
